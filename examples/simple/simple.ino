@@ -1,11 +1,11 @@
 #include <Arduino.h>
 
-#include "FujitsuHeatpumpIR.h"
-#include "PanasonicCKPHeatpumpIR.h"
-#include "PanasonicHeatpumpIR.h"
-#include "CarrierHeatpumpIR.h"
-#include "MideaHeatpumpIR.h"
-#include "MitsubishiHeatpumpIR.h"
+#include <FujitsuHeatpumpIR.h>
+#include <PanasonicCKPHeatpumpIR.h>
+#include <PanasonicHeatpumpIR.h>
+#include <CarrierHeatpumpIR.h>
+#include <MideaHeatpumpIR.h>
+#include <MitsubishiHeatpumpIR.h>
 
 IRSender irSender(3); // IR led on Duemilanove digital pin 3
 

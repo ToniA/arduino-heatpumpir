@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "PanasonicHeatpumpIR.h"
+#include <PanasonicHeatpumpIR.h>
 
 // This is a protected method, i.e. generic Panasonic instances cannot be created
 PanasonicHeatpumpIR::PanasonicHeatpumpIR()

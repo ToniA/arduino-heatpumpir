@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "MitsubishiHeatpumpIR.h"
+#include <MitsubishiHeatpumpIR.h>
 
 MitsubishiHeatpumpIR::MitsubishiHeatpumpIR()
 {

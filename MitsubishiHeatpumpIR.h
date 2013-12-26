@@ -5,8 +5,8 @@
 #define MitsubishiHeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
-#include "HeatpumpIR.h"
+#include <IRSender.h>
+#include <HeatpumpIR.h>
 
 
 // Mitsubishi MSZ FD-25 timing constants (remote control P/N KM09D 0052376)

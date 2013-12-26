@@ -6,8 +6,8 @@
 #define MideaHeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
-#include "HeatpumpIR.h"
+#include <IRSender.h>
+#include <HeatpumpIR.h>
 
 // Midea timing constants, Midea MSR1-12HRN1-QC2 + MOA1-12HN1-QC2, sold as Ultimate Pro Plus Basic 13FP in Finland (remote control P/N RG51M1/E)
 #define MIDEA_AIRCON1_HDR_MARK       4350

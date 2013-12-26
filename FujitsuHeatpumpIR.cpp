@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "FujitsuHeatpumpIR.h"
+#include <FujitsuHeatpumpIR.h>
 
 FujitsuHeatpumpIR::FujitsuHeatpumpIR()
 {

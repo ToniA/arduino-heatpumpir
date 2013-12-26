@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "CarrierHeatpumpIR.h"
+#include <CarrierHeatpumpIR.h>
 
 CarrierHeatpumpIR::CarrierHeatpumpIR()
 {

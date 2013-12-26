@@ -5,8 +5,8 @@
 #define PanasonicHeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
-#include "HeatpumpIR.h"
+#include <IRSender.h>
+#include <HeatpumpIR.h>
 
 
 // Panasonic DKE, JKE & NKE timing constants (DKE remote control P/N A75C2616)

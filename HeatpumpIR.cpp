@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "HeatpumpIR.h"
+#include <HeatpumpIR.h>
 
 HeatpumpIR::HeatpumpIR()
 {

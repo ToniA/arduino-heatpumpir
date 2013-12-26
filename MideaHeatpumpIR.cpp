@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "MideaHeatpumpIR.h"
+#include <MideaHeatpumpIR.h>
 
 MideaHeatpumpIR::MideaHeatpumpIR()
 {

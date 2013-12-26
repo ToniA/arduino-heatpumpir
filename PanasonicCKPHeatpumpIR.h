@@ -5,8 +5,8 @@
 #define PanasonicCKPHeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
-#include "HeatpumpIR.h"
+#include <IRSender.h>
+#include <HeatpumpIR.h>
 
 
 // Panasonic CKP timing constants (remote control P/N A75C2295)

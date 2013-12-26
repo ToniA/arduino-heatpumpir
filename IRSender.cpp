@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "IRSender.h"
+#include <IRSender.h>
 
 // Heavily based on Ken Shirriff's IRRemote library:
 // https://github.com/shirriff/Arduino-IRremote

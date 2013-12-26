@@ -5,8 +5,8 @@
 #define CarrierHeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
-#include "HeatpumpIR.h"
+#include <IRSender.h>
+#include <HeatpumpIR.h>
 
 // Carrier (42NQV035G / 38NYV035H2) timing constants (remote control P/N WH-L05SE)
 #define CARRIER_AIRCON1_HDR_MARK   4320

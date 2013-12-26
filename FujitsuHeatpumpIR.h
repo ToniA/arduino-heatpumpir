@@ -5,8 +5,8 @@
 #define FujitsuHeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
-#include "HeatpumpIR.h"
+#include <IRSender.h>
+#include <HeatpumpIR.h>
 
 
 // Fujitsu Nocria (AWYZ14) timing constants (remote control P/N AR-PZ2)

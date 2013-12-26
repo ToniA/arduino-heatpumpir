@@ -8,7 +8,7 @@
 #define HeatpumpIR_h
 
 #include <Arduino.h>
-#include "IRSender.h"
+#include <IRSender.h>
 
 
 // Power state

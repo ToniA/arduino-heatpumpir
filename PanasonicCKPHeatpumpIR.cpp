@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "PanasonicCKPHeatpumpIR.h"
+#include <PanasonicCKPHeatpumpIR.h>
 
 
 PanasonicCKPHeatpumpIR::PanasonicCKPHeatpumpIR()
