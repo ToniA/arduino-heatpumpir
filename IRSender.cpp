@@ -44,8 +44,8 @@ void IRSender::setFrequency(int frequency)
     case 46: // Timer 5 on Arduino Mega
       TCCR5A = _BV(WGM51);
       TCCR5B = _BV(WGM53) | _BV(CS50);
-      ICR5 = pwmval;
-      OCR5A = pwmval / 3;
+      ICR5 = pwmval16;
+      OCR5A = pwmval16 / 3;
 #else
 // Arduino Duemilanove etc
     case 3:
