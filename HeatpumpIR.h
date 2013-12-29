@@ -24,12 +24,12 @@
 #define MODE_MAINT  6
 
 // Fan speeds. Note that some heatpumps have less than 5 fan speeds
-#define FAN_AUTO    1
-#define FAN_1       2
-#define FAN_2       3
-#define FAN_3       4
-#define FAN_4       5
-#define FAN_5       6
+#define FAN_AUTO    0
+#define FAN_1       1
+#define FAN_2       2
+#define FAN_3       3
+#define FAN_4       4
+#define FAN_5       5
 
 // Vertical air directions. Note that these cannot be set on all heat pumps
 #define VDIR_AUTO   0
