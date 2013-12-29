@@ -32,6 +32,7 @@ void CarrierHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
         break;
       case MODE_DRY:
         operatingMode = CARRIER_AIRCON1_MODE_DRY;
+		fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in DRY mode
         break;
       case MODE_FAN:
         operatingMode = CARRIER_AIRCON1_MODE_FAN;
@@ -89,6 +90,44 @@ void CarrierHeatpumpIR::sendCarrier(IRSender& IR, byte operatingMode, byte fanSp
 
   for (int i=0; i<8; i++) {
     checksum += IR.bitReverse(sendBuffer[i]);
+  }
+
+  // There's something really strange with the checksum calculation...
+  // With these many of the codes matchs with the code from the real Carrier remote
+  // Still certain temperatures do not work with fan speeds 1, 2 or 5
+
+  switch (sendBuffer[6] & 0xF0) {
+  case 0x00: // MODE_AUTO - certain temperature / fan speed combinations do not work
+    checksum += 0x02;
+    switch (sendBuffer[6] & 0x0F) {
+      case 0x02: // FAN1
+      case 0x03: // FAN5
+      case 0x06: // FAN2
+        checksum += 0x80;
+        break;
+    }
+    break;
+  case 0x40: // MODE_DRY - all settings should work
+    checksum += 0x02;
+    break;
+  case 0xC0: // MODE_HEAT - certain temperature / fan speed combinations do not work
+    switch (sendBuffer[6] & 0x0F) {
+      case 0x05: // FAN4
+      case 0x06: // FAN2
+        checksum += 0xC0;
+        break;
+    }
+    break;
+  case 0x20: // MODE_FAN - all settings should work
+    checksum += 0x02;
+    switch (sendBuffer[6] & 0x0F) {
+      case 0x02: // FAN1
+      case 0x03: // FAN5
+      case 0x06: // FAN2
+        checksum += 0x80;
+        break;
+    }
+    break;
   }
 
   sendBuffer[8] = IR.bitReverse(checksum);
