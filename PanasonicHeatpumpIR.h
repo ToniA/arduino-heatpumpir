@@ -45,7 +45,7 @@
 #define PANASONIC_AIRCON2_HS_MRIGHT  0x0B
 #define PANASONIC_AIRCON2_HS_RIGHT   0x0C
 
-// Panasonic message templates
+// Panasonic model codes
 #define PANASONIC_DKE 0
 #define PANASONIC_JKE 1
 #define PANASONIC_NKE 2
