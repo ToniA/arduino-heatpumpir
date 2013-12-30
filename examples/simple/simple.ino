@@ -12,7 +12,7 @@ IRSender irSender(3); // IR led on Duemilanove digital pin 3
 // Array with all supported heatpumps
 HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpumpIR(), new PanasonicJKEHeatpumpIR(), 
                             new PanasonicNKEHeatpumpIR(), new CarrierHeatpumpIR(), new MideaHeatpumpIR(), 
-                            new FujitsuHeatpumpIR(), new MitsubishiHeatpumpIR(), NULL};
+                            new FujitsuHeatpumpIR(), new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), NULL};
 
 void setup()
 {

@@ -30,15 +30,35 @@
 #define MITSUBISHI_AIRCON1_FAN3       0x7B
 #define MITSUBISHI_AIRCON1_FAN4       0x7C
 
+// Mitsubishi model codes
+#define MITSUBISHI_FD 0
+#define MITSUBISHI_FE 1
 
 class MitsubishiHeatpumpIR : public HeatpumpIR
 {
+  protected:
+    MitsubishiHeatpumpIR(); // Cannot create generic Mitsubishi heatpump instances
+    byte _mitsubishiModel;  // Tells whether this is FD or EF (or other supported model...)
+
   public:
-    MitsubishiHeatpumpIR();
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
 
   private:
     void sendMitsubishi(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature, byte swingVCmd, byte swingHCmd);
 };
+
+
+class MitsubishiFDHeatpumpIR : public MitsubishiHeatpumpIR
+{
+  public:
+    MitsubishiFDHeatpumpIR();
+};
+
+class MitsubishiFEHeatpumpIR : public MitsubishiHeatpumpIR
+{
+  public:
+    MitsubishiFEHeatpumpIR();
+};
+
 
 #endif

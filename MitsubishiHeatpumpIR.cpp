@@ -1,8 +1,20 @@
 #include <Arduino.h>
 #include <MitsubishiHeatpumpIR.h>
 
+// This is a protected method, i.e. generic Mitsubishi instances cannot be created
 MitsubishiHeatpumpIR::MitsubishiHeatpumpIR()
 {
+}
+
+// The different models just set the model accordingly
+MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR()
+{
+  _mitsubishiModel = MITSUBISHI_FD;
+}
+
+MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR()
+{
+  _mitsubishiModel = MITSUBISHI_FE;
 }
 
 void MitsubishiHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)
@@ -37,7 +49,14 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingM
       operatingMode = MITSUBISHI_AIRCON1_MODE_COOL;
       // Temperature needs to be set to 31 degrees for 'simulated' FAN mode
       temperatureCmd = 31;
-     break;
+      break;
+    case MODE_MAINT: // Maintenance mode is just the heat mode at +10, FAN5
+      if (_mitsubishiModel == MITSUBISHI_FE) {
+        operatingMode |= MITSUBISHI_AIRCON1_MODE_HEAT;
+        temperature = 10; // Default to +10 degrees
+        fanSpeedCmd = FAN_AUTO;
+      }
+      break;
   }
 
   switch (fanSpeedCmd)
@@ -59,7 +78,7 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingM
       break;
   }
 
-  if ( temperatureCmd > 15 && temperatureCmd < 32)
+  if ( temperatureCmd > 16 && temperatureCmd < 32)
   {
     temperature = temperatureCmd;
   }
@@ -79,7 +98,12 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, byte powerMode, byte ope
   MitsubishiTemplate[6] = operatingMode;
 
   // Set the temperature on the template message
-  MitsubishiTemplate[7] = temperature - 16;
+  if (temperature == 10) {
+    MitsubishiTemplate[7] = 0x00; // Maintenance mode
+    MitsubishiTemplate[15] = 0x20; // This seems to be set to 0x20 on maintenance mode
+  } else {
+    MitsubishiTemplate[7] = temperature - 16;
+  }
 
   // Set the operatingmode on the template message
   MitsubishiTemplate[9] = fanSpeed;
