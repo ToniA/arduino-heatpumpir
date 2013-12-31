@@ -35,6 +35,7 @@ class FujitsuHeatpumpIR : public HeatpumpIR
   public:
     FujitsuHeatpumpIR();
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    const prog_char* supportedModel();
 
   private:
     void sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature);

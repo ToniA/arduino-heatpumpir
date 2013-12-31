@@ -6,6 +6,12 @@ PanasonicHeatpumpIR::PanasonicHeatpumpIR()
 {
 }
 
+// This is a virtual function, i.e. never called
+const prog_char* PanasonicHeatpumpIR::supportedModel()
+{
+}
+
+
 // The different models just set the model accordingly
 PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR()
 {
@@ -20,6 +26,29 @@ PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR()
 PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR()
 {
   _panasonicModel = PANASONIC_JKE;
+}
+
+// The supported model info for each model
+
+const prog_char* PanasonicDKEHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = {"{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}"};
+
+  return heatpumpModelData;
+}
+
+const prog_char* PanasonicJKEHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
+
+  return heatpumpModelData;
+}
+
+const prog_char* PanasonicNKEHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = {"{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mds\":6,\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}"};
+
+  return heatpumpModelData;
 }
 
 // Panasonic DKE/NKE/JKE numeric values to command bytes

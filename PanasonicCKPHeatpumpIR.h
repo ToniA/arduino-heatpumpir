@@ -46,6 +46,7 @@ class PanasonicCKPHeatpumpIR : public HeatpumpIR
   public:
     PanasonicCKPHeatpumpIR();
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    const prog_char* supportedModel();
     void sendPanasonicCKPCancelTimer(IRSender& IR);
 
   private:

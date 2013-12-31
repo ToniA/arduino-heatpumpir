@@ -9,7 +9,7 @@
 class IRSender
 {
   public:
-    IRSender(int pin);
+    IRSender(byte pin);
     void setFrequency(int frequency);
     void sendIRByte(byte sendByte, int bitMarkLength, int zeroSpaceLength, int oneSpaceLength);
     byte bitReverse(byte x);
@@ -17,7 +17,7 @@ class IRSender
     void mark(int markLength);
 
   private:
-    int _pin;
+    byte _pin;
 };
 
 #endif

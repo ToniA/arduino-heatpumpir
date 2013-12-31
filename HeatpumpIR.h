@@ -59,6 +59,7 @@ class HeatpumpIR
 
   public:
     virtual void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    virtual const prog_char* supportedModel();
 };
 
 #endif

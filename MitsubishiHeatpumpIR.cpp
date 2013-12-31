@@ -6,6 +6,11 @@ MitsubishiHeatpumpIR::MitsubishiHeatpumpIR()
 {
 }
 
+// This is a virtual function, i.e. never called
+const prog_char* MitsubishiHeatpumpIR::supportedModel()
+{
+}
+
 // The different models just set the model accordingly
 MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR()
 {
@@ -15,6 +20,22 @@ MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR()
 MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR()
 {
   _mitsubishiModel = MITSUBISHI_FE;
+}
+
+// The supported model info for each model
+
+const prog_char* MitsubishiFDHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5}";
+
+  return heatpumpModelData;
+}
+
+const prog_char* MitsubishiFEHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
+
+  return heatpumpModelData;
 }
 
 void MitsubishiHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)

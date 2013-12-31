@@ -6,7 +6,7 @@
 //
 // For PWM on Arduino, see http://playground.arduino.cc/Main/TimerPWMCheatsheet
 
-IRSender::IRSender(int pin)
+IRSender::IRSender(byte pin)
 {
   _pin = pin;
 }
@@ -139,7 +139,7 @@ void IRSender::mark(int markLength)
       (TCCR2A |= _BV(COM2A1)); // Enable pin 11 PWM output
       break;
 #endif
-}
+	}
 
   delayMicroseconds(markLength);
 }

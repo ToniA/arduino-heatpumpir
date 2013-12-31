@@ -5,6 +5,13 @@ MideaHeatpumpIR::MideaHeatpumpIR()
 {
 }
 
+const prog_char* MideaHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"midea\",\"dn\":\"Ultimate Pro Plus 13FP\",\"mds\":6,\"mT\":16,\"xT\":30,\"fs\":4,\"maint\":[10]}";
+
+  return heatpumpModelData;
+}
+
 void MideaHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)
 {
   // Sensible defaults for the heat pump mode

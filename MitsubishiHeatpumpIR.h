@@ -61,6 +61,7 @@ class MitsubishiHeatpumpIR : public HeatpumpIR
 
   public:
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    virtual const prog_char* supportedModel();
 
   private:
     void sendMitsubishi(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature, byte swingVCmd, byte swingHCmd);
@@ -71,12 +72,14 @@ class MitsubishiFDHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
     MitsubishiFDHeatpumpIR();
+    const prog_char* supportedModel();
 };
 
 class MitsubishiFEHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
     MitsubishiFEHeatpumpIR();
+    const prog_char* supportedModel();
 };
 
 

@@ -28,6 +28,9 @@ void loop()
 
   do {
     // Send the same IR command to all supported heatpumps
+    Serial.print("Sending IR to heatpump with type info: ");
+    Serial.println(heatpumpIR[i]->supportedModel());
+
     heatpumpIR[i]->send(irSender, POWER_ON, MODE_HEAT, FAN_2, 24, VDIR_UP, HDIR_AUTO);
     delay(500);
   }

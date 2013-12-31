@@ -5,6 +5,13 @@ FujitsuHeatpumpIR::FujitsuHeatpumpIR()
 {
 }
 
+const prog_char* FujitsuHeatpumpIR::supportedModel()
+{
+  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"fujitsu_awyz\",\"dn\":\"Fujitsu AWYZ\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":5}";
+
+  return heatpumpModelData;
+}
+
 void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)
 {
   // Sensible defaults for the heat pump mode

@@ -37,6 +37,7 @@ class MideaHeatpumpIR : public HeatpumpIR
   public:
     MideaHeatpumpIR();
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    const prog_char* supportedModel();
 
   private:
     void sendMidea(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature);

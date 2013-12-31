@@ -19,4 +19,5 @@ space	KEYWORD2
 mark	KEYWORD2
 	
 send	KEYWORD2
+supportedModel	KEYWORD2
 sendPanasonicCKPCancelTimer	KEYWORD2

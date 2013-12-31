@@ -59,6 +59,7 @@ class PanasonicHeatpumpIR : public HeatpumpIR
 
   public:
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    virtual const prog_char* supportedModel();
 
   private:
     void sendPanasonic(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH);
@@ -68,18 +69,21 @@ class PanasonicDKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicDKEHeatpumpIR();
+    const prog_char* supportedModel();
 };
 
 class PanasonicNKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicNKEHeatpumpIR();
+    const prog_char* supportedModel();
 };
 
 class PanasonicJKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicJKEHeatpumpIR();
+    const prog_char* supportedModel();
 };
 
 
