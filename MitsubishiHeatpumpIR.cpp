@@ -1,42 +1,51 @@
 #include <Arduino.h>
 #include <MitsubishiHeatpumpIR.h>
 
-// This is a protected method, i.e. generic Mitsubishi instances cannot be created
-MitsubishiHeatpumpIR::MitsubishiHeatpumpIR()
+// These are protected methods, i.e. generic Mitsubishi instances cannot be created directly
+MitsubishiHeatpumpIR::MitsubishiHeatpumpIR() : HeatpumpIR()
 {
 }
 
-// This is a virtual function, i.e. never called
-const prog_char* MitsubishiHeatpumpIR::supportedModel()
+MitsubishiHeatpumpIR::MitsubishiHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
+{
+}
+
+MitsubishiHeatpumpIR::MitsubishiHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
 {
 }
 
 // The different models just set the model accordingly
-MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR()
+
+MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 {
   _mitsubishiModel = MITSUBISHI_FD;
 }
 
-MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR()
+MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR(const prog_char* model) : MitsubishiHeatpumpIR(model)
+{
+  _mitsubishiModel = MITSUBISHI_FD;
+}
+
+MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR(const prog_char* model, const prog_char* info) : MitsubishiHeatpumpIR(model, info)
+{
+  _mitsubishiModel = MITSUBISHI_FD;
+}
+
+MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
 {
   _mitsubishiModel = MITSUBISHI_FE;
 }
 
-// The supported model info for each model
-
-const prog_char* MitsubishiFDHeatpumpIR::supportedModel()
+MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR(const prog_char* model) : MitsubishiHeatpumpIR(model)
 {
-  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5}";
-
-  return heatpumpModelData;
+  _mitsubishiModel = MITSUBISHI_FE;
 }
 
-const prog_char* MitsubishiFEHeatpumpIR::supportedModel()
+MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR(const prog_char* model, const prog_char* info) : MitsubishiHeatpumpIR(model, info)
 {
-  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
-
-  return heatpumpModelData;
+  _mitsubishiModel = MITSUBISHI_FE;
 }
+
 
 void MitsubishiHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)
 {

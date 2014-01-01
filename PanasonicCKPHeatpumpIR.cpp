@@ -6,12 +6,14 @@ PanasonicCKPHeatpumpIR::PanasonicCKPHeatpumpIR()
 {
 }
 
-const prog_char* PanasonicCKPHeatpumpIR::supportedModel()
+PanasonicCKPHeatpumpIR::PanasonicCKPHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
 {
-  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"panasonic_ckp\",\"dn\":\"Panasonic CKP\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
-
-  return heatpumpModelData;
 }
+
+PanasonicCKPHeatpumpIR::PanasonicCKPHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
+{
+}
+
 
 // Panasonic CKP numeric values to command bytes
 void PanasonicCKPHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)

@@ -1,13 +1,16 @@
 #include <Arduino.h>
 #include <PanasonicHeatpumpIR.h>
 
-// This is a protected method, i.e. generic Panasonic instances cannot be created
+// These are protected method, i.e. generic Panasonic instances cannot be created
 PanasonicHeatpumpIR::PanasonicHeatpumpIR()
 {
 }
 
-// This is a virtual function, i.e. never called
-const prog_char* PanasonicHeatpumpIR::supportedModel()
+PanasonicHeatpumpIR::PanasonicHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
+{
+}
+
+PanasonicHeatpumpIR::PanasonicHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
 {
 }
 
@@ -18,9 +21,14 @@ PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR()
   _panasonicModel = PANASONIC_DKE;
 }
 
-PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR()
+PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR(const prog_char* model) : PanasonicHeatpumpIR(model)
 {
-  _panasonicModel = PANASONIC_NKE;
+  _panasonicModel = PANASONIC_DKE;
+}
+
+PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR(const prog_char* model, const prog_char* info) : PanasonicHeatpumpIR(model, info)
+{
+  _panasonicModel = PANASONIC_DKE;
 }
 
 PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR()
@@ -28,28 +36,31 @@ PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR()
   _panasonicModel = PANASONIC_JKE;
 }
 
-// The supported model info for each model
-
-const prog_char* PanasonicDKEHeatpumpIR::supportedModel()
+PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR(const prog_char* model) : PanasonicHeatpumpIR(model)
 {
-  const prog_char* heatpumpModelData PROGMEM = {"{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}"};
-
-  return heatpumpModelData;
+  _panasonicModel = PANASONIC_JKE;
 }
 
-const prog_char* PanasonicJKEHeatpumpIR::supportedModel()
+PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR(const prog_char* model, const prog_char* info) : PanasonicHeatpumpIR(model, info)
 {
-  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
-
-  return heatpumpModelData;
+  _panasonicModel = PANASONIC_JKE;
 }
 
-const prog_char* PanasonicNKEHeatpumpIR::supportedModel()
+PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR()
 {
-  const prog_char* heatpumpModelData PROGMEM = {"{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mds\":6,\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}"};
-
-  return heatpumpModelData;
+  _panasonicModel = PANASONIC_NKE;
 }
+
+PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR(const prog_char* model) : PanasonicHeatpumpIR(model)
+{
+  _panasonicModel = PANASONIC_NKE;
+}
+
+PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR(const prog_char* model, const prog_char* info) : PanasonicHeatpumpIR(model, info)
+{
+  _panasonicModel = PANASONIC_NKE;
+}
+
 
 // Panasonic DKE/NKE/JKE numeric values to command bytes
 void PanasonicHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)

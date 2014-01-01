@@ -5,12 +5,14 @@ CarrierHeatpumpIR::CarrierHeatpumpIR()
 {
 }
 
-const prog_char* CarrierHeatpumpIR::supportedModel()
+CarrierHeatpumpIR::CarrierHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
 {
-  const prog_char* heatpumpModelData PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mds\":5,\"mT\":17,\"xT\":30,\"fs\":6}";
-
-  return heatpumpModelData;
 }
+
+CarrierHeatpumpIR::CarrierHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
+{
+}
+
 
 void CarrierHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)
 {

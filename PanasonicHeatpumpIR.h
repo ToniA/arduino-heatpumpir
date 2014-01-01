@@ -53,13 +53,14 @@
 
 class PanasonicHeatpumpIR : public HeatpumpIR
 {
-  protected:
-    PanasonicHeatpumpIR(); // Cannot create generic Panasonic heatpump instances
+  protected: // Cannot create generic Panasonic heatpump instances
+    PanasonicHeatpumpIR();
+    PanasonicHeatpumpIR(const prog_char* model);
+    PanasonicHeatpumpIR(const prog_char* model, const prog_char* info);
     byte _panasonicModel;  // Tells whether this is DKE, NKE or JKE (or other supported model...)
 
   public:
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
-    virtual const prog_char* supportedModel();
 
   private:
     void sendPanasonic(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH);
@@ -69,22 +70,24 @@ class PanasonicDKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicDKEHeatpumpIR();
-    const prog_char* supportedModel();
-};
-
-class PanasonicNKEHeatpumpIR : public PanasonicHeatpumpIR
-{
-  public:
-    PanasonicNKEHeatpumpIR();
-    const prog_char* supportedModel();
+    PanasonicDKEHeatpumpIR(const prog_char* model);
+    PanasonicDKEHeatpumpIR(const prog_char* model, const prog_char* info);
 };
 
 class PanasonicJKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicJKEHeatpumpIR();
-    const prog_char* supportedModel();
+    PanasonicJKEHeatpumpIR(const prog_char* model);
+    PanasonicJKEHeatpumpIR(const prog_char* model, const prog_char* info);
 };
 
+class PanasonicNKEHeatpumpIR : public PanasonicHeatpumpIR
+{
+  public:
+    PanasonicNKEHeatpumpIR();
+    PanasonicNKEHeatpumpIR(const prog_char* model);
+    PanasonicNKEHeatpumpIR(const prog_char* model, const prog_char* info);
+};
 
 #endif

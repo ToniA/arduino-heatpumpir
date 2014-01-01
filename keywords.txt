@@ -11,13 +11,14 @@ MitsubishiFDHeatpumpIR	KEYWORD1
 MitsubishiFEHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
-	
+
 setFrequency	KEYWORD2
 sendIRByte	KEYWORD2
 bitReverse	KEYWORD2
 space	KEYWORD2
 mark	KEYWORD2
-	
+
 send	KEYWORD2
-supportedModel	KEYWORD2
+model	KEYWORD2
+info	KEYWORD2
 sendPanasonicCKPCancelTimer	KEYWORD2
