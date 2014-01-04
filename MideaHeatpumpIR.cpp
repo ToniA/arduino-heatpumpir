@@ -50,8 +50,7 @@ void MideaHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCm
     case MODE_MAINT:
       // Maintenance mode ('FP' on the remote) is a special mode on Midea
       operatingMode = MIDEA_AIRCON1_MODE_FP;
-      sendMidea(IR, operatingMode, fanSpeed, temperature);
-      return;
+      break;
   }
 
   switch (fanSpeedCmd)
@@ -70,7 +69,7 @@ void MideaHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCm
       break;
   }
 
-  if ( temperatureCmd > 15 && temperatureCmd < 31)
+  if ( temperatureCmd > 16 && temperatureCmd < 31)
   {
     temperature = temperatureCmd;
   }
@@ -106,7 +105,7 @@ void MideaHeatpumpIR::sendMidea(IRSender& IR, byte operatingMode, byte fanSpeed,
     }
     else
     {
-      sendBuffer[2] = operatingMode | temperatures[temperature-17];
+      sendBuffer[2] = operatingMode | pgm_read_byte(&(temperatures[(temperature-17)]));
     }
   }
 

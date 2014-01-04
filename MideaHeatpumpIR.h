@@ -1,6 +1,9 @@
 /*
     Midea MSR1-12HRN1-QC2 + MOA1-12HN1-QC2 heatpump control (remote control P/N RG51M1/E)
     This heatpump is sold as 'Ultimate Pro Plus 13FP' in Finland, by www.ultimatemarket.com
+
+    Midea MSR1U-12HRDN1-QRC4W + MOB-12HFN1-QRC4W (remote control P/N RG51I20/BGE)
+    This heatpump is sold as 'Ultimate 12 Pro Plus Inverter' in Finland, by www.ultimatemarket.com
 */
 #ifndef MideaHeatpumpIR_h
 #define MideaHeatpumpIR_h
@@ -9,7 +12,7 @@
 #include <IRSender.h>
 #include <HeatpumpIR.h>
 
-// Midea timing constants, Midea MSR1-12HRN1-QC2 + MOA1-12HN1-QC2, sold as Ultimate Pro Plus Basic 13FP in Finland (remote control P/N RG51M1/E)
+// Midea timing constants
 #define MIDEA_AIRCON1_HDR_MARK       4350
 #define MIDEA_AIRCON1_HDR_SPACE      4230
 #define MIDEA_AIRCON1_BIT_MARK       520
@@ -38,7 +41,7 @@ class MideaHeatpumpIR : public HeatpumpIR
     MideaHeatpumpIR();
     MideaHeatpumpIR(const prog_char* model);
     MideaHeatpumpIR(const prog_char* model, const prog_char* info);
-	void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
 
   private:
     void sendMidea(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature);
