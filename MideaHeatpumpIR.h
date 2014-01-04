@@ -13,11 +13,11 @@
 #include <HeatpumpIR.h>
 
 // Midea timing constants
-#define MIDEA_AIRCON1_HDR_MARK       4350
-#define MIDEA_AIRCON1_HDR_SPACE      4230
-#define MIDEA_AIRCON1_BIT_MARK       520
-#define MIDEA_AIRCON1_ONE_SPACE      1650
-#define MIDEA_AIRCON1_ZERO_SPACE     550
+#define MIDEA_AIRCON1_HDR_MARK       4420
+#define MIDEA_AIRCON1_HDR_SPACE      4300
+#define MIDEA_AIRCON1_BIT_MARK       620
+#define MIDEA_AIRCON1_ONE_SPACE      1560
+#define MIDEA_AIRCON1_ZERO_SPACE     480
 #define MIDEA_AIRCON1_MSG_SPACE      5100
 
 // MIDEA codes
