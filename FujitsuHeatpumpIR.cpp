@@ -1,16 +1,13 @@
 #include <Arduino.h>
 #include <FujitsuHeatpumpIR.h>
 
-FujitsuHeatpumpIR::FujitsuHeatpumpIR()
+FujitsuHeatpumpIR::FujitsuHeatpumpIR() : HeatpumpIR()
 {
-}
+  static const prog_char model[] PROGMEM = "fujitsu_awyz";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"fujitsu_awyz\",\"dn\":\"Fujitsu AWYZ\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":5}";
 
-FujitsuHeatpumpIR::FujitsuHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
-{
-}
-
-FujitsuHeatpumpIR::FujitsuHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
-{
+  _model = model;
+  _info = info;
 }
 
 

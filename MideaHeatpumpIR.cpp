@@ -1,16 +1,13 @@
 #include <Arduino.h>
 #include <MideaHeatpumpIR.h>
 
-MideaHeatpumpIR::MideaHeatpumpIR()
+MideaHeatpumpIR::MideaHeatpumpIR() : HeatpumpIR()
 {
-}
+  static const prog_char model[]  PROGMEM = "midea"; // The basic and inverter Midea's are the same, i.e. at least Pro Plus 10FP, Pro Plus 13Fp, Pro Plus 9 Inverter and Pro Plus 12 Inverter should work
+  static const prog_char info[]   PROGMEM = "{\"mdl\":\"midea\",\"dn\":\"Ultimate Pro Plus\",\"mds\":6,\"mT\":16,\"xT\":30,\"fs\":4,\"maint\":[10]}";
 
-MideaHeatpumpIR::MideaHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
-{
-}
-
-MideaHeatpumpIR::MideaHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
-{
+  _model = model;
+  _info = info;
 }
 
 

@@ -57,8 +57,6 @@ class MitsubishiHeatpumpIR : public HeatpumpIR
 {
   protected: // Cannot create generic Mitsubishi heatpump instances
     MitsubishiHeatpumpIR();
-    MitsubishiHeatpumpIR(const prog_char* model);
-    MitsubishiHeatpumpIR(const prog_char* model, const prog_char* info);
     byte _mitsubishiModel;  // Tells whether this is FD or EF (or other supported model...)
 
   public:
@@ -72,16 +70,12 @@ class MitsubishiFDHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
     MitsubishiFDHeatpumpIR();
-    MitsubishiFDHeatpumpIR(const prog_char* model);
-    MitsubishiFDHeatpumpIR(const prog_char* model, const prog_char* info);
 };
 
 class MitsubishiFEHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
     MitsubishiFEHeatpumpIR();
-    MitsubishiFEHeatpumpIR(const prog_char* model);
-    MitsubishiFEHeatpumpIR(const prog_char* model, const prog_char* info);
 };
 
 #endif

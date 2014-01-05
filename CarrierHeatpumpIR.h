@@ -35,8 +35,6 @@ class CarrierHeatpumpIR : public HeatpumpIR
 {
   public:
     CarrierHeatpumpIR();
-    CarrierHeatpumpIR(const prog_char* model);
-    CarrierHeatpumpIR(const prog_char* model, const prog_char* info);
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
 
   private:

@@ -1,63 +1,43 @@
 #include <Arduino.h>
 #include <PanasonicHeatpumpIR.h>
 
-// These are protected method, i.e. generic Panasonic instances cannot be created
-PanasonicHeatpumpIR::PanasonicHeatpumpIR()
-{
-}
-
-PanasonicHeatpumpIR::PanasonicHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
-{
-}
-
-PanasonicHeatpumpIR::PanasonicHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
+// This is a protected method, i.e. generic Panasonic instances cannot be created
+PanasonicHeatpumpIR::PanasonicHeatpumpIR() : HeatpumpIR()
 {
 }
 
 
 // The different models just set the model accordingly
-PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR()
+PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
+  static const prog_char model[] PROGMEM = "panasonic_dke";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
+
+  _model = model;
+  _info = info;
+
   _panasonicModel = PANASONIC_DKE;
 }
 
-PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR(const prog_char* model) : PanasonicHeatpumpIR(model)
+PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
-  _panasonicModel = PANASONIC_DKE;
-}
+  static const prog_char model[] PROGMEM = "panasonic_jke";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
 
-PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR(const prog_char* model, const prog_char* info) : PanasonicHeatpumpIR(model, info)
-{
-  _panasonicModel = PANASONIC_DKE;
-}
+  _model = model;
+  _info = info;
 
-PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR()
-{
   _panasonicModel = PANASONIC_JKE;
 }
 
-PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR(const prog_char* model) : PanasonicHeatpumpIR(model)
+PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
-  _panasonicModel = PANASONIC_JKE;
-}
+  static const prog_char model[] PROGMEM = "panasonic_nke";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mds\":6,\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
 
-PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR(const prog_char* model, const prog_char* info) : PanasonicHeatpumpIR(model, info)
-{
-  _panasonicModel = PANASONIC_JKE;
-}
+  _model = model;
+  _info = info;
 
-PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR()
-{
-  _panasonicModel = PANASONIC_NKE;
-}
-
-PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR(const prog_char* model) : PanasonicHeatpumpIR(model)
-{
-  _panasonicModel = PANASONIC_NKE;
-}
-
-PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR(const prog_char* model, const prog_char* info) : PanasonicHeatpumpIR(model, info)
-{
   _panasonicModel = PANASONIC_NKE;
 }
 

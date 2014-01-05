@@ -3,20 +3,6 @@
 
 HeatpumpIR::HeatpumpIR()
 {
-  _model = NULL;
-  _info = NULL;
-}
-
-HeatpumpIR::HeatpumpIR(const prog_char* model)
-{
-  _model = (prog_char*)model;
-  _info = NULL;
-}
-
-HeatpumpIR::HeatpumpIR(const prog_char* model, const prog_char* info)
-{
-  _model = model;
-  _info = info;
 }
 
 // This is a virtual function, i.e. never called

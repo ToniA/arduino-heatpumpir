@@ -1,16 +1,13 @@
 #include <Arduino.h>
 #include <CarrierHeatpumpIR.h>
 
-CarrierHeatpumpIR::CarrierHeatpumpIR()
+CarrierHeatpumpIR::CarrierHeatpumpIR() : HeatpumpIR()
 {
-}
+  static const prog_char model[] PROGMEM = "carrier";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mds\":5,\"mT\":17,\"xT\":30,\"fs\":6}";
 
-CarrierHeatpumpIR::CarrierHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
-{
-}
-
-CarrierHeatpumpIR::CarrierHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
-{
+  _model = model;
+  _info = info;
 }
 
 

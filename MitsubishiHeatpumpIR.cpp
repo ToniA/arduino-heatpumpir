@@ -6,43 +6,28 @@ MitsubishiHeatpumpIR::MitsubishiHeatpumpIR() : HeatpumpIR()
 {
 }
 
-MitsubishiHeatpumpIR::MitsubishiHeatpumpIR(const prog_char* model) : HeatpumpIR(model)
-{
-}
-
-MitsubishiHeatpumpIR::MitsubishiHeatpumpIR(const prog_char* model, const prog_char* info) : HeatpumpIR(model, info)
-{
-}
 
 // The different models just set the model accordingly
 
 MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  _mitsubishiModel = MITSUBISHI_FD;
-}
+  static const prog_char model[] PROGMEM = "mitsubishi_fd";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5}";
 
-MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR(const prog_char* model) : MitsubishiHeatpumpIR(model)
-{
-  _mitsubishiModel = MITSUBISHI_FD;
-}
+  _model = model;
+  _info = info;
 
-MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR(const prog_char* model, const prog_char* info) : MitsubishiHeatpumpIR(model, info)
-{
   _mitsubishiModel = MITSUBISHI_FD;
 }
 
 MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  _mitsubishiModel = MITSUBISHI_FE;
-}
+  static const prog_char model[] PROGMEM = "mitsubishi_fe";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
 
-MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR(const prog_char* model) : MitsubishiHeatpumpIR(model)
-{
-  _mitsubishiModel = MITSUBISHI_FE;
-}
+  _model = model;
+  _info = info;
 
-MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR(const prog_char* model, const prog_char* info) : MitsubishiHeatpumpIR(model, info)
-{
   _mitsubishiModel = MITSUBISHI_FE;
 }
 
