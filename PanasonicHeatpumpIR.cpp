@@ -11,7 +11,7 @@ PanasonicHeatpumpIR::PanasonicHeatpumpIR() : HeatpumpIR()
 PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
   static const prog_char model[] PROGMEM = "panasonic_dke";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
@@ -22,7 +22,7 @@ PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR() : PanasonicHeatpumpIR()
 PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
   static const prog_char model[] PROGMEM = "panasonic_jke";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mds\":5,\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
@@ -33,7 +33,7 @@ PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR() : PanasonicHeatpumpIR()
 PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
   static const prog_char model[] PROGMEM = "panasonic_nke";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mds\":6,\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
 
   _model = model;
   _info = info;

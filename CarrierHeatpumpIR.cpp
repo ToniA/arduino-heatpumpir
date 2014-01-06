@@ -4,7 +4,7 @@
 CarrierHeatpumpIR::CarrierHeatpumpIR() : HeatpumpIR()
 {
   static const prog_char model[] PROGMEM = "carrier";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mds\":5,\"mT\":17,\"xT\":30,\"fs\":6}";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mT\":17,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;

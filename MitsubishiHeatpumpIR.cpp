@@ -12,7 +12,7 @@ MitsubishiHeatpumpIR::MitsubishiHeatpumpIR() : HeatpumpIR()
 MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 {
   static const prog_char model[] PROGMEM = "mitsubishi_fd";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5}";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mT\":16,\"xT\":31,\"fs\":5}";
 
   _model = model;
   _info = info;
@@ -23,7 +23,7 @@ MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
 {
   static const prog_char model[] PROGMEM = "mitsubishi_fe";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mds\":5,\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
+  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
 
   _model = model;
   _info = info;
