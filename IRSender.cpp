@@ -41,8 +41,11 @@ void IRSender::setFrequency(int frequency)
       OCR1A = pwmval16 / 3;
       OCR1B = pwmval16 / 3;
       break;
-    case 46: // Timer 5 on Arduino Mega
-      TCCR5A = _BV(WGM51);
+    case 44:
+      // Fall-through to 46, timer 5 controls pins 44, 45 and 46 on Arduino Mega
+    case 45:
+    case 46:
+      TCCR5A = _BV(WGM51) | _BV(WGM50);
       TCCR5B = _BV(WGM53) | _BV(CS50);
       ICR5 = pwmval16;
       OCR5A = pwmval16 / 3;
@@ -121,6 +124,12 @@ void IRSender::mark(int markLength)
     case 10:
       (TCCR2A |= _BV(COM2A1)); // Enable pin 11 PWM output
       break;
+    case 44:
+      (TCCR5A |= _BV(COM5C1)); // Enable pin 44 PWM output on Arduino Mega
+      break;
+    case 45:
+      (TCCR5A |= _BV(COM5B1)); // Enable pin 45 PWM output on Arduino Mega
+      break;
     case 46:
       (TCCR5A |= _BV(COM5A1)); // Enable pin 46 PWM output on Arduino Mega
       break;
@@ -139,7 +148,7 @@ void IRSender::mark(int markLength)
       (TCCR2A |= _BV(COM2A1)); // Enable pin 11 PWM output
       break;
 #endif
-	}
+    }
 
   delayMicroseconds(markLength);
 }
@@ -163,6 +172,10 @@ void IRSender::space(int spaceLength)
     case 10:
       (TCCR2A &= ~(_BV(COM2A1))); // Disable pin 11 PWM output
       break;
+    case 44:
+      (TCCR5A &= ~(_BV(COM5C1))); // Disable pin 44 PWM output on Arduino Mega
+    case 45:
+      (TCCR5A &= ~(_BV(COM5B1))); // Disable pin 45 PWM output on Arduino Mega
     case 46:
       (TCCR5A &= ~(_BV(COM5A1))); // Disable pin 46 PWM output on Arduino Mega
 #else

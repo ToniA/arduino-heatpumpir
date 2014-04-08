@@ -1,4 +1,5 @@
 HeatpumpIR	KEYWORD1
+PanasonicHeatpumpIR	KEYWORD1
 PanasonicCKPHeatpumpIR	KEYWORD1
 PanasonicDKEHeatpumpIR	KEYWORD1
 PanasonicJKEHeatpumpIR	KEYWORD1
@@ -9,6 +10,7 @@ FujitsuHeatpumpIR	KEYWORD1
 MitsubishiHeatpumpIR	KEYWORD1
 MitsubishiFDHeatpumpIR	KEYWORD1
 MitsubishiFEHeatpumpIR	KEYWORD1
+SamsungHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
 
