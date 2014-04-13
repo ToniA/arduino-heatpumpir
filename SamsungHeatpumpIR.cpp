@@ -79,10 +79,11 @@ void SamsungHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
 
 void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature)
 {
-
   byte SamsungTemplate[] = { 0x02, 0x92, 0x0F, 0x00, 0x00, 0x00, 0xF0,   // Header part
                              0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages
                              0x01, 0x00, 0xFE, 0x71, 0x00, 0x00, 0xF0 }; // The actual data is in this part, on bytes 14-20
+
+  byte SamsungChecksum = 0;
 
   // Set the power mode on the template message
   SamsungTemplate[1] = powerMode;
@@ -93,8 +94,25 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
   // Set the temperature on the template message
   SamsungTemplate[18] = (temperature - 16) << 4;
 
-  // Byte 15 has some meaning on the protocol, it's one of these: 0xB2, 0xC2, 0xD2 or 0xE2
-  SamsungTemplate[15] = 0xE2;
+  // Calculate the byte 15 checksum
+  // Count the number of ZERO bits on message bytes 15-20
+  for (byte j=15; j<21; j++) {
+    byte SamsungByte = SamsungTemplate[j];
+    for (byte i=0; i<8; i++) {
+      if ( (SamsungByte & 0x01) == 0x00 ) {
+        SamsungChecksum++;
+      }
+      SamsungByte >>= 1;
+    }
+  }
+
+  // Transform the number of ZERO bytes to the actual checksum
+  SamsungChecksum += 1;
+  SamsungChecksum %= 4;
+  SamsungChecksum <<= 4;
+  SamsungChecksum += 0xB2;
+
+  SamsungTemplate[15] = SamsungChecksum;
 
   // 40 kHz PWM frequency
   IR.setFrequency(40);
@@ -108,6 +126,7 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
     IR.sendIRByte(SamsungTemplate[i], SAMSUNG_AIRCON1_BIT_MARK, SAMSUNG_AIRCON1_ZERO_SPACE, SAMSUNG_AIRCON1_ONE_SPACE);
   }
 
+/* Hmm. Looks like this part is not necessarily needed at all?
   // Pause + new header
   IR.mark(SAMSUNG_AIRCON1_BIT_MARK);
   IR.space(SAMSUNG_AIRCON1_MSG_SPACE);
@@ -119,6 +138,7 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
   for (int i=7; i<14; i++) {
     IR.sendIRByte(SamsungTemplate[i], SAMSUNG_AIRCON1_BIT_MARK, SAMSUNG_AIRCON1_ZERO_SPACE, SAMSUNG_AIRCON1_ONE_SPACE);
   }
+*/
 
   // Pause + new header
   IR.mark(SAMSUNG_AIRCON1_BIT_MARK);

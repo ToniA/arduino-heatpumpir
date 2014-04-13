@@ -1,5 +1,5 @@
 /*
-    Samsung xxx / yyy heatpump control (remote control P/N zzz)
+    Samsung AQV12PSBN / AQV09ASA heatpump control (remote control P/N zzz)
 */
 #ifndef SamsungHeatpumpIR_h
 #define SamsungHeatpumpIR_h
