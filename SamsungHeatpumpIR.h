@@ -22,8 +22,8 @@
 #define SAMSUNG_AIRCON1_MODE_COOL  0x10
 #define SAMSUNG_AIRCON1_MODE_DRY   0x20
 #define SAMSUNG_AIRCON1_MODE_FAN   0x30
-#define SAMSUNG_AIRCON1_MODE_OFF   0xB2 // Power OFF
-#define SAMSUNG_AIRCON1_MODE_ON    0x92 // Power ON
+#define SAMSUNG_AIRCON1_MODE_OFF   0xC0 // Power OFF
+#define SAMSUNG_AIRCON1_MODE_ON    0xF0 // Power ON
 #define SAMSUNG_AIRCON1_FAN_AUTO   0x01 // Fan speed
 #define SAMSUNG_AIRCON1_FAN1       0x05 // * low
 #define SAMSUNG_AIRCON1_FAN2       0x09 // * med

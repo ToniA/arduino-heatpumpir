@@ -79,14 +79,21 @@ void SamsungHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
 
 void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature)
 {
-  byte SamsungTemplate[] = { 0x02, 0x92, 0x0F, 0x00, 0x00, 0x00, 0xF0,   // Header part
+  byte SamsungTemplate[] = { 0x02, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Header part
                              0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages
-                             0x01, 0x00, 0xFE, 0x71, 0x00, 0x00, 0xF0 }; // The actual data is in this part, on bytes 14-20
+                             0x01, 0x00, 0xFE, 0x71, 0x00, 0x00, 0x00 }; // The actual data is in this part, on bytes 14-20
 
   byte SamsungChecksum = 0;
 
-  // Set the power mode on the template message
-  SamsungTemplate[1] = powerMode;
+  // Set the power mode on the template message, also add the first part checksum
+  SamsungTemplate[6] = powerMode;
+  if ( powerMode == SAMSUNG_AIRCON1_MODE_ON ) {
+    SamsungTemplate[1] = 0x92;
+  } else {
+    SamsungTemplate[1] = 0xB2;
+  }
+
+  SamsungTemplate[20] = powerMode;
 
   // Set the fan speed and the operating mode on the template message
   SamsungTemplate[19] = operatingMode | fanSpeed;
