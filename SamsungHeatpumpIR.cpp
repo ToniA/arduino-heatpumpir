@@ -122,7 +122,7 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
   SamsungTemplate[15] = SamsungChecksum;
 
   // 40 kHz PWM frequency
-  IR.setFrequency(40);
+  IR.setFrequency(38);
 
   // Header
   IR.mark(SAMSUNG_AIRCON1_HDR_MARK);
