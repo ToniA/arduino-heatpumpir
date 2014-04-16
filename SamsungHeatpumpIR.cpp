@@ -19,6 +19,7 @@ void SamsungHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
   byte operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
   byte fanSpeed = SAMSUNG_AIRCON1_FAN_AUTO;
   byte temperature = 23;
+  byte swingV = SAMSUNG_AIRCON1_VS_AUTO;
 
   if (powerModeCmd == POWER_OFF)
   {
@@ -72,12 +73,19 @@ void SamsungHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
     temperature = temperatureCmd;
   }
 
-  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature);
+  switch (swingVCmd)
+  {
+    case VDIR_SWING:
+      swingV = SAMSUNG_AIRCON1_VS_SWING;
+      break;
+  }
+
+  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature, swingV);
 }
 
 // Send the Samsung code
 
-void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature)
+void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature, byte swingV)
 {
   byte SamsungTemplate[] = { 0x02, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Header part
                              0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages
@@ -100,6 +108,9 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
 
   // Set the temperature on the template message
   SamsungTemplate[18] = (temperature - 16) << 4;
+
+  // Set the vertical swing mode on the template message
+  SamsungTemplate[16] = swingV;
 
   // Calculate the byte 15 checksum
   // Count the number of ZERO bits on message bytes 15-20

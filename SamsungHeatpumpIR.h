@@ -28,7 +28,8 @@
 #define SAMSUNG_AIRCON1_FAN1       0x05 // * low
 #define SAMSUNG_AIRCON1_FAN2       0x09 // * med
 #define SAMSUNG_AIRCON1_FAN3       0x0B // * high
-
+#define SAMSUNG_AIRCON1_VS_SWING   0xAE // Vertical swing
+#define SAMSUNG_AIRCON1_VS_AUTO    0xFE
 
 class SamsungHeatpumpIR : public HeatpumpIR
 {
@@ -37,7 +38,7 @@ class SamsungHeatpumpIR : public HeatpumpIR
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
 
   private:
-    void sendSamsung(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature);
+    void sendSamsung(IRSender& IR, byte powerMode, byte operatingMode, byte fanSpeed, byte temperature, byte swingV);
 };
 
 #endif
