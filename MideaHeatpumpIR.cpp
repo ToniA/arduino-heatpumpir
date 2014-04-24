@@ -46,6 +46,8 @@ void MideaHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCm
       break;
     case MODE_MAINT:
       // Maintenance mode ('FP' on the remote) is a special mode on Midea
+	  // Also, this is a switch between 'normal' operation and 'maintenance' operation,
+	  // i.e. if already running on maintenance, the heatpump will go back to normal operation
       operatingMode = MIDEA_AIRCON1_MODE_FP;
       break;
   }
