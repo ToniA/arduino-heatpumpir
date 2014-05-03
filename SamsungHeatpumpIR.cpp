@@ -132,7 +132,7 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
 
   SamsungTemplate[15] = SamsungChecksum;
 
-  // 40 kHz PWM frequency
+  // 38 kHz PWM frequency
   IR.setFrequency(38);
 
   // Header
@@ -144,7 +144,6 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
     IR.sendIRByte(SamsungTemplate[i], SAMSUNG_AIRCON1_BIT_MARK, SAMSUNG_AIRCON1_ZERO_SPACE, SAMSUNG_AIRCON1_ONE_SPACE);
   }
 
-/* Hmm. Looks like this part is not necessarily needed at all?
   // Pause + new header
   IR.mark(SAMSUNG_AIRCON1_BIT_MARK);
   IR.space(SAMSUNG_AIRCON1_MSG_SPACE);
@@ -156,7 +155,6 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
   for (int i=7; i<14; i++) {
     IR.sendIRByte(SamsungTemplate[i], SAMSUNG_AIRCON1_BIT_MARK, SAMSUNG_AIRCON1_ZERO_SPACE, SAMSUNG_AIRCON1_ONE_SPACE);
   }
-*/
 
   // Pause + new header
   IR.mark(SAMSUNG_AIRCON1_BIT_MARK);
