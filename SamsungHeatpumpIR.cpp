@@ -113,22 +113,21 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, byte powerMode, byte operating
   SamsungTemplate[16] = swingV;
 
   // Calculate the byte 15 checksum
-  // Count the number of ZERO bits on message bytes 15-20
+  // Count the number of ONE bits on message bytes 15-20
   for (byte j=15; j<21; j++) {
     byte SamsungByte = SamsungTemplate[j];
     for (byte i=0; i<8; i++) {
-      if ( (SamsungByte & 0x01) == 0x00 ) {
+      if ( (SamsungByte & 0x01) == 0x01 ) {
         SamsungChecksum++;
       }
       SamsungByte >>= 1;
     }
   }
 
-  // Transform the number of ZERO bytes to the actual checksum
-  SamsungChecksum += 1;
-  SamsungChecksum %= 4;
+  // Transform the number of ONE bits to the actual checksum
+  SamsungChecksum = 32 - SamsungChecksum;
   SamsungChecksum <<= 4;
-  SamsungChecksum += 0xB2;
+  SamsungChecksum += 0x02;
 
   SamsungTemplate[15] = SamsungChecksum;
 
