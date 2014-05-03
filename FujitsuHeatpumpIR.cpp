@@ -79,14 +79,14 @@ void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSp
   byte FujitsuTemplate[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x80, 0x04, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00 };
   //                            0     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
 
-  static const prog_uint8_t OFF_msg[] PROGMEM = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x02, 0xFD };
+  static const byte OFF_msg[] PROGMEM = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x02, 0xFD };
   byte checksum = 0x00;
 
   // Set the operatingmode on the template message
   FujitsuTemplate[9] = operatingMode;
 
-  // Set the temperature on the template message
-  FujitsuTemplate[8] = (temperature - 16) << 4;
+  // Set the temperature on the template message. The least significant bit should be set to '1'
+  FujitsuTemplate[8] = (temperature - 16) << 4  | 0x01;
 
   // Set the fan speed on the template message
   FujitsuTemplate[10] = fanSpeed;
