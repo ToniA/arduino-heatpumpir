@@ -18,6 +18,8 @@ void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
   byte operatingMode = FUJITSU_AIRCON1_MODE_HEAT;
   byte fanSpeed = FUJITSU_AIRCON1_FAN_AUTO;
   byte temperature = 23;
+  byte swingV = FUJITSU_AIRCON1_VDIR_MANUAL;
+  byte swingH = FUJITSU_AIRCON1_HDIR_MANUAL;
 
   if (powerModeCmd == POWER_OFF)
   {
@@ -70,10 +72,19 @@ void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
     temperature = temperatureCmd;
   }
 
-  sendFujitsu(IR, operatingMode, fanSpeed, temperature);
+  // Only support 'don't move' or 'swing' at the moment, not any specific position
+  if ( swingVCmd == VDIR_SWING) {
+    swingV = FUJITSU_AIRCON1_VDIR_SWING;
+  }
+
+  if ( swingHCmd != HDIR_SWING) {
+    swingH = FUJITSU_AIRCON1_HDIR_SWING;
+  }
+
+  sendFujitsu(IR, operatingMode, fanSpeed, temperature, swingV, swingH);
 }
 
-void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature)
+void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH)
 {
   // ON, HEAT, AUTO FAN, +24 degrees
   byte FujitsuTemplate[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x80, 0x04, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00 };
@@ -82,14 +93,23 @@ void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSp
   byte OFF_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x02, 0xFD };
   byte checksum = 0x00;
 
+/*
+
+  Fujitsu does not have codes to set the air direction to any specific position, but just go to the next position:
+
+  byte nextVerticalPosition_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x6C, 0x93 };
+  byte nextHorizontalPosition_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x79,0x86 };
+
+  These would need to be sent separately...
+*/
   // Set the operatingmode on the template message
   FujitsuTemplate[9] = operatingMode;
 
   // Set the temperature on the template message. The least significant bit should be set to '1'
   FujitsuTemplate[8] = (temperature - 16) << 4  | 0x01;
 
-  // Set the fan speed on the template message
-  FujitsuTemplate[10] = fanSpeed;
+  // Set the fan speed and air direction on the template message
+  FujitsuTemplate[10] = fanSpeed + swingV + swingH;
 
   // Calculate the checksum
   for (int i=0; i<15; i++) {
