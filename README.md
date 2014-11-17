@@ -10,6 +10,7 @@ Currently supports at least these models
 * Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
+* Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 
 
 Instructions
