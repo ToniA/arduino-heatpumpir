@@ -1,10 +1,9 @@
-#include <Arduino.h>
 #include <FujitsuHeatpumpIR.h>
 
 FujitsuHeatpumpIR::FujitsuHeatpumpIR() : HeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "fujitsu_awyz";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"fujitsu_awyz\",\"dn\":\"Fujitsu AWYZ\",\"mT\":16,\"xT\":30,\"fs\":5}";
+  static const char PROGMEM model[] PROGMEM = "fujitsu_awyz";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"fujitsu_awyz\",\"dn\":\"Fujitsu AWYZ\",\"mT\":16,\"xT\":30,\"fs\":5}";
 
   _model = model;
   _info = info;

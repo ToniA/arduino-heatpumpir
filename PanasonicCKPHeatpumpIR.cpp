@@ -1,11 +1,10 @@
-#include <Arduino.h>
 #include <PanasonicCKPHeatpumpIR.h>
 
 
 PanasonicCKPHeatpumpIR::PanasonicCKPHeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "panasonic_ckp";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"panasonic_ckp\",\"dn\":\"Panasonic CKP\",\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const char PROGMEM model[] PROGMEM = "panasonic_ckp";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_ckp\",\"dn\":\"Panasonic CKP\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;

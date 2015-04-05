@@ -1,10 +1,9 @@
-#include <Arduino.h>
 #include <CarrierHeatpumpIR.h>
 
 CarrierHeatpumpIR::CarrierHeatpumpIR() : HeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "carrier";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mT\":17,\"xT\":30,\"fs\":6}";
+  static const char PROGMEM model[] PROGMEM = "carrier";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mT\":17,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;

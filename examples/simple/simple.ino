@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 #include <FujitsuHeatpumpIR.h>
 #include <PanasonicCKPHeatpumpIR.h>
 #include <PanasonicHeatpumpIR.h>

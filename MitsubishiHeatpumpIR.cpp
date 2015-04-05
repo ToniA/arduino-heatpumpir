@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include <MitsubishiHeatpumpIR.h>
 
 // These are protected methods, i.e. generic Mitsubishi instances cannot be created directly
@@ -11,8 +10,8 @@ MitsubishiHeatpumpIR::MitsubishiHeatpumpIR() : HeatpumpIR()
 
 MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "mitsubishi_fd";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mT\":16,\"xT\":31,\"fs\":5}";
+  static const char PROGMEM model[] PROGMEM = "mitsubishi_fd";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mT\":16,\"xT\":31,\"fs\":5}";
 
   _model = model;
   _info = info;
@@ -22,8 +21,8 @@ MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 
 MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "mitsubishi_fe";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
+  static const char PROGMEM model[] PROGMEM = "mitsubishi_fe";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
 
   _model = model;
   _info = info;

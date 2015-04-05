@@ -4,8 +4,6 @@
 #ifndef HisenseHeatpumpIR_h
 #define HisenseHeatpumpIR_h
 
-#include <Arduino.h>
-#include <IRSender.h>
 #include <HeatpumpIR.h>
 
 

@@ -1,8 +1,3 @@
-/* 
-
-*/
-
-#include <Arduino.h>
 #include <HisenseHeatpumpIR.h>
 
 IRSender irSender(3); // IR led on Duemilanove digital pin 3

@@ -4,8 +4,6 @@
 #ifndef MitsubishiHeatpumpIR_h
 #define MitsubishiHeatpumpIR_h
 
-#include <Arduino.h>
-#include <IRSender.h>
 #include <HeatpumpIR.h>
 
 

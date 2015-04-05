@@ -1,10 +1,9 @@
-#include <Arduino.h>
 #include <SamsungHeatpumpIR.h>
 
 SamsungHeatpumpIR::SamsungHeatpumpIR() : HeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "samsung";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"samsung\",\"dn\":\"Samsung\",\"mT\":16,\"xT\":27,\"fs\":4}";
+  static const char PROGMEM model[] PROGMEM = "samsung";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"samsung\",\"dn\":\"Samsung\",\"mT\":16,\"xT\":27,\"fs\":4}";
 
   _model = model;
   _info = info;

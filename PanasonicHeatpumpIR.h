@@ -4,8 +4,6 @@
 #ifndef PanasonicHeatpumpIR_h
 #define PanasonicHeatpumpIR_h
 
-#include <Arduino.h>
-#include <IRSender.h>
 #include <HeatpumpIR.h>
 
 

@@ -1,10 +1,9 @@
-#include <Arduino.h>
 #include <HisenseHeatpumpIR.h>
 
 HisenseHeatpumpIR::HisenseHeatpumpIR() : HeatpumpIR()
 {
-  static const prog_char model[] PROGMEM = "hisense_aud";
-  static const prog_char info[]  PROGMEM = "{\"mdl\":\"hisense_aud\",\"dn\":\"Hisense AUD\",\"mT\":18,\"xT\":32,\"fs\":3}";
+  static const char PROGMEM model[] PROGMEM = "hisense_aud";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"hisense_aud\",\"dn\":\"Hisense AUD\",\"mT\":18,\"xT\":32,\"fs\":3}";
 
   _model = model;
   _info = info;

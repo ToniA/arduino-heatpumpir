@@ -8,8 +8,6 @@
 #ifndef MideaHeatpumpIR_h
 #define MideaHeatpumpIR_h
 
-#include <Arduino.h>
-#include <IRSender.h>
 #include <HeatpumpIR.h>
 
 // Midea timing constants

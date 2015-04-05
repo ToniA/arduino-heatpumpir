@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include <MideaHeatpumpIR.h>       // https://github.com/ToniA/arduino-heatpumpir
 #include <Button.h>                // http://playground.arduino.cc/Code/Button
 

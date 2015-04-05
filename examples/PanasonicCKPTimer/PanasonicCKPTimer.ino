@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include <PanasonicCKPHeatpumpIR.h>
 #include <Timer.h>
 

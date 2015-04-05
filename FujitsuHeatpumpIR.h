@@ -4,8 +4,6 @@
 #ifndef FujitsuHeatpumpIR_h
 #define FujitsuHeatpumpIR_h
 
-#include <Arduino.h>
-#include <IRSender.h>
 #include <HeatpumpIR.h>
 
 

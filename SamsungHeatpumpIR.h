@@ -4,8 +4,6 @@
 #ifndef SamsungHeatpumpIR_h
 #define SamsungHeatpumpIR_h
 
-#include <Arduino.h>
-#include <IRSender.h>
 #include <HeatpumpIR.h>
 
 // Samsung timing constants

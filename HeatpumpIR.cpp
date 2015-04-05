@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include <HeatpumpIR.h>
 
 HeatpumpIR::HeatpumpIR()
@@ -11,12 +10,12 @@ void HeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, by
 }
 
 // Heatpump model and info getters
-const prog_char* HeatpumpIR::model()
+const char PROGMEM* HeatpumpIR::model()
 {
   return _model;
 }
 
-const prog_char* HeatpumpIR::info()
+const char PROGMEM* HeatpumpIR::info()
 {
   return _info;
 }
