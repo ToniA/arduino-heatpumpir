@@ -30,6 +30,9 @@
 #define FUJITSU_AIRCON1_VDIR_SWING  0x10
 #define FUJITSU_AIRCON1_HDIR_MANUAL 0x00
 #define FUJITSU_AIRCON1_HDIR_SWING  0x20
+#define FUJITSU_AIRCON1_ECO_OFF     0x20
+#define FUJITSU_AIRCON1_ECO_ON      0x00
+
 
 
 class FujitsuHeatpumpIR : public HeatpumpIR
@@ -37,9 +40,15 @@ class FujitsuHeatpumpIR : public HeatpumpIR
   public:
     FujitsuHeatpumpIR();
     void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd, bool ecoModeCmd);
+    void sendFujitsuHiPower(IRSender& IR);
+    void sendFujitsuFilterClean(IRSender& IR);
+    void sendFujitsuSuperQuiet(IRSender& IR);
+    void sendFujitsuTestRun(IRSender& IR);
 
   private:
-    void sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH);
+    void sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH, byte ecoMode);
+    void sendFujitsuMsg(IRSender& IR, byte msgSize, byte *msg);
 };
 
 #endif

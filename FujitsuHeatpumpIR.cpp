@@ -12,6 +12,12 @@ FujitsuHeatpumpIR::FujitsuHeatpumpIR() : HeatpumpIR()
 
 void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd)
 {
+  send(IR,  powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false);
+}
+
+
+void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd, bool ecoModeCmd)
+{
   // Sensible defaults for the heat pump mode
 
   byte operatingMode = FUJITSU_AIRCON1_MODE_HEAT;
@@ -19,6 +25,7 @@ void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
   byte temperature = 23;
   byte swingV = FUJITSU_AIRCON1_VDIR_MANUAL;
   byte swingH = FUJITSU_AIRCON1_HDIR_MANUAL;
+  byte ecoMode = FUJITSU_AIRCON1_ECO_OFF;
 
   if (powerModeCmd == POWER_OFF)
   {
@@ -80,10 +87,15 @@ void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
     swingH = FUJITSU_AIRCON1_HDIR_SWING;
   }
 
-  sendFujitsu(IR, operatingMode, fanSpeed, temperature, swingV, swingH);
+  if (ecoModeCmd) {
+    ecoMode = FUJITSU_AIRCON1_ECO_ON;
+  }
+
+  sendFujitsu(IR, operatingMode, fanSpeed, temperature, swingV, swingH, ecoMode);
 }
 
-void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH)
+
+void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSpeed, byte temperature, byte swingV, byte swingH, byte ecoMode)
 {
   // ON, HEAT, AUTO FAN, +24 degrees
   byte FujitsuTemplate[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x80, 0x04, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00 };
@@ -104,6 +116,9 @@ void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSp
   // Set the operatingmode on the template message
   FujitsuTemplate[9] = operatingMode;
 
+  // Set the eco mode on the template message
+  FujitsuTemplate[14] = ecoMode;
+
   // Set the temperature on the template message. The least significant bit should be set to '1'
   FujitsuTemplate[8] = (temperature - 16) << 4  | 0x01;
 
@@ -117,6 +132,49 @@ void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSp
 
   FujitsuTemplate[15] = (byte)(0x9E - checksum);
 
+  if (operatingMode == FUJITSU_AIRCON1_MODE_OFF) {
+    // OFF
+    sendFujitsuMsg(IR, sizeof(OFF_msg), OFF_msg);
+  } else {
+    sendFujitsuMsg(IR, sizeof(FujitsuTemplate), FujitsuTemplate);
+  }
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuHiPower(IRSender& IR)
+{
+  byte HiPower_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x39, 0xC6 };
+
+  sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuFilterClean(IRSender& IR)
+{
+  byte FilterClean_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x02, 0xFD };
+
+  sendFujitsuMsg(IR, sizeof(FilterClean_msg), FilterClean_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuSuperQuiet(IRSender& IR)
+{
+  byte SuperQuiet_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x02, 0xFD };
+
+  sendFujitsuMsg(IR, sizeof(SuperQuiet_msg), SuperQuiet_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuTestRun(IRSender& IR)
+{
+  byte TestRun_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x02, 0xFD };
+
+  sendFujitsuMsg(IR, sizeof(TestRun_msg), TestRun_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuMsg(IRSender& IR, byte msgSize, byte *msg)
+{
   // 40 kHz PWM frequency
   IR.setFrequency(40);
 
@@ -124,16 +182,9 @@ void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, byte operatingMode, byte fanSp
   IR.mark(FUJITSU_AIRCON1_HDR_MARK);
   IR.space(FUJITSU_AIRCON1_HDR_SPACE);
 
-  if (operatingMode == FUJITSU_AIRCON1_MODE_OFF) {
-    // OFF
-    for (int i=0; i<sizeof(OFF_msg); i++) {
-      IR.sendIRByte(OFF_msg[i], FUJITSU_AIRCON1_BIT_MARK, FUJITSU_AIRCON1_ZERO_SPACE, FUJITSU_AIRCON1_ONE_SPACE);
-    }
-  } else {
-    // Data
-    for (int i=0; i<sizeof(FujitsuTemplate); i++) {
-      IR.sendIRByte(FujitsuTemplate[i], FUJITSU_AIRCON1_BIT_MARK, FUJITSU_AIRCON1_ZERO_SPACE, FUJITSU_AIRCON1_ONE_SPACE);
-    }
+  // Data
+  for (byte i=0; i<msgSize; i++) {
+      IR.sendIRByte(msg[i], FUJITSU_AIRCON1_BIT_MARK, FUJITSU_AIRCON1_ZERO_SPACE, FUJITSU_AIRCON1_ONE_SPACE);
   }
 
   // End mark
