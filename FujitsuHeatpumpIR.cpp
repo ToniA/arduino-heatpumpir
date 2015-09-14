@@ -76,7 +76,7 @@ void FujitsuHeatpumpIR::send(IRSender& IR, byte powerModeCmd, byte operatingMode
     swingV = FUJITSU_AIRCON1_VDIR_SWING;
   }
 
-  if ( swingHCmd != HDIR_SWING) {
+  if ( swingHCmd == HDIR_SWING) {
     swingH = FUJITSU_AIRCON1_HDIR_SWING;
   }
 
