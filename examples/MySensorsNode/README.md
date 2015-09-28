@@ -43,9 +43,10 @@ As Domoticz does not really support sending IR code yet, the workaround is to us
 To send a command, first add the sensors. Then update the data of the text sensor to contain the IR code to be sent, and then flip the switch to trigger the sending.
 The data can be updated through the JSON REST API, or through the Lua event scripts.
 
-REST API example (assuming that the idx of the text sensor is 105, and Domoticz is at 192.168.0.4:8080):
+REST API example (assuming that the idx of the text sensor is 105 and the switch is 104, and Domoticz is at 192.168.0.4:8080):
 ```
 http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&svalue=00213416
+http://192.168.0.4:8080/json.htm?type=command&param=switchlight&idx=104&switchcmd=On
 ```
 
 Lua example:
