@@ -52,22 +52,20 @@ Lua example:
 * Seems that the text sensor can't be updated through the commandArray...
 * So now when a device called 'trigger' changes, the text sensor value is first updated to '00213416', and then the IR signal is sent
 
-'''
-commandArray = {}
-
-for key, value in pairs(devicechanged) do
-  -- alarm commands
-  if (key == 'trigger') then
-
-    print("Heatpump script")
-
-    commandArray['OpenURL']='http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&svalue=00213416'
-    commandArray['IR send']='On'
-  end
-end
+    commandArray = {}
     
-return commandArray
-'''
+    for key, value in pairs(devicechanged) do
+      -- alarm commands
+      if (key == 'trigger') then
+    
+        print("Heatpump script")
+    
+        commandArray['OpenURL']='http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&svalue=00213416'
+        commandArray['IR send']='On'
+      end
+    end
+        
+    return commandArray
 
 ##Hardware
 
