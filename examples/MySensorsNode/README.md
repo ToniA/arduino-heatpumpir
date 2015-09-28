@@ -1,4 +1,4 @@
-#MySensors example
+# MySensors example
 
 This example shows how HeatpumpIR could be integrated with the MySensors sensor network. As this sensor sends infrared signals, 
 the natural sensor type is 'S_IR'. The heatpump/air conditioner signals are really long, so the signals need to be encoded somehow.
@@ -27,7 +27,7 @@ This sketch creates three sensors:
 
 The S_INFO and S_LIGHT sensors are for Domoticz, as it does not currently (as of V2.3093) support infrared code sending through the S_IR sensor type.
 
-##Sending the code
+## Sending the code
 ### MYSController
 
 * Select the IR sensor on the 'Heatpump Sensor 1.0' node
@@ -43,30 +43,30 @@ As Domoticz does not really support sending IR code yet, the workaround is to us
 To send a command, first add the sensors. Then update the data of the text sensor to contain the IR code to be sent, and then flip the switch to trigger the sending.
 The data can be updated through the JSON REST API, or through the Lua event scripts.
 
-REST API example (assuming that the idx of the text sensor is 105):
-'''
+REST API example (assuming that the idx of the text sensor is 105, and Domoticz is at 192.168.0.4:8080):
+```
 http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&svalue=00213416
-'''
+```
 
 Lua example:
 * Seems that the text sensor can't be updated through the commandArray...
 * So now when a device called 'trigger' changes, the text sensor value is first updated to '00213416', and then the IR signal is sent
 
-    commandArray = {}
-    
-    for key, value in pairs(devicechanged) do
-      -- alarm commands
-      if (key == 'trigger') then
-    
-        print("Heatpump script")
-    
-        commandArray['OpenURL']='http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&svalue=00213416'
-        commandArray['IR send']='On'
-      end
-    end
-        
-    return commandArray
+```
+commandArray = {}
 
-##Hardware
+for key, value in pairs(devicechanged) do
+  if (key == 'trigger') then
+
+    print("Heatpump script")
+    commandArray['OpenURL']='http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&svalue=00213416'
+    commandArray['IR send']='On'
+  end
+end
+
+return commandArray
+```
+
+## Hardware
 
 Use any ATMega328-based Arduino, connect the radio, and finally connect an infrared led (in series with a resistor, like 100 Ohm) between digital pin 3 and GND.
