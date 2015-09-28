@@ -28,7 +28,6 @@ This sketch creates three sensors:
 The S_INFO and S_LIGHT sensors are for Domoticz, as it does not currently (as of V2.3093) support infrared code sending through the S_IR sensor type.
 
 ##Sending the code
-
 ### MYSController
 
 * Select the IR sensor on the 'Heatpump Sensor 1.0' node
@@ -52,6 +51,7 @@ http://192.168.0.4:8080/json.htm?type=command&param=udevice&idx=105&nvalue=0&sva
 Lua example:
 * Seems that the text sensor can't be updated through the commandArray...
 * So now when a device called 'trigger' changes, the text sensor value is first updated to '00213416', and then the IR signal is sent
+
 '''
 commandArray = {}
 
@@ -68,8 +68,6 @@ end
     
 return commandArray
 '''
-
-
 
 ##Hardware
 
