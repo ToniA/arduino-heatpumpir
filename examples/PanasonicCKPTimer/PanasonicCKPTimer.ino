@@ -34,8 +34,8 @@ void setup()
   heatpumpIR->send(irSender, POWER_ON, MODE_HEAT, FAN_2, 24, VDIR_UP, HDIR_AUTO);
   Serial.println("The heatpump should have beeped, and the TIMER led should be ON");
 
-  timer.after(60000, panasonicIsOn); // Called after 1 minute
-  timer.after(120000, panasonicCancelTimer); // Called after 2 minutes
+  timer.after(60000, panasonicIsOn, NULL); // Called after 1 minute
+  timer.after(120000, panasonicCancelTimer, NULL); // Called after 2 minutes
 
 }
 
@@ -44,12 +44,12 @@ void loop()
   timer.update();
 }
 
-void panasonicIsOn()
+void panasonicIsOn(void *context)
 {
   Serial.println("The heatpump should should turn ON by now, the TIMER led is still ON");
 }
 
-void panasonicCancelTimer()
+void panasonicCancelTimer(void *context)
 {
   heatpumpIR->sendPanasonicCKPCancelTimer(irSender);
   Serial.println("The TIMER led should now be OFF");
