@@ -7,7 +7,6 @@
 #ifndef HeatpumpIR_h
 #define HeatpumpIR_h
 
-#define __PROG_TYPES_COMPAT__
 #include <Arduino.h>
 #include <IRSender.h>
 
@@ -57,11 +56,11 @@ class HeatpumpIR
 {
   protected:
     HeatpumpIR(); // Cannot create generic heatpump instances
-    const char PROGMEM* _model;
-	const char PROGMEM* _info;
+    const char * _model;
+    const char * _info;
 
   public:
-    virtual void send(IRSender& IR, byte powerModeCmd, byte operatingModeCmd, byte fanSpeedCmd, byte temperatureCmd, byte swingVCmd, byte swingHCmd);
+    virtual void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
     const char PROGMEM* model();
     const char PROGMEM* info();
 };
