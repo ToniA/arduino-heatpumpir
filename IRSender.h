@@ -8,16 +8,38 @@
 
 class IRSender
 {
+  protected:
+    IRSender(uint8_t pin); // Cannot create generic IRSender instances
+
   public:
-    IRSender(uint8_t pin);
-    void setFrequency(int frequency);
+    virtual void setFrequency(int frequency);
     void sendIRbyte(uint8_t sendByte, int bitMarkLength, int zeroSpaceLength, int oneSpaceLength);
     uint8_t bitReverse(uint8_t x);
+    virtual void space(int spaceLength);
+    virtual void mark(int markLength);
+
+  protected:
+    uint8_t _pin;
+};
+
+
+class IRSenderPWM : public IRSender
+{
+  public:
+    IRSenderPWM(uint8_t pin);
+    void setFrequency(int frequency);
     void space(int spaceLength);
     void mark(int markLength);
+};
 
-  private:
-    uint8_t _pin;
+
+class IRSenderBlaster : public IRSender
+{
+  public:
+    IRSenderBlaster(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
 };
 
 #endif

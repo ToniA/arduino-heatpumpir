@@ -38,7 +38,8 @@ const byte heatpumpMaintenance = 2;
 Button relay1 = Button(11, INPUT_PULLUP); // Heatpump ON-OFF state
 Button relay2 = Button(12, INPUT_PULLUP); // FP mode (maintenance heating at 8 degrees C) ON-OFF state
 
-IRSender irSender(9);              // IR led on Duemilanove digital pin 9
+IRSenderPWM irSender(9);     // IR led on Duemilanove digital pin 9, using Arduino PWM
+//IRSenderBlaster irSender(9); // IR led on Duemilanove digital pin 9, using IR Blaster (generates the 38 kHz carrier)
 
 byte heatpumpState = heatpumpOff;
 

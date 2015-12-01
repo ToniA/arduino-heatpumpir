@@ -19,7 +19,8 @@
 */
 
 
-IRSender irSender(3); // IR led on Duemilanove digital pin 3
+IRSenderPWM irSender(3);     // IR led on Duemilanove digital pin 3, using Arduino PWM
+//IRSenderBlaster irSender(3); // IR led on Duemilanove digital pin 3, using IR Blaster (generates the 38 kHz carrier)
 
 PanasonicCKPHeatpumpIR *heatpumpIR;
 
