@@ -21,7 +21,7 @@ void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
   uint8_t temperature   = 23;
   uint8_t swingV        = 0;
   uint8_t swingH        = 0;
-  
+
   (void)swingVCmd;
   (void)swingHCmd;
 
@@ -73,7 +73,7 @@ void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
 
   if ( temperatureCmd > 17 && temperatureCmd < 31)
   {
-    temperature = temperatureCmd;
+    temperature = (~((temperatureCmd - 17) << 4)) & 0xF0;
   }
 
   sendMitsubishiHeavy(IR, powerMode, operatingMode, fanSpeed, temperature, swingV, swingH);
@@ -83,7 +83,7 @@ void MitsubishiHeavyHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powerM
 {
   (void)swingV;
   (void)swingH;
-  
+
   uint8_t MitsubishiHeavyTemplate[] = { 0x52, 0xAE, 0xC3, 0x26, 0xD9, 0x7B, 0x00, 0x07, 0x00, 0x00, 0x00 };
   //                                       0     1     2     3     4     5     6     7     8     9    10
 
@@ -93,7 +93,7 @@ void MitsubishiHeavyHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powerM
   // Vertical air flow + fan speed
   MitsubishiHeavyTemplate[7] |= fanSpeed;
 
-  // Pwer state + operating mode + fan speed
+  // Power state + operating mode + fan speed
   MitsubishiHeavyTemplate[9] |= operatingMode | powerMode | temperature;
 
 	// There is no checksum, but some bytes are inverted
