@@ -1,5 +1,5 @@
 /*
-    Mitsubishi Heavy heatpump control (remote control P/N xxx)
+    Mitsubishi Heavy SRKxxZJ-S heatpump control (remote control P/N RKX502A001C)
 */
 #ifndef MitsubishiHeavyHeatpumpIR_h
 #define MitsubishiHeavyHeatpumpIR_h
@@ -20,7 +20,7 @@
 #define MITSUBISHI_AIRCON2_MODE_HEAT  0x03
 #define MITSUBISHI_AIRCON2_MODE_COOL  0x06
 #define MITSUBISHI_AIRCON2_MODE_DRY   0x05
-#define MITSUBISHI_AIRCON2_MODE_FAN   0x01
+#define MITSUBISHI_AIRCON2_MODE_FAN   0x04
 #define MITSUBISHI_AIRCON2_MODE_OFF   0x08 // Power OFF
 #define MITSUBISHI_AIRCON2_MODE_ON    0x00 // Power ON
 #define MITSUBISHI_AIRCON2_FAN_AUTO   0xE0 // Fan speed
@@ -29,6 +29,20 @@
 #define MITSUBISHI_AIRCON2_FAN3       0x60
 #define MITSUBISHI_AIRCON2_FAN4       0x20 // High speed
 #define MITSUBISHI_AIRCON2_FAN5       0x00 // Silent
+
+#define MITSUBISHI_AIRCON2_VS_AUTO    0x0A // Vertical swing
+#define MITSUBISHI_AIRCON2_VS_UP      0x02
+#define MITSUBISHI_AIRCON2_VS_MUP     0x18
+#define MITSUBISHI_AIRCON2_VS_MIDDLE  0x10
+#define MITSUBISHI_AIRCON2_VS_MDOWN   0x08
+#define MITSUBISHI_AIRCON2_VS_DOWN    0x00
+#define MITSUBISHI_AIRCON2_VS_STOP    0x1A
+#define MITSUBISHI_AIRCON2_HS_AUTO    0x04 // Horizontal swing - 3D AUTO
+#define MITSUBISHI_AIRCON2_HS_MIDDLE  0x48
+#define MITSUBISHI_AIRCON2_HS_LEFT    0xC8
+#define MITSUBISHI_AIRCON2_HS_MLEFT   0x88
+#define MITSUBISHI_AIRCON2_HS_MRIGHT  0x08
+#define MITSUBISHI_AIRCON2_HS_RIGHT   0xC4
 
 
 class MitsubishiHeavyHeatpumpIR : public HeatpumpIR

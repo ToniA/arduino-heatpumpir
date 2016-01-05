@@ -19,11 +19,8 @@ void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
   uint8_t operatingMode = MITSUBISHI_AIRCON2_MODE_HEAT;
   uint8_t fanSpeed      = MITSUBISHI_AIRCON2_FAN_AUTO;
   uint8_t temperature   = 23;
-  uint8_t swingV        = 0;
-  uint8_t swingH        = 0;
-
-  (void)swingVCmd;
-  (void)swingHCmd;
+  uint8_t swingV        = MITSUBISHI_AIRCON2_VS_AUTO;
+  uint8_t swingH        = MITSUBISHI_AIRCON2_HS_AUTO;
 
   if (powerModeCmd == 0)
   {
@@ -76,6 +73,54 @@ void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
     temperature = (~((temperatureCmd - 17) << 4)) & 0xF0;
   }
 
+  switch (swingVCmd)
+  {
+    case VDIR_AUTO:
+      swingV = MITSUBISHI_AIRCON2_VS_STOP;
+      break;
+    case VDIR_SWING:
+      swingV = MITSUBISHI_AIRCON2_VS_AUTO;
+      break;
+    case VDIR_UP:
+      swingV = MITSUBISHI_AIRCON2_VS_UP;
+      break;
+    case VDIR_MUP:
+      swingV = MITSUBISHI_AIRCON2_VS_MUP;
+      break;
+    case VDIR_MIDDLE:
+      swingV = MITSUBISHI_AIRCON2_VS_MIDDLE;
+      break;
+    case VDIR_MDOWN:
+      swingV = MITSUBISHI_AIRCON2_VS_MDOWN;
+      break;
+    case VDIR_DOWN:
+      swingV = MITSUBISHI_AIRCON2_VS_DOWN;
+      break;
+  }
+
+  switch (swingHCmd)
+  {
+    case HDIR_AUTO: // Fall-through to HDIR_SWING
+    case HDIR_SWING:
+      swingH = MITSUBISHI_AIRCON2_HS_AUTO;
+      break;
+    case HDIR_MIDDLE:
+      swingH = MITSUBISHI_AIRCON2_HS_MIDDLE;
+      break;
+    case HDIR_LEFT:
+      swingH = MITSUBISHI_AIRCON2_HS_LEFT;
+      break;
+    case HDIR_MLEFT:
+      swingH = MITSUBISHI_AIRCON2_HS_MLEFT;
+      break;
+    case HDIR_RIGHT:
+      swingH = MITSUBISHI_AIRCON2_HS_RIGHT;
+      break;
+    case HDIR_MRIGHT:
+      swingH = MITSUBISHI_AIRCON2_HS_MRIGHT;
+      break;
+  }
+
   sendMitsubishiHeavy(IR, powerMode, operatingMode, fanSpeed, temperature, swingV, swingH);
 }
 
@@ -84,14 +129,14 @@ void MitsubishiHeavyHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powerM
   (void)swingV;
   (void)swingH;
 
-  uint8_t MitsubishiHeavyTemplate[] = { 0x52, 0xAE, 0xC3, 0x26, 0xD9, 0x7B, 0x00, 0x07, 0x00, 0x00, 0x00 };
+  uint8_t MitsubishiHeavyTemplate[] = { 0x52, 0xAE, 0xC3, 0x26, 0xD9, 0x33, 0x00, 0x07, 0x00, 0x00, 0x00 };
   //                                       0     1     2     3     4     5     6     7     8     9    10
 
   // Vertical air flow + allergen + clean + 3D
-  //MitsubishiHeavyTemplate[5] = powerMode | operatingMode | temperature;
+  MitsubishiHeavyTemplate[5] |= swingH + (swingV & 0b00000010);
 
   // Vertical air flow + fan speed
-  MitsubishiHeavyTemplate[7] |= fanSpeed;
+  MitsubishiHeavyTemplate[7] |= fanSpeed + (swingV & 0b00011000);
 
   // Power state + operating mode + fan speed
   MitsubishiHeavyTemplate[9] |= operatingMode | powerMode | temperature;

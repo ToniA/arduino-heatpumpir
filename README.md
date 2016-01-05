@@ -13,7 +13,8 @@ Currently supports at least these models
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 * Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
-* Daikin RXS25G2V1B /FVXS25FV1B (Remote control P/N ARC452A1)
+* Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
+* Mitsubishi Heavy SRKxxZJ-S (Remote control P/N RKX502A001C)
 
 
 ## Instructions
