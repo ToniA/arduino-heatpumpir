@@ -42,6 +42,8 @@
 #define PANASONIC_AIRCON2_HS_MLEFT   0x0A
 #define PANASONIC_AIRCON2_HS_MRIGHT  0x0B
 #define PANASONIC_AIRCON2_HS_RIGHT   0x0C
+#define PANASONIC_AIRCON2_QUIET      0x01 // Quiet setting
+#define PANASONIC_AIRCON2_POWERFUL   0x20 // Powerful setting
 
 // Panasonic model codes
 #define PANASONIC_DKE 0
@@ -57,9 +59,10 @@ class PanasonicHeatpumpIR : public HeatpumpIR
 
   public:
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool powerfulCmd, bool quietCmd);
 
   private:
-    void sendPanasonic(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH);
+    void sendPanasonic(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t profile);
 };
 
 class PanasonicDKEHeatpumpIR : public PanasonicHeatpumpIR
