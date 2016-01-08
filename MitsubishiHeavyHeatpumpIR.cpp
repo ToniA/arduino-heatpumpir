@@ -129,7 +129,7 @@ void MitsubishiHeavyHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powerM
   (void)swingV;
   (void)swingH;
 
-  uint8_t MitsubishiHeavyTemplate[] = { 0x52, 0xAE, 0xC3, 0x26, 0xD9, 0x33, 0x00, 0x07, 0x00, 0x00, 0x00 };
+  uint8_t MitsubishiHeavyTemplate[] = { 0x52, 0xAE, 0xC3, 0x26, 0xD9, 0x31, 0x00, 0x07, 0x00, 0x00, 0x00 };
   //                                       0     1     2     3     4     5     6     7     8     9    10
 
   // Vertical air flow + allergen + clean + 3D
