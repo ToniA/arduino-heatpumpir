@@ -75,7 +75,7 @@ void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
 
   switch (swingVCmd)
   {
-    case VDIR_AUTO:
+    case VDIR_MANUAL:
       swingV = MITSUBISHI_AIRCON2_VS_STOP;
       break;
     case VDIR_SWING:
@@ -100,7 +100,9 @@ void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
 
   switch (swingHCmd)
   {
-    case HDIR_AUTO: // Fall-through to HDIR_SWING
+    case HDIR_MANUAL:
+      swingH = MITSUBISHI_AIRCON2_HS_STOP;
+      break;
     case HDIR_SWING:
       swingH = MITSUBISHI_AIRCON2_HS_AUTO;
       break;
