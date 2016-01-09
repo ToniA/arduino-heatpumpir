@@ -30,6 +30,9 @@
 #define MITSUBISHI_AIRCON2_FAN4       0x20 // High speed
 #define MITSUBISHI_AIRCON2_FAN5       0x00 // Silent
 
+#define MITSUBISHI_AIRCON2_CLEAN_ON   0x00
+#define MITSUBISHI_AIRCON2_CLEAN_OFF  0x20
+
 #define MITSUBISHI_AIRCON2_VS_AUTO    0x0A // Vertical swing
 #define MITSUBISHI_AIRCON2_VS_UP      0x02
 #define MITSUBISHI_AIRCON2_VS_MUP     0x18
@@ -54,9 +57,10 @@ class MitsubishiHeavyHeatpumpIR : public HeatpumpIR
   public:
     MitsubishiHeavyHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd);
 
   private:
-    void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd);
+    void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t cleanMode);
 };
 
 #endif
