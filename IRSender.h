@@ -42,4 +42,16 @@ class IRSenderBlaster : public IRSender
     void mark(int markLength);
 };
 
+class IRSenderBitBang : public IRSender
+{
+  public:
+    IRSenderBitBang(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  protected:
+    uint _halfPeriodicTime;
+};
+
 #endif

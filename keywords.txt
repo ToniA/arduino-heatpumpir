@@ -18,6 +18,7 @@ MitsubishiHeavyHeatpumpIR	KEYWORD1
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1
 IRSenderBlaster	KEYWORD1
+IRSenderBitBang	KEYWORD1
 
 setFrequency	KEYWORD2
 sendIRByte	KEYWORD2
