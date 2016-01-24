@@ -22,4 +22,10 @@ Currently supports at least these models
 * Download the library, and place it under your personal Arduino 'libraries' directory, under directory 'HeatpumpIR'
 * See the example sketches
 
+### ESP8266 support
+
+This hasn't been tested extensively, but this library should also work on ESP8266. Just change the IR send method from 'IRSenderPWM' to 'IRSenderBitBang':
+
+    IRSenderBitBang irSender(1);     // IR led on ESP8266 digital pin 1
+
 ![Schema](https://raw.github.com/ToniA/arduino-heatpumpir/master/arduino_irsender.png)
