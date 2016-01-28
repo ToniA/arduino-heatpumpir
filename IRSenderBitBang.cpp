@@ -23,7 +23,7 @@ void IRSenderBitBang::mark(int markLength)
 {
   long beginning = micros();
 
-  while(micros() - beginning < markLength){
+  while((int)(micros() - beginning) < markLength){
     digitalWrite(_pin, HIGH);
     delayMicroseconds(_halfPeriodicTime);
     digitalWrite(_pin, LOW);

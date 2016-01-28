@@ -51,7 +51,7 @@ class IRSenderBitBang : public IRSender
     void mark(int markLength);
 
   protected:
-    uint _halfPeriodicTime;
+    int _halfPeriodicTime;
 };
 
 #endif
