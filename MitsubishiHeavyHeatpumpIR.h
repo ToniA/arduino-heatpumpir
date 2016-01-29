@@ -32,6 +32,7 @@
 
 #define MITSUBISHI_AIRCON2_CLEAN_ON   0x00
 #define MITSUBISHI_AIRCON2_CLEAN_OFF  0x20
+#define MITSUBISHI_AIRCON2_CLN_OFF_ZM 0x60
 
 #define MITSUBISHI_AIRCON2_VS_AUTO    0x0A // Vertical swing
 #define MITSUBISHI_AIRCON2_VS_UP      0x02
@@ -52,15 +53,37 @@
 #define MITSUBISHI_AIRCON2_HS_3DAUTO  0x04
 
 
+// MitsubishiHeavy model codes
+#define MITSUBISHIHEAVY_ZJ 0
+#define MITSUBISHIHEAVY_ZM 1
+
+
 class MitsubishiHeavyHeatpumpIR : public HeatpumpIR
 {
-  public:
+  protected: // Cannot create generic MitsubishiHeavy heatpump instances
     MitsubishiHeavyHeatpumpIR();
+    uint8_t _mitsubishiModel;  // Tells whether this is ZJ or ZM (or other supported model...)
+
+  public:
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd);
 
   private:
-    void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t cleanMode);
+    void sendMitsubishiHeavyZJ(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t cleanMode);
+    void sendMitsubishiHeavyZM(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t cleanMode);
 };
+
+class MitsubishiHeavyZJHeatpumpIR : public MitsubishiHeavyHeatpumpIR
+{
+  public:
+    MitsubishiHeavyZJHeatpumpIR();
+};
+
+class MitsubishiHeavyZMHeatpumpIR : public MitsubishiHeavyHeatpumpIR
+{
+  public:
+    MitsubishiHeavyZMHeatpumpIR();
+};
+
 
 #endif
