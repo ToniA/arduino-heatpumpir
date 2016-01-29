@@ -8,6 +8,8 @@ Currently supports at least these models
 * Panasonic E9/E12-DKE (Panasonic remote control P/N A75C2616)
 * Panasonic E9/E12-JKE and E9/E12-NKE
 * Midea MSR1-12HRN1-QC2 + MOA1-12HN1-QC2, sold as Ultimate Pro Plus Basic 13FP in Finland (Midea remote control P/N RG51M1/E)
+   * Also other Midea models sold as 'Ultimate', even some inverter models
+   * Also Onnline (sold through Onninen) has been reported to work
 * Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
