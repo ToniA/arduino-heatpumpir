@@ -48,8 +48,9 @@
 #define MITSUBISHI_AIRCON1_HS_RIGHT   0x50
 
 // Mitsubishi model codes
-#define MITSUBISHI_FD 0
-#define MITSUBISHI_FE 1
+#define MITSUBISHI_FD  0
+#define MITSUBISHI_FE  1
+#define MITSUBISHI_MSY 2
 
 class MitsubishiHeatpumpIR : public HeatpumpIR
 {
@@ -74,6 +75,12 @@ class MitsubishiFEHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
     MitsubishiFEHeatpumpIR();
+};
+
+class MitsubishiMSYHeatpumpIR : public MitsubishiHeatpumpIR
+{
+  public:
+    MitsubishiMSYHeatpumpIR();
 };
 
 #endif

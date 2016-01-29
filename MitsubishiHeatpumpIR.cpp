@@ -30,6 +30,17 @@ MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
   _mitsubishiModel = MITSUBISHI_FE;
 }
 
+MitsubishiMSYHeatpumpIR::MitsubishiMSYHeatpumpIR() : MitsubishiHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "mitsubishi_msy";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_msy\",\"dn\":\"Mitsubishi MSY\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
+
+  _model = model;
+  _info = info;
+
+  _mitsubishiModel = MITSUBISHI_MSY;
+}
+
 
 void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
@@ -158,7 +169,7 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
 void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH)
 {
   uint8_t MitsubishiTemplate[] = { 0x23, 0xCB, 0x26, 0x01, 0x00, 0x20, 0x48, 0x00, 0x00, 0x00, 0x61, 0x00, 0x00, 0x00, 0x10, 0x40, 0x00, 0x00 };
-  //                            0     1     2     3     4     5     6     7     8     9     10    11    12    13    14    15    16    17
+  //                                  0     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15    16    17
 
   uint8_t checksum = 0x00;
 
@@ -202,9 +213,14 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8
     }
 
     // Pause between the first and the second data burst
+    // Also modify one byte for the second burst on MSY model. This does not affect the checksum of the second burst
     if (j == 0) {
       IR.mark(MITSUBISHI_AIRCON1_BIT_MARK);
       IR.space(MITSUBISHI_AIRCON1_MSG_SPACE);
+      
+      if (_mitsubishiModel == MITSUBISHI_MSY) {
+        MitsubishiTemplate[14] = 0x24;
+      }
     }
   }
 
