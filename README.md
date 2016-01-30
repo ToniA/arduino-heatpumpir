@@ -16,6 +16,8 @@ Currently supports at least these models
 * Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
 * Mitsubishi Heavy SRKxxZJ-S (Remote control P/N RKX502A001C)
 * Mitsubishi Heavy SRKxxZM-S (Remote Control P/N RLA502A700B)
+* Hyundai (Remote Control P/N Y512F2)
+   * This is probably a generic Gree model
 
 ## Instructions
 
