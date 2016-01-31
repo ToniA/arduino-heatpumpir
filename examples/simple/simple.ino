@@ -21,8 +21,9 @@ IRSenderPWM irSender(3);     // IR led on Duemilanove digital pin 3, using Ardui
 HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpumpIR(), new PanasonicJKEHeatpumpIR(),
                             new PanasonicNKEHeatpumpIR(), new CarrierHeatpumpIR(), new MideaHeatpumpIR(),
                             new FujitsuHeatpumpIR(), new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(),
-                            new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(), 
-                            new MitsubishiHeavyHeatpumpIR(), NULL};
+                            new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
+                            new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
+                            NULL};
 
 void setup()
 {

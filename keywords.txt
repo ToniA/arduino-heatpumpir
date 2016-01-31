@@ -14,6 +14,8 @@ SamsungHeatpumpIR	KEYWORD1
 SharpHeatpumpIR	KEYWORD1
 DaikinHeatpumpIR	KEYWORD1
 MitsubishiHeavyHeatpumpIR	KEYWORD1
+MitsubishiHeavyZJHeatpumpIR	KEYWORD1
+MitsubishiHeavyZMHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1
