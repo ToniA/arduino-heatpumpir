@@ -58,37 +58,57 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
     powerMode = MITSUBISHI_AIRCON1_MODE_OFF;
   }
 
-  switch (operatingModeCmd)
+  if (_mitsubishiModel !=  MITSUBISHI_MSY)
   {
-    case MODE_AUTO:
-      operatingMode = MITSUBISHI_AIRCON1_MODE_AUTO;
-      break;
-    case MODE_HEAT:
-      operatingMode = MITSUBISHI_AIRCON1_MODE_HEAT;
-      break;
-    case MODE_COOL:
-      operatingMode = MITSUBISHI_AIRCON1_MODE_COOL;
-      break;
-    case MODE_DRY:
-      operatingMode = MITSUBISHI_AIRCON1_MODE_DRY;
-      break;
-    case MODE_FAN:
-      if (_mitsubishiModel == MITSUBISHI_FE) {
-        operatingMode = MITSUBISHI_AIRCON1_MODE_FAN;
-        temperatureCmd = 24;
-      } else {
+    switch (operatingModeCmd)
+    {
+      case MODE_AUTO:
+        operatingMode = MITSUBISHI_AIRCON1_MODE_AUTO;
+        break;
+      case MODE_HEAT:
+        operatingMode = MITSUBISHI_AIRCON1_MODE_HEAT;
+        break;
+      case MODE_COOL:
         operatingMode = MITSUBISHI_AIRCON1_MODE_COOL;
-        // Temperature needs to be set to 31 degrees for 'simulated' FAN mode
-        temperatureCmd = 31;
-      }
-      break;
-    case MODE_MAINT: // Maintenance mode is just the heat mode at +10, FAN5
-      if (_mitsubishiModel == MITSUBISHI_FE) {
-        operatingMode |= MITSUBISHI_AIRCON1_MODE_HEAT;
-        temperature = 10; // Default to +10 degrees
-        fanSpeedCmd = FAN_AUTO;
-      }
-      break;
+        break;
+      case MODE_DRY:
+        operatingMode = MITSUBISHI_AIRCON1_MODE_DRY;
+        break;
+      case MODE_FAN:
+        if (_mitsubishiModel == MITSUBISHI_FE) {
+          operatingMode = MITSUBISHI_AIRCON1_MODE_FAN;
+          temperatureCmd = 24;
+        } else {
+          operatingMode = MITSUBISHI_AIRCON1_MODE_COOL;
+          // Temperature needs to be set to 31 degrees for 'simulated' FAN mode
+          temperatureCmd = 31;
+        }
+        break;
+      case MODE_MAINT: // Maintenance mode is just the heat mode at +10, FAN5
+        if (_mitsubishiModel == MITSUBISHI_FE) {
+          operatingMode |= MITSUBISHI_AIRCON1_MODE_HEAT;
+          temperature = 10; // Default to +10 degrees
+          fanSpeedCmd = FAN_AUTO;
+        }
+        break;
+    }
+  } else {
+    operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
+    switch (operatingModeCmd)
+    {
+      case MODE_AUTO:
+        operatingMode = MITSUBISHI_AIRCON2_MODE_IFEEL;
+        break;
+      case MODE_COOL:
+        operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
+        break;
+      case MODE_DRY:
+        operatingMode = MITSUBISHI_AIRCON2_MODE_DRY;
+        break;
+      case MODE_FAN:
+        operatingMode = MITSUBISHI_AIRCON2_MODE_FAN;
+        break;
+    }
   }
 
   switch (fanSpeedCmd)
@@ -191,6 +211,12 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8
   // Set the fan speed and vertical air direction on the template message
   MitsubishiTemplate[9] = fanSpeed | swingV;
 
+  // MSY has a bit different template
+  if (_mitsubishiModel == MITSUBISHI_MSY) {
+    MitsubishiTemplate[14] = 0x00;
+    MitsubishiTemplate[15] = 0x00;
+  }
+
   // Calculate the checksum
   for (int i=0; i<17; i++) {
     checksum += MitsubishiTemplate[i];
@@ -217,7 +243,7 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8
     if (j == 0) {
       IR.mark(MITSUBISHI_AIRCON1_BIT_MARK);
       IR.space(MITSUBISHI_AIRCON1_MSG_SPACE);
-      
+
       if (_mitsubishiModel == MITSUBISHI_MSY) {
         MitsubishiTemplate[14] = 0x24;
       }
