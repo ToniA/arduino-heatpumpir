@@ -29,8 +29,10 @@
 #define MITSUBISHI_HEAVY_ZJ_FAN1           0xA0
 #define MITSUBISHI_HEAVY_ZJ_FAN2           0x80
 #define MITSUBISHI_HEAVY_ZJ_FAN3           0x60
-#define MITSUBISHI_HEAVY_ZJ_FAN4           0x60 // Fan 4 isn't available on ZM-S, same as Fan 3
-#define MITSUBISHI_HEAVY_ZJ_FAN5           0x60 // Fan 5 isn't available on ZM-S, same as Fan 3
+#define MITSUBISHI_HEAVY_ZJ_FAN4           0x60 // Fan 4 isn't available on ZJ-S, same as Fan 3
+#define MITSUBISHI_HEAVY_ZJ_FAN5           0x60 // Fan 5 isn't available on ZJ-S, same as Fan 3
+#define MITSUBISHI_HEAVY_ZJ_HIPOWER        0x40
+#define MITSUBISHI_HEAVY_ZJ_ECONO          0x00
 
 #define MITSUBISHI_HEAVY_ZM_FAN_AUTO       0x0F // Fan speed
 #define MITSUBISHI_HEAVY_ZM_FAN1           0x0E
@@ -38,13 +40,18 @@
 #define MITSUBISHI_HEAVY_ZM_FAN3           0x0C
 #define MITSUBISHI_HEAVY_ZM_FAN4           0x0B
 #define MITSUBISHI_HEAVY_ZM_FAN5           0x0B // Fan 5 isn't available on ZM-S, same as Fan 4
+#define MITSUBISHI_HEAVY_ZM_HIPOWER        0x07
+#define MITSUBISHI_HEAVY_ZM_ECONO          0x09
 
 #define MITSUBISHI_HEAVY_CLEAN_ON          0x00
 #define MITSUBISHI_HEAVY_ZJ_CLEAN_OFF      0x20
 #define MITSUBISHI_HEAVY_ZM_CLEAN_OFF      0x60
 
-#define MITSUBISHI_HEAVY_ZM_3DAUTO_ON      0x00
+#define MITSUBISHI_HEAVY_ZM_3DAUTO_ON      0x00 // Only available in Auto, Cool and Heat mode
 #define MITSUBISHI_HEAVY_ZM_3DAUTO_OFF     0x12
+
+#define MITSUBISHI_HEAVY_ZM_SILENT_ON      0x00 // NOT available in Fan or Dry mode
+#define MITSUBISHI_HEAVY_ZM_SILENT_OFF     0x80
 
 #define MITSUBISHI_HEAVY_ZJ_VS_SWING       0x0A // Vertical swing
 #define MITSUBISHI_HEAVY_ZJ_VS_UP          0x02
@@ -116,7 +123,7 @@ class MitsubishiHeavyZMHeatpumpIR : public MitsubishiHeavyHeatpumpIR
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd);
 
   private:
-    void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t cleanMode);
+    void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t cleanMode, uint8_t silentMode, uint8_t _3DAuto);
 };
 
 
