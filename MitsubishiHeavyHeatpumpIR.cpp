@@ -22,7 +22,7 @@ MitsubishiHeavyZJHeatpumpIR::MitsubishiHeavyZJHeatpumpIR() : MitsubishiHeavyHeat
 MitsubishiHeavyZMHeatpumpIR::MitsubishiHeavyZMHeatpumpIR() : MitsubishiHeavyHeatpumpIR()
 {
   static const char PROGMEM model[] PROGMEM = "mitsubishi_heavy_zm";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zm\",\"dn\":\"Mitsubishi Heavy ZM\",\"mT\":18,\"xT\":30,\"fs\":3}";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zm\",\"dn\":\"Mitsubishi Heavy ZM\",\"mT\":18,\"xT\":30,\"fs\":4}";
 
   _model = model;
   _info = info;
@@ -236,6 +236,9 @@ void MitsubishiHeavyZMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
       break;
     case FAN_3:
       fanSpeed = MITSUBISHI_HEAVY_ZM_FAN3;
+      break;
+    case FAN_4:
+      fanSpeed = MITSUBISHI_HEAVY_ZM_FAN4;
       break;
   }
 

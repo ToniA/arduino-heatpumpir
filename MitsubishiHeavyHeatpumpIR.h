@@ -36,6 +36,7 @@
 #define MITSUBISHI_HEAVY_ZM_FAN1           0x0E
 #define MITSUBISHI_HEAVY_ZM_FAN2           0x0D
 #define MITSUBISHI_HEAVY_ZM_FAN3           0x0C
+#define MITSUBISHI_HEAVY_ZM_FAN4           0x0B
 #define MITSUBISHI_HEAVY_ZM_HIPOWER        0x07
 #define MITSUBISHI_HEAVY_ZM_ECONO          0x09
 
