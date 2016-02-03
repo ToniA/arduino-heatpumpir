@@ -100,9 +100,10 @@ void MitsubishiHeavyZJHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
       break;
   }
 
-  if (silentModeCmd && !(operatingModeCmd == MODE_DRY || operatingModeCmd == MODE_FAN))
+  if (silentModeCmd)
   {
-    fanSpeed == MITSUBISHI_HEAVY_ZJ_SILENT_ON;
+  	// Silent mode doesn't exist on ZJ model, use ECONO mode instead
+    fanSpeed = MITSUBISHI_HEAVY_ZJ_SILENT_ON;
   }
 
   if ( temperatureCmd > 17 && temperatureCmd < 31)
@@ -160,7 +161,7 @@ void MitsubishiHeavyZJHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
       break;
   }
 
-  if (_3DAutoCmd == true && (operatingModeCmd == MODE_AUTO || operatingModeCmd == MODE_COOL || operatingModeCmd == MODE_DRY))
+  if (_3DAutoCmd == true && (operatingModeCmd == MODE_AUTO || operatingModeCmd == MODE_COOL || operatingModeCmd == MODE_HEAT))
   {
       swingH = MITSUBISHI_HEAVY_ZJ_HS_3DAUTO;
   }
