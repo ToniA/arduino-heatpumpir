@@ -196,12 +196,12 @@ void MitsubishiHeavyZMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
 
   if (silentModeCmd && !(operatingModeCmd == MODE_DRY || operatingModeCmd == MODE_FAN))
   {
-    silentMode == MITSUBISHI_HEAVY_ZM_SILENT_ON;
+    silentMode = MITSUBISHI_HEAVY_ZM_SILENT_ON;
   }
 
   if (_3DAutoCmd && !(operatingModeCmd == MODE_DRY || operatingModeCmd == MODE_FAN))
   {
-    _3DAuto == MITSUBISHI_HEAVY_ZM_3DAUTO_ON;
+    _3DAuto = MITSUBISHI_HEAVY_ZM_3DAUTO_ON;
   }
 
   switch (operatingModeCmd)
@@ -340,7 +340,7 @@ void MitsubishiHeavyZJHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powe
 
 void MitsubishiHeavyZMHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t cleanMode, uint8_t silentMode, uint8_t _3DAuto)
 {
-  uint8_t MitsubishiHeavyZMTemplate[] = { 0x52, 0xAE, 0xC3, 0x1A, 0xE5, 0x90, 0x00, 0xF0, 0x00, 0xF0, 0x00, 0x0D, 0x00, 0x01, 0x00, 0xFF, 0x00, 0x7B, 0x00 };
+  uint8_t MitsubishiHeavyZMTemplate[] = { 0x52, 0xAE, 0xC3, 0x1A, 0xE5, 0x90, 0x00, 0xF0, 0x00, 0xF0, 0x00, 0x0D, 0x00, 0x10, 0x00, 0xFF, 0x00, 0x7B, 0x00 };
   //                                         0     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15    16    17    18
 
   // Power state + operating mode
