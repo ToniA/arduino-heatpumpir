@@ -13,9 +13,12 @@
 #include <HyundaiHeatpumpIR.h>
 
 
-IRSenderPWM irSender(3);     // IR led on Duemilanove digital pin 3, using Arduino PWM
-//IRSenderBlaster irSender(3); // IR led on Duemilanove digital pin 3, using IR Blaster (generates the 38 kHz carrier)
-//IRSenderBitBang irSender(1); // IR led on ESP8266 digital pin 1
+#ifndef ESP8266
+IRSenderPWM irSender(3);       // IR led on Arduino digital pin 3, using Arduino PWM
+//IRSenderBlaster irSender(3); // IR led on Arduino digital pin 3, using IR Blaster (generates the 38 kHz carrier)
+#else
+IRSenderBitBang irSender(1);   // IR led on ESP8266 GPIO pin 1
+#endif
 
 
 // Array with all supported heatpumps
