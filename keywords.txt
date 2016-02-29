@@ -18,6 +18,7 @@ MitsubishiHeavyHeatpumpIR	KEYWORD1
 MitsubishiHeavyZJHeatpumpIR	KEYWORD1
 MitsubishiHeavyZMHeatpumpIR	KEYWORD1
 HyundaiHeatpumpIR	KEYWORD1
+FuegoHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1

@@ -11,6 +11,7 @@
 #include <DaikinHeatpumpIR.h>
 #include <MitsubishiHeavyHeatpumpIR.h>
 #include <HyundaiHeatpumpIR.h>
+#include <FuegoHeatpumpIR.h>
 
 
 IRSenderPWM irSender(3);     // IR led on Duemilanove digital pin 3, using Arduino PWM
@@ -25,7 +26,7 @@ HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpu
                             new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), new MitsubishiMSYHeatpumpIR(),
                             new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
                             new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
-                            new HyundaiHeatpumpIR(), NULL};
+                            new HyundaiHeatpumpIR(), new FuegoHeatpumpIR(), NULL};
 
 void setup()
 {
