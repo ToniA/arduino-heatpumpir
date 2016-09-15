@@ -11,10 +11,12 @@
 #include <DaikinHeatpumpIR.h>
 #include <MitsubishiHeavyHeatpumpIR.h>
 #include <HyundaiHeatpumpIR.h>
+#include <HisenseHeatpumpIR.h>
+#include <GreeHeatpumpIR.h>
 
 
 #ifndef ESP8266
-IRSenderPWM irSender(3);       // IR led on Arduino digital pin 3, using Arduino PWM
+IRSenderPWM irSender(9);       // IR led on Arduino digital pin 9, using Arduino PWM
 //IRSenderBlaster irSender(3); // IR led on Arduino digital pin 3, using IR Blaster (generates the 38 kHz carrier)
 #else
 IRSenderBitBang irSender(1);   // IR led on ESP8266 GPIO pin 1
@@ -28,7 +30,8 @@ HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpu
                             new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), new MitsubishiMSYHeatpumpIR(),
                             new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
                             new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
-                            new HyundaiHeatpumpIR(), NULL};
+                            new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(), new GreeHeatpumpIR(),
+                            NULL};
 
 void setup()
 {
@@ -65,9 +68,9 @@ void loop()
 
     // Send the IR command
     heatpumpIR[i]->send(irSender, POWER_ON, MODE_HEAT, FAN_2, 24, VDIR_UP, HDIR_AUTO);
-    delay(500);
+    delay(2000);
   }
   while (heatpumpIR[++i] != NULL);
 
-  delay(2000);
+  delay(5000);
 }
