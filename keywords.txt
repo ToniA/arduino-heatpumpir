@@ -5,6 +5,8 @@ PanasonicDKEHeatpumpIR	KEYWORD1
 PanasonicJKEHeatpumpIR	KEYWORD1
 PanasonicNKEHeatpumpIR	KEYWORD1
 CarrierHeatpumpIR	KEYWORD1
+CarrierNQVHeatpumpIR	KEYWORD1
+CarrierMCAHeatpumpIR	KEYWORD1
 MideaHeatpumpIR	KEYWORD1
 FujitsuHeatpumpIR	KEYWORD1
 MitsubishiHeatpumpIR	KEYWORD1

@@ -1,16 +1,32 @@
 #include <CarrierHeatpumpIR.h>
 
+// This is a protected method, i.e. generic Carrier instances cannot be created
 CarrierHeatpumpIR::CarrierHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "carrier";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier\",\"dn\":\"Carrier\",\"mT\":17,\"xT\":30,\"fs\":6}";
+}
+
+
+// The different models just set the model accordingly
+CarrierNQVHeatpumpIR::CarrierNQVHeatpumpIR() : CarrierHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "carrier_nqv";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier_nqv\",\"dn\":\"Carrier NQV\",\"mT\":17,\"xT\":30,\"fs\":6}";
+
+  _model = model;
+  _info = info;
+}
+
+CarrierMCAHeatpumpIR::CarrierMCAHeatpumpIR() : CarrierHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "carrier_mca";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier_mca\",\"dn\":\"Carrier MCA\",\"mT\":17,\"xT\":30,\"fs\":4}";
 
   _model = model;
   _info = info;
 }
 
 
-void CarrierHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
+void CarrierNQVHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
   (void)swingVCmd;
   (void)swingHCmd;
@@ -40,7 +56,7 @@ void CarrierHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
         break;
       case MODE_DRY:
         operatingMode = CARRIER_AIRCON1_MODE_DRY;
-		fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in DRY mode
+		    fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in DRY mode
         break;
       case MODE_FAN:
         operatingMode = CARRIER_AIRCON1_MODE_FAN;
@@ -71,7 +87,7 @@ void CarrierHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
       break;
   }
 
-  if ( temperatureCmd > 16 && temperatureCmd < 31)
+  if (temperatureCmd > 16 && temperatureCmd < 31)
   {
     temperature = temperatureCmd;
   }
@@ -82,9 +98,9 @@ void CarrierHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
 // Send the Carrier code
 // Carrier has the LSB and MSB in different format than Panasonic
 
-void CarrierHeatpumpIR::sendCarrier(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature)
+void CarrierNQVHeatpumpIR::sendCarrier(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature)
 {
-  uint8_t sendBuffer[9] = { 0x4f, 0xb0, 0xc0, 0x3f, 0x80, 0x00, 0x00, 0x00, 0x00 }; // The data is on the last four uint8_ts
+  uint8_t sendBuffer[] = { 0x4f, 0xb0, 0xc0, 0x3f, 0x80, 0x00, 0x00, 0x00, 0x00 }; // The data is on the last four bytes
 
   static const uint8_t temperatures[] PROGMEM = { 0x00, 0x08, 0x04, 0x0c, 0x02, 0x0a, 0x06, 0x0e, 0x01, 0x09, 0x05, 0x0d, 0x03, 0x0b };
   uint8_t checksum = 0;
@@ -140,7 +156,7 @@ void CarrierHeatpumpIR::sendCarrier(IRSender& IR, uint8_t operatingMode, uint8_t
 
   sendBuffer[8] = IR.bitReverse(checksum);
 
-  // 40 kHz PWM frequency
+  // 38 kHz PWM frequency
   IR.setFrequency(38);
 
   // Header
@@ -166,5 +182,115 @@ void CarrierHeatpumpIR::sendCarrier(IRSender& IR, uint8_t operatingMode, uint8_t
 
   // End mark
   IR.mark(CARRIER_AIRCON1_BIT_MARK);
+  IR.space(0);
+}
+
+void CarrierMCAHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
+{
+  (void)swingVCmd;
+  (void)swingHCmd;
+
+  // Sensible defaults for the A/C mode
+
+  uint8_t powerMode = CARRIER_AIRCON2_MODE_ON;
+  uint8_t operatingMode = CARRIER_AIRCON2_MODE_COOL;
+  uint8_t fanSpeed = CARRIER_AIRCON2_FAN_AUTO;
+  uint8_t temperature = 23;
+
+  if (powerModeCmd == POWER_OFF)
+  {
+    powerMode = CARRIER_AIRCON2_MODE_OFF;
+    operatingMode = CARRIER_AIRCON2_MODE_COOL;
+    fanSpeed = CARRIER_AIRCON2_FAN_OFF;
+    temperature = 31;
+  }
+  else
+  {
+    switch (operatingModeCmd)
+    {
+      case MODE_AUTO:
+        operatingMode = CARRIER_AIRCON2_MODE_AUTO;
+		    fanSpeed = CARRIER_AIRCON2_FAN_DRY_AUTO; // Fan speed is always 'AUTO' in AUTO mode
+        break;
+      case MODE_COOL:
+        operatingMode = CARRIER_AIRCON2_MODE_COOL;
+        break;
+      case MODE_DRY:
+        operatingMode = CARRIER_AIRCON2_MODE_DRY;
+		    fanSpeed = CARRIER_AIRCON2_FAN_DRY_AUTO; // Fan speed is always 'AUTO' in DRY mode
+        break;
+      case MODE_FAN:
+        operatingMode = CARRIER_AIRCON2_MODE_FAN;
+        temperature = 31; // Temperature is always 31 in FAN mode
+        break;
+    }
+
+    if (operatingModeCmd != MODE_AUTO
+        && operatingModeCmd != MODE_DRY)
+      {
+        switch (fanSpeedCmd)
+        {
+          case FAN_AUTO:
+            fanSpeed = CARRIER_AIRCON2_FAN_AUTO;
+            break;
+          case FAN_1:
+            fanSpeed = CARRIER_AIRCON2_FAN1;
+            break;
+          case FAN_2:
+            fanSpeed = CARRIER_AIRCON2_FAN2;
+            break;
+          case FAN_3:
+            fanSpeed = CARRIER_AIRCON2_FAN3;
+            break;
+        }
+      }
+
+    if ( temperatureCmd > 16 && temperatureCmd < 31
+         && operatingModeCmd != MODE_FAN)
+    {
+      temperature = temperatureCmd;
+    }
+  }
+
+  sendCarrier(IR, powerMode, operatingMode, fanSpeed, temperature);
+}
+
+void CarrierMCAHeatpumpIR::sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature)
+{
+  uint8_t sendBuffer[] = { 0x4D, 0xB2, 0xD8, 0x00, 0x00, 0x00 };
+  static const uint8_t temperatures[] PROGMEM = { 0, 8, 12, 4, 6, 14, 10, 2, 3, 11, 9, 1, 5, 13, 7 };
+
+  sendBuffer[2] = sendBuffer[2] | powerMode | fanSpeed;
+
+  // PROGMEM arrays cannot be addressed directly, see http://forum.arduino.cc/index.php?topic=106603.0
+  sendBuffer[4] = sendBuffer[4] | operatingMode | pgm_read_byte(&(temperatures[(temperature-17)]));
+
+  // Checksums
+  sendBuffer[3] = ~sendBuffer[2];
+  sendBuffer[5] = ~sendBuffer[4];
+
+  // 38 kHz PWM frequency
+  IR.setFrequency(38);
+
+  // Header
+  IR.mark(CARRIER_AIRCON2_HDR_MARK);
+  IR.space(CARRIER_AIRCON2_HDR_SPACE);
+
+  // Payload
+  for (size_t i=0; i<sizeof(sendBuffer); i++) {
+    IR.sendIRbyte(sendBuffer[i], CARRIER_AIRCON2_BIT_MARK, CARRIER_AIRCON2_ZERO_SPACE, CARRIER_AIRCON2_ONE_SPACE);
+  }
+
+  // New header
+  IR.mark(CARRIER_AIRCON2_HDR_MARK);
+  IR.space(CARRIER_AIRCON2_HDR_SPACE);
+
+  // Payload again
+  for (size_t i=0; i<sizeof(sendBuffer); i++) {
+    IR.sendIRbyte(sendBuffer[i], CARRIER_AIRCON2_BIT_MARK, CARRIER_AIRCON2_ZERO_SPACE, CARRIER_AIRCON2_ONE_SPACE);
+  }
+
+  // End mark
+  IR.mark(CARRIER_AIRCON2_BIT_MARK);
   IR.space(0);
 }
