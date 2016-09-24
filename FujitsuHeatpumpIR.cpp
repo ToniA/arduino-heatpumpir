@@ -49,7 +49,7 @@ void FujitsuHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
         break;
       case MODE_FAN:
         operatingMode = FUJITSU_AIRCON1_MODE_FAN;
-        // When Fujitsu goes to FAN mode, it sets the low bit of the uint8_t with the temperature. What is the meaning of that?
+        // When Fujitsu goes to FAN mode, it sets the low bit of the byte with the temperature. What is the meaning of that?
        break;
     }
   }
@@ -144,6 +144,46 @@ void FujitsuHeatpumpIR::sendFujitsu(IRSender& IR, uint8_t operatingMode, uint8_t
 void FujitsuHeatpumpIR::sendFujitsuHiPower(IRSender& IR)
 {
   uint8_t HiPower_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x39, 0xC6 };
+
+  sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuEcoMode(IRSender& IR)
+{
+  uint8_t HiPower_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0x09, 0xF6 };
+
+  sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuSwingOff(IRSender& IR)
+{
+  uint8_t HiPower_msg[] = { 0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x20, 0x20, 0x04, 0xE0, 0x0A, 0x00, 0x20, 0x82 };
+
+  sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuVerticalSwingOn(IRSender& IR)
+{
+  uint8_t HiPower_msg[] = {  0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x20, 0x20, 0x14, 0xDF, 0x0A, 0x00, 0x20, 0x73 };
+
+  sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuHorizontalSwingOn(IRSender& IR)
+{
+  uint8_t HiPower_msg[] = {  0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x20, 0x20, 0x24, 0xDE, 0x0A, 0x00, 0x20, 0x64 };
+
+  sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
+}
+
+
+void FujitsuHeatpumpIR::sendFujitsuSwingOn(IRSender& IR)
+{
+  uint8_t HiPower_msg[] = {  0x14, 0x63, 0x00, 0x10, 0x10, 0xFE, 0x09, 0x30, 0x20, 0x20, 0x34, 0xDD, 0x0A, 0x00, 0x20, 0x55 };
 
   sendFujitsuMsg(IR, sizeof(HiPower_msg), HiPower_msg);
 }

@@ -42,6 +42,11 @@ class FujitsuHeatpumpIR : public HeatpumpIR
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool ecoModeCmd);
     void sendFujitsuHiPower(IRSender& IR);
+    void sendFujitsuEcoMode(IRSender& IR);
+    void sendFujitsuSwingOff(IRSender& IR);
+    void sendFujitsuVerticalSwingOn(IRSender& IR);
+    void sendFujitsuHorizontalSwingOn(IRSender& IR);
+    void sendFujitsuSwingOn(IRSender& IR);
     void sendFujitsuFilterClean(IRSender& IR);
     void sendFujitsuSuperQuiet(IRSender& IR);
     void sendFujitsuTestRun(IRSender& IR);
