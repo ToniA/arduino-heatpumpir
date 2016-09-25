@@ -22,6 +22,7 @@ MitsubishiHeavyZMHeatpumpIR	KEYWORD1
 HyundaiHeatpumpIR	KEYWORD1
 HisenseHeatpumpIR	KEYWORD1
 GreeHeatpumpIR	KEYWORD1
+FuegoHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1
@@ -37,4 +38,5 @@ mark	KEYWORD2
 send	KEYWORD2
 model	KEYWORD2
 info	KEYWORD2
+
 sendPanasonicCKPCancelTimer	KEYWORD2
