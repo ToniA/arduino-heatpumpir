@@ -1,5 +1,5 @@
 /*
-    Fuego etc. (Vivax, Classe, NEO, Galanz, Simbio, Beko) heatpump control (remote control P/N GZ-1002B-E3)
+    Fuego etc. (Vivax, Classe, NEO, Galanz, Simbio, Beko, Sintech) heatpump control (remote control P/N GZ-1002B-E3)
 */
 #ifndef FuegoHeatpumpIR_h
 #define FuegoHeatpumpIR_h
@@ -8,14 +8,14 @@
 
 
 //Fuego timing constants
-#define FUEGO_AIRCON1_HDR_MARK   3740 // 3750
-#define FUEGO_AIRCON1_HDR_SPACE  1630 // 1450
-#define FUEGO_AIRCON1_BIT_MARK   640  // 600
-#define FUEGO_AIRCON1_ONE_SPACE  1240 // 1100
-#define FUEGO_AIRCON1_ZERO_SPACE 520  // 400
+#define FUEGO_AIRCON1_HDR_MARK   3600
+#define FUEGO_AIRCON1_HDR_SPACE  1630
+#define FUEGO_AIRCON1_BIT_MARK   420
+#define FUEGO_AIRCON1_ONE_SPACE  1380
+#define FUEGO_AIRCON1_ZERO_SPACE 420
 
 // Fuego codes
-#define FUEGO_AIRCON1_MODE_AUTO  0x00 // Operating mode
+#define FUEGO_AIRCON1_MODE_AUTO  0x08 // Operating mode
 #define FUEGO_AIRCON1_MODE_HEAT  0x01
 #define FUEGO_AIRCON1_MODE_COOL  0x03
 #define FUEGO_AIRCON1_MODE_DRY   0x02
