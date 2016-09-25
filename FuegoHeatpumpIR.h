@@ -21,6 +21,7 @@
 #define FUEGO_AIRCON1_MODE_DRY   0x02
 #define FUEGO_AIRCON1_MODE_FAN   0x07
 #define FUEGO_AIRCON1_MODE_ON    0x04 // Power ON
+#define FUEGO_AIRCON1_MODE_OFF   0x00
 #define FUEGO_AIRCON1_FAN_AUTO   0x00 // Fan speed
 #define FUEGO_AIRCON1_FAN1       0x02
 #define FUEGO_AIRCON1_FAN2       0x03

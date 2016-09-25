@@ -24,9 +24,9 @@ void FuegoHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operating
   (void)swingHCmd;
 
 
-  if (powerModeCmd == 1)
+  if (powerModeCmd == POWER_OFF)
   {
-    powerMode = FUEGO_AIRCON1_MODE_ON;
+    powerMode = FUEGO_AIRCON1_MODE_OFF;
   }
 
   switch (operatingModeCmd)
