@@ -260,10 +260,10 @@ void CarrierMCAHeatpumpIR::sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t 
   uint8_t sendBuffer[] = { 0x4D, 0xB2, 0xD8, 0x00, 0x00, 0x00 };
   static const uint8_t temperatures[] PROGMEM = { 0, 8, 12, 4, 6, 14, 10, 2, 3, 11, 9, 1, 5, 13, 7 };
 
-  sendBuffer[2] = sendBuffer[2] | powerMode | fanSpeed;
+  sendBuffer[2] |= powerMode | fanSpeed;
 
   // PROGMEM arrays cannot be addressed directly, see http://forum.arduino.cc/index.php?topic=106603.0
-  sendBuffer[4] = sendBuffer[4] | operatingMode | pgm_read_byte(&(temperatures[(temperature-17)]));
+  sendBuffer[4] |= operatingMode | pgm_read_byte(&(temperatures[(temperature-17)]));
 
   // Checksums
   sendBuffer[3] = ~sendBuffer[2];
