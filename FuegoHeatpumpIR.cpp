@@ -27,7 +27,7 @@ void FuegoHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operating
   if (powerModeCmd == POWER_OFF)
   {
     powerMode = FUEGO_AIRCON1_MODE_OFF;
-    operatingMode = FUEGO_AIRCON1_MODE_AUTO;
+    swingVCmd = VDIR_MUP;
   }
 
   switch (operatingModeCmd)
@@ -70,6 +70,8 @@ void FuegoHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operating
   switch (swingVCmd)
   {
     case VDIR_AUTO:
+      swingV = FUEGO_AIRCON1_VS_AUTO;
+      break;
     case VDIR_SWING:
       swingV = FUEGO_AIRCON1_VS_SWING;
       break;

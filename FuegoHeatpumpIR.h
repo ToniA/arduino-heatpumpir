@@ -27,13 +27,13 @@
 #define FUEGO_AIRCON1_FAN2       0x03
 #define FUEGO_AIRCON1_FAN3       0x05
 
-#define FUEGO_AIRCON1_VS_SWING   0x38 // Vertical swing
-#define FUEGO_AIRCON1_VS_UP      0x00
-#define FUEGO_AIRCON1_VS_MUP     0x08
+#define FUEGO_AIRCON1_VS_AUTO    0x00 // Vertical swing
+#define FUEGO_AIRCON1_VS_UP      0x08
+#define FUEGO_AIRCON1_VS_MUP     0x10
 #define FUEGO_AIRCON1_VS_MIDDLE  0x18
 #define FUEGO_AIRCON1_VS_MDOWN   0x20
 #define FUEGO_AIRCON1_VS_DOWN    0x28
-
+#define FUEGO_AIRCON1_VS_SWING   0x38
 
 class FuegoHeatpumpIR : public HeatpumpIR
 {
