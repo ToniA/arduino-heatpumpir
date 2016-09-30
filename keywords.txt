@@ -23,6 +23,7 @@ HyundaiHeatpumpIR	KEYWORD1
 HisenseHeatpumpIR	KEYWORD1
 GreeHeatpumpIR	KEYWORD1
 FuegoHeatpumpIR	KEYWORD1
+ToshibaHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1
