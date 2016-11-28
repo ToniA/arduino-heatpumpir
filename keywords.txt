@@ -4,6 +4,7 @@ PanasonicCKPHeatpumpIR	KEYWORD1
 PanasonicDKEHeatpumpIR	KEYWORD1
 PanasonicJKEHeatpumpIR	KEYWORD1
 PanasonicNKEHeatpumpIR	KEYWORD1
+PanasonicLKEHeatpumpIR	KEYWORD1
 CarrierHeatpumpIR	KEYWORD1
 CarrierNQVHeatpumpIR	KEYWORD1
 CarrierMCAHeatpumpIR	KEYWORD1

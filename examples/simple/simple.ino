@@ -27,7 +27,8 @@ IRSenderBitBang irSender(1);   // IR led on ESP8266 GPIO pin 1
 
 // Array with all supported heatpumps
 HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpumpIR(), new PanasonicJKEHeatpumpIR(),
-                            new PanasonicNKEHeatpumpIR(), new CarrierNQVHeatpumpIR(), new CarrierMCAHeatpumpIR(),
+                            new PanasonicNKEHeatpumpIR(), new PanasonicLKEHeatpumpIR(),
+                            new CarrierNQVHeatpumpIR(), new CarrierMCAHeatpumpIR(),
                             new MideaHeatpumpIR(), new FujitsuHeatpumpIR(),
                             new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), new MitsubishiMSYHeatpumpIR(),
                             new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
