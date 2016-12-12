@@ -11,6 +11,9 @@ Currently supports at least these models
    * Also other Midea models sold as 'Ultimate', even some inverter models
    * Also Onnline (sold through Onninen) has been reported to work
 * Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
+* Toshiba Daiseikai (Toshiba remote control P/N WH-TA01EE).
+   * Fully compatible with CarrierNQV functions instead of Daiseikai functions.
+   * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
