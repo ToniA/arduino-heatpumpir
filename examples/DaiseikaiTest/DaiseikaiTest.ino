@@ -1,10 +1,10 @@
 #include <Arduino.h>
-#include <CarrierHeatpumpIR.h>
+#include <ToshibaDaiseikaiHeatpumpIR.h>
 
 IRSenderPWM irSender(9);     // IR led on Duemilanove digital pin 3, using Arduino PWM
 //IRSenderBlaster irSender(3); // IR led on Duemilanove digital pin 3, using IR Blaster (generates the 38 kHz carrier)
 
-DaiseikaiHeatpumpIR *heatpumpIR;
+ToshibaDaiseikaiHeatpumpIR *heatpumpIR;
 
 int redLED = 6;
 int orangeLED = 5;
@@ -19,7 +19,7 @@ void setup()
   pinMode(greenLED, OUTPUT);
   pinMode(blueLED, OUTPUT);
   delay(500);
-  heatpumpIR = new DaiseikaiHeatpumpIR();
+  heatpumpIR = new ToshibaDaiseikaiHeatpumpIR();
   Serial.println(F("Starting"));
 }
 
