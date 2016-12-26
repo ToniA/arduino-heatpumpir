@@ -15,6 +15,7 @@
 #include <GreeHeatpumpIR.h>
 #include <FuegoHeatpumpIR.h>
 #include <ToshibaHeatpumpIR.h>
+#include <ToshibaDaiseikaiHeatpumpIR.h>
 
 
 #ifndef ESP8266
@@ -34,7 +35,7 @@ HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpu
                             new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
                             new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
                             new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(), new GreeHeatpumpIR(),
-                            new FuegoHeatpumpIR(), new ToshibaHeatpumpIR(),
+                            new FuegoHeatpumpIR(), new ToshibaHeatpumpIR(), new ToshibaDaiseikaiHeatpumpIR(),
                             NULL};
 
 void setup()
