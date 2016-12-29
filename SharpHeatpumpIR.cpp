@@ -8,6 +8,8 @@ SharpHeatpumpIR::SharpHeatpumpIR() : HeatpumpIR()
 
   _model = model;
   _info = info;
+  
+  _sharpModel = MODEL_SHARP;
 }
 
 
@@ -18,7 +20,7 @@ void SharpHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operating
 
   // Sensible defaults for the heat pump mode
 
-  uint8_t powerMode     = SHARP_AIRCON1_MODE_ON;
+  uint8_t powerMode     = _sharpModel == MODEL_SHARP ? SHARP_AIRCON1_MODE_ON : SHARP_AIRCON2_MODE_ON;
   uint8_t operatingMode = SHARP_AIRCON1_MODE_HEAT;
   uint8_t fanSpeed      = SHARP_AIRCON1_FAN_AUTO;
   uint8_t temperature   = 23;
