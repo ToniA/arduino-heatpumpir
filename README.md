@@ -2,6 +2,10 @@
 
 Original location: https://github.com/ToniA/arduino-heatpumpir
 
+For concrete examples, see the MySensors (Arduino + nRF24 radio) and ESPEasy (ESP8266 modules) integrations:
+* https://github.com/mysensors/MySensorsArduinoExamples/tree/master/examples/HeatpumpIRController
+* https://github.com/ToniA/ESPEasy/blob/master/ESPEasy/_P115_HeatpumpIR.ino
+
 An Arduino library to control a Panasonic, Midea, Carrier, Fujitsu or Mitsubishi heat pump/split unit air conditioner.
 Currently supports at least these models 
 * Panasonic E9/E12-CKP (Panasonic remote control P/N A75C2295)
@@ -31,8 +35,10 @@ Currently supports at least these models
 
 ### ESP8266 support
 
-This hasn't been tested extensively, but this library should also work on ESP8266. Just change the IR send method from 'IRSenderPWM' to 'IRSenderBitBang':
+This library also supports ESP8266. Just change the IR send method from 'IRSenderPWM' to 'IRSenderBitBang':
 
     IRSenderBitBang irSender(1);     // IR led on ESP8266 digital pin 1
+
+* Note that depending on your board, certain GPIO's might not be available. For example on NodeMCU, the usable GPIO's are D1 (GPIO5), D2 (GPIO4), D6 (GPIO12), D7 (GPIO13) and D3 (GPIO0).
 
 ![Schema](https://raw.github.com/ToniA/arduino-heatpumpir/master/arduino_irsender.png)
