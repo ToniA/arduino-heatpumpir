@@ -23,7 +23,7 @@
 IRSenderPWM irSender(9);       // IR led on Arduino digital pin 9, using Arduino PWM
 //IRSenderBlaster irSender(3); // IR led on Arduino digital pin 3, using IR Blaster (generates the 38 kHz carrier)
 #else
-IRSenderBitBang irSender(1);   // IR led on ESP8266 GPIO pin 1
+IRSenderBitBang irSender(D2);  // IR led on Wemos D1 mini, connect between D2 and G
 #endif
 
 
@@ -35,7 +35,8 @@ HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpu
                             new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), new MitsubishiMSYHeatpumpIR(),
                             new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
                             new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
-                            new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(), new GreeHeatpumpIR(),
+                            new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(),
+                            new GreeGenericHeatpumpIR(), new GreeYANHeatpumpIR(),
                             new FuegoHeatpumpIR(), new ToshibaHeatpumpIR(), new ToshibaDaiseikaiHeatpumpIR(),
                             new IVTHeatpumpIR(),
                             NULL};
