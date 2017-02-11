@@ -41,4 +41,22 @@ This library also supports ESP8266. Just change the IR send method from 'IRSende
 
 * Note that depending on your board, certain GPIO's might not be available. For example on NodeMCU, the usable GPIO's are D1 (GPIO5), D2 (GPIO4), D6 (GPIO12), D7 (GPIO13) and D3 (GPIO0).
 
+### Arduino example
+
 ![Schema](https://raw.github.com/ToniA/arduino-heatpumpir/master/arduino_irsender.png)
+
+## How to contribute
+
+All these heatpump / A/C models have been reverse-engineered, by decoding the IR signal from the remote control. See the sketch https://github.com/ToniA/Raw-IR-decoder-for-Arduino for more information.
+
+First the protocol needs to be understood
+* The frame structure, and the timings of the symbols
+* The bits which signal these
+   * ON/OFF state
+   * Operating mode (heat, cool, dry, fan, auto)
+   * Temperature
+   * Fan speed
+   * Airflow direction etc. settings
+   * And last, but not least, the algorithm to calculate the checksum of the IR signal
+   
+Once a working decoder module has been written, writing a transmitter module into HeatpumpIR is easy. I can help in coding the modules, and I'm also happy to receive pull requests.
