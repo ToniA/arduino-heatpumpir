@@ -1,5 +1,6 @@
 /*
     Samsung AQV12PSBN / AQV09ASA heatpump control (remote control P/N zzz)
+    Samsung FJM (RJ040F2HXEA / 2XMH026FNEA) heatpump control (remote control P/N ARH-465)
 */
 #ifndef SamsungHeatpumpIR_h
 #define SamsungHeatpumpIR_h
@@ -31,12 +32,35 @@
 
 class SamsungHeatpumpIR : public HeatpumpIR
 {
-  public:
+  protected:
     SamsungHeatpumpIR();
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+  
+  public:
+    virtual void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
 
   private:
     void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV);
+};
+
+
+class SamsungAQVHeatpumpIR : public SamsungHeatpumpIR
+{
+  public:
+    SamsungAQVHeatpumpIR();
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    
+  private:
+    void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV);    
+};
+
+class SamsungFJMHeatpumpIR : public SamsungHeatpumpIR
+{
+  public:
+    SamsungFJMHeatpumpIR();
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    
+  private:
+    void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV);    
 };
 
 #endif

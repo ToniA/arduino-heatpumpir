@@ -1,16 +1,37 @@
 #include <SamsungHeatpumpIR.h>
 
+// These are protected methods, i.e. generic Samsung instances cannot be created directly
 SamsungHeatpumpIR::SamsungHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "samsung";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"samsung\",\"dn\":\"Samsung\",\"mT\":16,\"xT\":27,\"fs\":4}";
+}
+
+void SamsungHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
+{
+}
+
+// Samsung models
+
+SamsungAQVHeatpumpIR::SamsungAQVHeatpumpIR() : SamsungHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "samsung_aqv";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"samsung_aqv\",\"dn\":\"Samsung AQV\",\"mT\":16,\"xT\":27,\"fs\":4}";
 
   _model = model;
   _info = info;
 }
 
+SamsungFJMHeatpumpIR::SamsungFJMHeatpumpIR() : SamsungHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "samsung_fjm";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"samsung_fjm\",\"dn\":\"Samsung FJM\",\"mT\":16,\"xT\":27,\"fs\":4}";
 
-void SamsungHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
+  _model = model;
+  _info = info;
+}
+
+// Samsung AQV12PSBN / AQV09ASA heatpump control (remote control P/N zzz)
+
+void SamsungAQVHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
   (void)swingVCmd;
   (void)swingHCmd;
@@ -87,7 +108,7 @@ void SamsungHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
 
 // Send the Samsung code
 
-void SamsungHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
+void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
 {
   uint8_t SamsungTemplate[] = { 0x02, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Header part
                                 0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages
@@ -173,3 +194,92 @@ void SamsungHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t ope
   IR.mark(SAMSUNG_AIRCON1_BIT_MARK);
   IR.space(0);
 }
+
+// Samsung FJM (RJ040F2HXEA / 2XMH026FNEA) heatpump control (remote control P/N ARH-465)
+
+void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
+{
+  (void)swingVCmd;
+  (void)swingHCmd;
+
+  // Sensible defaults for the heat pump mode
+
+  uint8_t powerMode = SAMSUNG_AIRCON1_MODE_ON;
+  uint8_t operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
+  uint8_t fanSpeed = SAMSUNG_AIRCON1_FAN_AUTO;
+  uint8_t temperature = 23;
+  uint8_t swingV = SAMSUNG_AIRCON1_VS_AUTO;
+
+  // See also https://github.com/wisskar/souliss/blob/master/extras/SamsungMH026FB.cpp
+  
+  if (powerModeCmd == POWER_OFF)
+  {
+    powerMode = SAMSUNG_AIRCON1_MODE_OFF;
+  }
+  else
+  {
+    switch (operatingModeCmd)
+    {
+      case MODE_AUTO:
+        operatingMode = SAMSUNG_AIRCON1_MODE_AUTO;
+        fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in AUTO mode
+        break;
+      case MODE_HEAT:
+        operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
+        break;
+      case MODE_COOL:
+        operatingMode = SAMSUNG_AIRCON1_MODE_COOL;
+        break;
+      case MODE_DRY:
+        operatingMode = SAMSUNG_AIRCON1_MODE_DRY;
+        fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in DRY mode
+        break;
+      case MODE_FAN:
+        operatingMode = SAMSUNG_AIRCON1_MODE_FAN;
+        temperatureCmd = 24; // Temperature is always 24 in FAN mode
+        if ( fanSpeedCmd == FAN_AUTO ) {
+          fanSpeedCmd = FAN_1; // Fan speed cannot be 'AUTO' in FAN mode
+        }
+        break;
+    }
+  }
+
+  switch (fanSpeedCmd)
+  {
+    case FAN_AUTO:
+      fanSpeed = SAMSUNG_AIRCON1_FAN_AUTO;
+      break;
+    case FAN_1:
+      fanSpeed = SAMSUNG_AIRCON1_FAN1;
+      break;
+    case FAN_2:
+      fanSpeed = SAMSUNG_AIRCON1_FAN2;
+      break;
+    case FAN_3:
+      fanSpeed = SAMSUNG_AIRCON1_FAN3;
+      break;
+  }
+
+  if ( temperatureCmd > 15 && temperatureCmd < 28)
+  {
+    temperature = temperatureCmd;
+  }
+
+  switch (swingVCmd)
+  {
+    case VDIR_SWING:
+      swingV = SAMSUNG_AIRCON1_VS_SWING;
+      break;
+  }
+
+  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature, swingV);
+}
+
+// Send the Samsung code
+
+void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
+{
+  // TBD
+}
+
+
