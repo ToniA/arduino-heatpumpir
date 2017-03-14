@@ -211,10 +211,10 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
   uint8_t swingV = SAMSUNG_AIRCON1_VS_AUTO;
 
   // See also https://github.com/wisskar/souliss/blob/master/extras/SamsungMH026FB.cpp
-  
+
   if (powerModeCmd == POWER_OFF)
   {
-    powerMode = SAMSUNG_AIRCON1_MODE_OFF;
+    powerMode = POWER_OFF;
   }
   else
   {
@@ -258,6 +258,9 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
     case FAN_3:
       fanSpeed = SAMSUNG_AIRCON1_FAN3;
       break;
+    case FAN_4:
+      fanSpeed = SAMSUNG_AIRCON2_FAN4;
+      break;
   }
 
   if ( temperatureCmd > 15 && temperatureCmd < 28)
@@ -279,7 +282,85 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
 
 void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
 {
-  // TBD
+  static const uint8_t samsungOffCode[] PROGMEM = { 0x02, 0xB2, 0x0F, 0x00, 0x00, 0x00, 0xC0,
+                                                    0x01, 0x72, 0x0F, 0x00, 0x90, 0xD0, 0x01,
+                                                    0x01, 0x02, 0xFF, 0x01, 0x60, 0x4B, 0xC0 };
+
+  static const uint8_t samsungHeader[] PROGMEM = { 0x02, 0x92, 0x0F, 0x00, 0x00, 0x00, 0xF0 };
+
+  uint8_t samsungTemplate[] = { 0x01, 0x00, 0xFE, 0x01, 0x00, 0x00, 0xF0 };
+  //                               0     1     2     3     4     5     6
+  //                               7     8     9    10    11    12    13 <- byte in whole sequence
+
+  // 38 kHz PWM frequency
+  IR.setFrequency(38);
+
+  // Header
+  IR.mark(SAMSUNG_AIRCON2_HDR_MARK);
+  IR.space(SAMSUNG_AIRCON2_HDR_SPACE);
+
+  if (powerMode == POWER_OFF)
+  {
+    for (size_t i=0; i<sizeof(samsungOffCode); i++) {
+      IR.sendIRbyte(pgm_read_byte(&samsungOffCode[i]), SAMSUNG_AIRCON2_BIT_MARK, SAMSUNG_AIRCON2_ZERO_SPACE, SAMSUNG_AIRCON2_ONE_SPACE);
+
+      if (i == 6 || i == 13)
+      {
+        IR.mark(SAMSUNG_AIRCON2_BIT_MARK);
+        IR.space(SAMSUNG_AIRCON2_ONE_SPACE);
+        IR.mark(SAMSUNG_AIRCON2_HDR_MARK);
+        IR.space(SAMSUNG_AIRCON2_HDR_SPACE);
+      }
+    }
+  }
+  else
+  {
+    for (size_t i=0; i<sizeof(samsungHeader); i++) {
+      IR.sendIRbyte(pgm_read_byte(&samsungHeader[i]), SAMSUNG_AIRCON2_BIT_MARK, SAMSUNG_AIRCON2_ZERO_SPACE, SAMSUNG_AIRCON2_ONE_SPACE);
+    }
+
+    IR.mark(SAMSUNG_AIRCON2_BIT_MARK);
+    IR.space(SAMSUNG_AIRCON2_ONE_SPACE);
+    IR.mark(SAMSUNG_AIRCON2_HDR_MARK);
+    IR.space(SAMSUNG_AIRCON2_HDR_SPACE);
+
+    // The actual data is in the last 7 bytes
+    samsungTemplate[4] = (temperature - 16) << 4;
+    samsungTemplate[5] = operatingMode | fanSpeed;
+
+    // Checksum calculation
+    uint8_t checksum = 0x00;
+
+    for (uint8_t j=2; j<6; j++) {
+      uint8_t samsungByte = samsungTemplate[j];
+
+      if (j == 2)
+      {
+        samsungByte &= 0b11111110;
+      }
+
+      for (uint8_t i=0; i<8; i++) {
+        if ( (samsungByte & 0x01) == 0x01 ) {
+          checksum++;
+        }
+        samsungByte >>= 1;
+      }
+    }
+
+    checksum = 28 - checksum;
+    checksum <<= 4;
+    checksum |= 0x02;
+
+    samsungTemplate[1] = checksum;
+
+    for (size_t i=0; i<sizeof(samsungTemplate); i++) {
+      IR.sendIRbyte(samsungTemplate[i], SAMSUNG_AIRCON2_BIT_MARK, SAMSUNG_AIRCON2_ZERO_SPACE, SAMSUNG_AIRCON2_ONE_SPACE);
+    }
+  }
+
+  // End mark
+  IR.mark(SAMSUNG_AIRCON2_BIT_MARK);
+  IR.space(0);
 }
 
 

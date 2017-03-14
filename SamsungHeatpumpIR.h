@@ -15,6 +15,13 @@
 #define SAMSUNG_AIRCON1_ZERO_SPACE 500
 #define SAMSUNG_AIRCON1_MSG_SPACE  2000
 
+#define SAMSUNG_AIRCON2_HDR_MARK   2900
+#define SAMSUNG_AIRCON2_HDR_SPACE  9150
+#define SAMSUNG_AIRCON2_BIT_MARK   360
+#define SAMSUNG_AIRCON2_ONE_SPACE  1600
+#define SAMSUNG_AIRCON2_ZERO_SPACE 630
+
+
 // Samsung codes
 #define SAMSUNG_AIRCON1_MODE_AUTO  0x00 // Operating mode
 #define SAMSUNG_AIRCON1_MODE_HEAT  0x40
@@ -27,8 +34,10 @@
 #define SAMSUNG_AIRCON1_FAN1       0x05 // * low
 #define SAMSUNG_AIRCON1_FAN2       0x09 // * med
 #define SAMSUNG_AIRCON1_FAN3       0x0B // * high
+#define SAMSUNG_AIRCON2_FAN4       0x0B // * very high
 #define SAMSUNG_AIRCON1_VS_SWING   0xAE // Vertical swing
 #define SAMSUNG_AIRCON1_VS_AUTO    0xFE
+
 
 class SamsungHeatpumpIR : public HeatpumpIR
 {
