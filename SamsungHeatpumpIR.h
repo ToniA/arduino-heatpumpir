@@ -38,6 +38,10 @@
 #define SAMSUNG_AIRCON1_VS_SWING   0xAE // Vertical swing
 #define SAMSUNG_AIRCON1_VS_AUTO    0xFE
 
+#define SAMSUNG_AIRCON2_VS_SWING   0xA0 // Vertical swing
+#define SAMSUNG_AIRCON2_VS_AUTO    0xF0
+#define SAMSUNG_AIRCON2_TURBO      0x06 // 30 minutes of full power
+
 
 class SamsungHeatpumpIR : public HeatpumpIR
 {
@@ -67,9 +71,10 @@ class SamsungFJMHeatpumpIR : public SamsungHeatpumpIR
   public:
     SamsungFJMHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboModeCmd);
     
   private:
-    void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV);    
+    void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, bool turboMode);    
 };
 
 #endif

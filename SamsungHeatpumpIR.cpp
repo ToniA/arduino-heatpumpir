@@ -199,6 +199,11 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
 
 void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
+  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false);
+}
+
+void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboModeCmd)
+{
   (void)swingVCmd;
   (void)swingHCmd;
 
@@ -208,7 +213,7 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
   uint8_t operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
   uint8_t fanSpeed = SAMSUNG_AIRCON1_FAN_AUTO;
   uint8_t temperature = 23;
-  uint8_t swingV = SAMSUNG_AIRCON1_VS_AUTO;
+  uint8_t swingV = SAMSUNG_AIRCON2_VS_AUTO;
 
   // See also https://github.com/wisskar/souliss/blob/master/extras/SamsungMH026FB.cpp
 
@@ -271,16 +276,16 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
   switch (swingVCmd)
   {
     case VDIR_SWING:
-      swingV = SAMSUNG_AIRCON1_VS_SWING;
+      swingV = SAMSUNG_AIRCON2_VS_SWING;
       break;
   }
 
-  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature, swingV);
+  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature, swingV, turboModeCmd);
 }
 
 // Send the Samsung code
 
-void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
+void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, bool turboMode)
 {
   static const uint8_t samsungOffCode[] PROGMEM = { 0x02, 0xB2, 0x0F, 0x00, 0x00, 0x00, 0xC0,
                                                     0x01, 0x72, 0x0F, 0x00, 0x90, 0xD0, 0x01,
@@ -288,7 +293,7 @@ void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
 
   static const uint8_t samsungHeader[] PROGMEM = { 0x02, 0x92, 0x0F, 0x00, 0x00, 0x00, 0xF0 };
 
-  uint8_t samsungTemplate[] = { 0x01, 0x00, 0xFE, 0x01, 0x00, 0x00, 0xF0 };
+  uint8_t samsungTemplate[] = { 0x01, 0x00, 0x0E, 0x01, 0x00, 0x00, 0xF0 };
   //                               0     1     2     3     4     5     6
   //                               7     8     9    10    11    12    13 <- byte in whole sequence
 
@@ -325,8 +330,14 @@ void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
     IR.space(SAMSUNG_AIRCON2_HDR_SPACE);
 
     // The actual data is in the last 7 bytes
+    samsungTemplate[2] |= swingV;
     samsungTemplate[4] = (temperature - 16) << 4;
     samsungTemplate[5] = operatingMode | fanSpeed;
+    
+    if (turboMode)
+    {
+      samsungTemplate[3] |= SAMSUNG_AIRCON2_TURBO;
+    }
 
     // Checksum calculation
     uint8_t checksum = 0x00;
