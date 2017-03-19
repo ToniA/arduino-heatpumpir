@@ -19,6 +19,7 @@ Currently supports at least these models
    * Fully compatible with CarrierNQV functions instead of Daiseikai functions.
    * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
+   * Also Fujitsu remote controls RY3-AR and AR-RCE1E
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 * Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
@@ -27,6 +28,9 @@ Currently supports at least these models
 * Mitsubishi Heavy SRKxxZM-S (Remote Control P/N RLA502A700B)
 * Hyundai (Remote Control P/N Y512F2)
    * This is probably a generic Gree model
+* Samsung
+   * AQV12PSBN / AQV09ASA
+   * Samsung FJM (RJ040F2HXEA / 2XMH026FNEA), Remote Control P/N ARH-465
 
 ## Instructions
 
