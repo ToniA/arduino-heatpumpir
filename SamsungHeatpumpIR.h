@@ -1,6 +1,6 @@
 /*
     Samsung AQV12PSBN / AQV09ASA heatpump control (remote control P/N zzz)
-    Samsung FJM (RJ040F2HXEA / 2XMH026FNEA) heatpump control (remote control P/N ARH-465)
+    Samsung FJM (RJ040F2HXEA / MH026FNEA) heatpump control (remote control P/N ARH-465)
 */
 #ifndef SamsungHeatpumpIR_h
 #define SamsungHeatpumpIR_h
@@ -14,13 +14,18 @@
 #define SAMSUNG_AIRCON1_ONE_SPACE  1500
 #define SAMSUNG_AIRCON1_ZERO_SPACE 500
 #define SAMSUNG_AIRCON1_MSG_SPACE  2000
-
-#define SAMSUNG_AIRCON2_HDR_MARK   2900
+/* Orig
+#define SAMSUNG_AIRCON2_HDR_MARK   3000
 #define SAMSUNG_AIRCON2_HDR_SPACE  9150
 #define SAMSUNG_AIRCON2_BIT_MARK   360
 #define SAMSUNG_AIRCON2_ONE_SPACE  1600
 #define SAMSUNG_AIRCON2_ZERO_SPACE 630
-
+*/
+#define SAMSUNG_AIRCON2_HDR_MARK   2920
+#define SAMSUNG_AIRCON2_HDR_SPACE  8960
+#define SAMSUNG_AIRCON2_BIT_MARK   490
+#define SAMSUNG_AIRCON2_ONE_SPACE  1560
+#define SAMSUNG_AIRCON2_ZERO_SPACE 546
 
 // Samsung codes
 #define SAMSUNG_AIRCON1_MODE_AUTO  0x00 // Operating mode

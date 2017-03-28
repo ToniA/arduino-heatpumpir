@@ -195,7 +195,7 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
   IR.space(0);
 }
 
-// Samsung FJM (RJ040F2HXEA / 2XMH026FNEA) heatpump control (remote control P/N ARH-465)
+// Samsung FJM (RJ040F2HXEA / MH026FNEA) heatpump control (remote control P/N ARH-465)
 
 void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
@@ -293,7 +293,8 @@ void SamsungFJMHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
 
   static const uint8_t samsungHeader[] PROGMEM = { 0x02, 0x92, 0x0F, 0x00, 0x00, 0x00, 0xF0 };
 
-  uint8_t samsungTemplate[] = { 0x01, 0x00, 0x0E, 0x01, 0x00, 0x00, 0xF0 };
+//  uint8_t samsungTemplate[] = { 0x01, 0x00, 0x0E, 0x01, 0x00, 0x00, 0xF0 }; //Orig
+  uint8_t samsungTemplate[] = { 0x01, 0x00, 0x0F, 0x01, 0x00, 0x00, 0xF0 };  
   //                               0     1     2     3     4     5     6
   //                               7     8     9    10    11    12    13 <- byte in whole sequence
 
