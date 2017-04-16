@@ -285,6 +285,8 @@ void CarrierMCAHeatpumpIR::sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t 
   }
 
   // New header
+  IR.mark(CARRIER_AIRCON2_BIT_MARK);
+  IR.space(CARRIER_AIRCON2_HDR_SPACE);
   IR.mark(CARRIER_AIRCON2_HDR_MARK);
   IR.space(CARRIER_AIRCON2_HDR_SPACE);
 
