@@ -1,6 +1,7 @@
 /*
     Carrier 42NQV035G / 38NYV035H2 heatpump control (remote control P/N WH-L05SE)
     Carrier 42MCA009515LS A/C control (remote control P/N R11CG/E)
+       * Qlima (remote control P/N ABS10FP)
 */
 #ifndef CarrierHeatpumpIR_h
 #define CarrierHeatpumpIR_h
@@ -41,6 +42,7 @@
 #define CARRIER_AIRCON2_MODE_COOL    0x00
 #define CARRIER_AIRCON2_MODE_DRY     0x20
 #define CARRIER_AIRCON2_MODE_FAN     0x20
+#define CARRIER_AIRCON2_MODE_HEAT    0x30
 #define CARRIER_AIRCON2_MODE_OFF     0x00 // Power OFF
 #define CARRIER_AIRCON2_MODE_ON      0x20 // Power ON
 #define CARRIER_AIRCON2_FAN_DRY_AUTO 0x00 // Fan speed, AUTO or DRY modes
@@ -80,9 +82,10 @@ class CarrierMCAHeatpumpIR : public CarrierHeatpumpIR
 
   public:
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode);
 
   private:
-    void sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature);
+    void sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, bool maintenanceMode, bool turboMode);
 };
 
 #endif
