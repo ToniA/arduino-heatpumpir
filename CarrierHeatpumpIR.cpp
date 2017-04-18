@@ -22,10 +22,33 @@ CarrierNQVHeatpumpIR::CarrierNQVHeatpumpIR() : CarrierHeatpumpIR()
 CarrierMCAHeatpumpIR::CarrierMCAHeatpumpIR() : CarrierHeatpumpIR()
 {
   static const char PROGMEM model[] PROGMEM = "carrier_mca";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier_mca\",\"dn\":\"Carrier MCA\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier_mca\",\"dn\":\"Carrier MCA\",\"mT\":17,\"xT\":30,\"fs\":4}";
 
   _model = model;
   _info = info;
+  _carrierModel = MODEL_CARRIER_MCA;
+}
+
+Qlima1HeatpumpIR::Qlima1HeatpumpIR() : CarrierMCAHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "qlima_1";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"qlima_1\",\"dn\":\"Qlima #1\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
+
+  _model = model;
+  _info = info;
+
+  _carrierModel = MODEL_QLIMA_1;
+}
+
+Qlima2HeatpumpIR::Qlima2HeatpumpIR() : CarrierMCAHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "qlima_2";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"qlima_2\",\"dn\":\"Qlima #2\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
+
+  _model = model;
+  _info = info;
+
+  _carrierModel = MODEL_QLIMA_2;
 }
 
 
@@ -274,8 +297,9 @@ void CarrierMCAHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
 void CarrierMCAHeatpumpIR::sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, bool maintenanceMode, bool turboMode)
 {
   uint8_t sendBuffer[] = { 0x4D, 0xB2, 0xD8, 0x00, 0x00, 0x00 };
-  static const uint8_t sendBufferMaintenance[] PROGMEM = { 0xAD, 0x52, 0xAF, 0x50, 0x55, 0xAA };
-  static const uint8_t sendBufferTurbo[]       PROGMEM = { 0xAD, 0x52, 0xAF, 0x50, 0x45, 0xBA };
+  static const uint8_t sendBufferMaintenance1[] PROGMEM = { 0xAD, 0x52, 0xAF, 0x50, 0xB5, 0x4A };
+  static const uint8_t sendBufferMaintenance2[] PROGMEM = { 0xAD, 0x52, 0xAF, 0x50, 0x55, 0xAA };
+  static const uint8_t sendBufferTurbo[]        PROGMEM = { 0xAD, 0x52, 0xAF, 0x50, 0x45, 0xBA };
 
   static const uint8_t temperatures[] PROGMEM = { 0, 8, 12, 4, 6, 14, 10, 2, 3, 11, 9, 1, 5, 13, 7 };
 
@@ -289,11 +313,15 @@ void CarrierMCAHeatpumpIR::sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t 
   sendBuffer[5] = ~sendBuffer[4];
 
   // Maintenance or turbo mode overide
-  if (maintenanceMode)
+  if (maintenanceMode && _carrierModel == MODEL_QLIMA_1)
   {
-    memcpy_P(sendBuffer, sendBufferMaintenance, sizeof(sendBufferMaintenance));    
+    memcpy_P(sendBuffer, sendBufferMaintenance1, sizeof(sendBufferMaintenance1));    
   }
-  if (turboMode)
+  if (maintenanceMode && _carrierModel == MODEL_QLIMA_2)
+  {
+    memcpy_P(sendBuffer, sendBufferMaintenance2, sizeof(sendBufferMaintenance2));    
+  }  
+  if (turboMode && (_carrierModel == MODEL_QLIMA_1 || _carrierModel == MODEL_QLIMA_2))
   {
     memcpy_P(sendBuffer, sendBufferTurbo, sizeof(sendBufferTurbo));
   }

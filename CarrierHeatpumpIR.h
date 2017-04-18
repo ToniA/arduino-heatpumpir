@@ -53,6 +53,10 @@
 #define CARRIER_AIRCON2_FAN_OFF      0x06
 
 
+#define MODEL_CARRIER_MCA            1
+#define MODEL_QLIMA_1                2
+#define MODEL_QLIMA_2                3
+
 class CarrierHeatpumpIR : public HeatpumpIR
 {
   protected:
@@ -86,6 +90,18 @@ class CarrierMCAHeatpumpIR : public CarrierHeatpumpIR
 
   private:
     void sendCarrier(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, bool maintenanceMode, bool turboMode);
+};
+
+class Qlima1HeatpumpIR : public CarrierMCAHeatpumpIR
+{
+  public:
+    Qlima1HeatpumpIR();
+};
+
+class Qlima2HeatpumpIR : public CarrierMCAHeatpumpIR
+{
+  public:
+    Qlima2HeatpumpIR();
 };
 
 #endif

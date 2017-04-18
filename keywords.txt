@@ -9,6 +9,8 @@ CarrierHeatpumpIR	KEYWORD1
 CarrierNQVHeatpumpIR	KEYWORD1
 ToshibaDaiseikaiHeatpumpIR	KEYWORD1
 CarrierMCAHeatpumpIR	KEYWORD1
+Qlima1HeatpumpIR  KEYWORD1
+Qlima2HeatpumpIR  KEYWORD1
 MideaHeatpumpIR	KEYWORD1
 FujitsuHeatpumpIR	KEYWORD1
 MitsubishiHeatpumpIR	KEYWORD1
