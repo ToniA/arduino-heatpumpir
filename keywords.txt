@@ -34,6 +34,7 @@ FuegoHeatpumpIR	KEYWORD1
 ToshibaHeatpumpIR	KEYWORD1
 IVTHeatpumpIR KEYWORD1
 HitachiHeatpumpIR KEYWORD1
+BalluHeatpumpIR KEYWORD1
 
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1

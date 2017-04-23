@@ -31,6 +31,7 @@ Currently supports at least these models
 * Samsung
    * AQV12PSBN / AQV09ASA
    * Samsung FJM (RJ040F2HXEA / 2XMH026FNEA), Remote Control P/N ARH-465
+* Ballu
 
 ## Instructions
 
