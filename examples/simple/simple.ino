@@ -10,6 +10,7 @@
 #include <SharpHeatpumpIR.h>
 #include <DaikinHeatpumpIR.h>
 #include <MitsubishiHeavyHeatpumpIR.h>
+#include <MitsubishiSEZKDXXHeatpumpIR.h>
 #include <HyundaiHeatpumpIR.h>
 #include <HisenseHeatpumpIR.h>
 #include <GreeHeatpumpIR.h>
@@ -37,6 +38,7 @@ HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpu
                             new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), new MitsubishiMSYHeatpumpIR(),
                             new SamsungAQVHeatpumpIR(), new SamsungFJMHeatpumpIR(),new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
                             new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
+                            new MitsubishiSEZKDXXHeatpumpIR(),
                             new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(),
                             new GreeGenericHeatpumpIR(), new GreeYANHeatpumpIR(),
                             new FuegoHeatpumpIR(), new ToshibaHeatpumpIR(), new ToshibaDaiseikaiHeatpumpIR(),
