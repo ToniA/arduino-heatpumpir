@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include <IRSender.h>
 
+// ESP8266 does not have the Arduino PWM control registers
+#ifndef ESP8266 
+
 // Heavily based on Ken Shirriff's IRRemote library:
 // https://github.com/shirriff/Arduino-IRremote
 //
@@ -173,3 +176,5 @@ void IRSenderPWM::space(int spaceLength)
     delay(spaceLength/1000);
   }
 }
+
+#endif // ESP8266

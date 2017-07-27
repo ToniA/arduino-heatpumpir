@@ -49,6 +49,7 @@
 #define PANASONIC_DKE 0
 #define PANASONIC_JKE 1
 #define PANASONIC_NKE 2
+#define PANASONIC_LKE 3
 
 
 class PanasonicHeatpumpIR : public HeatpumpIR
@@ -81,6 +82,12 @@ class PanasonicNKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicNKEHeatpumpIR();
+};
+
+class PanasonicLKEHeatpumpIR : public PanasonicHeatpumpIR
+{
+  public:
+    PanasonicLKEHeatpumpIR();
 };
 
 #endif

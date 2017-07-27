@@ -1,14 +1,15 @@
 /*
     Sharp AY-ZP40KR heatpump control (remote control P/N CRMC-A788JBEZ)
-    Probably also works on IVT (as those are Sharp units with different branding)
 
-    Also see: https://github.com/skarlsso/IRRemoteIVT/blob/master/IRRemoteIVT.ino
+    Also see: https://github.com/skarlsso/IRRemoteIVT/blob/master/IRRemoteIVT
 */
 #ifndef SharpHeatpumpIR_h
 #define SharpHeatpumpIR_h
 
 #include <HeatpumpIR.h>
 
+#define MODEL_SHARP 0
+#define MODEL_IVT   1
 
 // Sharp timing constants
 #define SHARP_AIRCON1_HDR_MARK   3540 // 3820
@@ -28,6 +29,9 @@
 #define SHARP_AIRCON1_FAN2       0x50
 #define SHARP_AIRCON1_FAN3       0x70
 
+// IVT codes
+#define SHARP_AIRCON2_MODE_ON    0x11 // Power ON
+
 
 class SharpHeatpumpIR : public HeatpumpIR
 {
@@ -35,8 +39,9 @@ class SharpHeatpumpIR : public HeatpumpIR
     SharpHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
 
-  private:
+  protected:
     void sendSharp(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature);
+    uint8_t _sharpModel;  // Tells whether this is Sharp or IVT
 };
 
 #endif

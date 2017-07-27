@@ -69,7 +69,7 @@ void DaikinHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatin
       break;
   }
 
-  if ((operatingModeCmd == DAIKIN_AIRCON_MODE_HEAT && temperatureCmd >= 10 && temperatureCmd <= 30) ||
+  if ((operatingModeCmd == MODE_HEAT && temperatureCmd >= 10 && temperatureCmd <= 30) ||
       (temperatureCmd >= 18 && temperatureCmd <= 30))
   {
     temperature = temperatureCmd << 1;

@@ -6,6 +6,10 @@
 
 #include <Arduino.h>
 
+#ifdef ESP8266
+#include <IRsend.h>  // From IRremoteESP8266 library
+#endif
+
 class IRSender
 {
   protected:
@@ -41,5 +45,31 @@ class IRSenderBlaster : public IRSender
     void space(int spaceLength);
     void mark(int markLength);
 };
+
+class IRSenderBitBang : public IRSender
+{
+  public:
+    IRSenderBitBang(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  protected:
+    int _halfPeriodicTime;
+};
+
+#ifdef ESP8266
+class IRSenderIRremoteESP8266 : public IRSender
+{
+  public:
+    IRSenderIRremoteESP8266(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  private:
+    IRsend _ir;
+};
+#endif
 
 #endif

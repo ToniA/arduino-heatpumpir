@@ -10,18 +10,42 @@
 #include <SharpHeatpumpIR.h>
 #include <DaikinHeatpumpIR.h>
 #include <MitsubishiHeavyHeatpumpIR.h>
+#include <MitsubishiSEZKDXXHeatpumpIR.h>
+#include <HyundaiHeatpumpIR.h>
+#include <HisenseHeatpumpIR.h>
+#include <GreeHeatpumpIR.h>
+#include <FuegoHeatpumpIR.h>
+#include <ToshibaHeatpumpIR.h>
+#include <ToshibaDaiseikaiHeatpumpIR.h>
+#include <IVTHeatpumpIR.h>
+#include <HitachiHeatpumpIR.h>
+#include <BalluHeatpumpIR.h>
+#include <AUXHeatpumpIR.h>
 
 
-IRSenderPWM irSender(3);     // IR led on Duemilanove digital pin 3, using Arduino PWM
-//IRSenderBlaster irSender(3); // IR led on Duemilanove digital pin 3, using IR Blaster (generates the 38 kHz carrier)
+#ifndef ESP8266
+IRSenderPWM irSender(9);       // IR led on Arduino digital pin 9, using Arduino PWM
+//IRSenderBlaster irSender(3); // IR led on Arduino digital pin 3, using IR Blaster (generates the 38 kHz carrier)
+#else
+IRSenderBitBang irSender(D2);  // IR led on Wemos D1 mini, connect between D2 and G
+#endif
 
 
 // Array with all supported heatpumps
 HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpumpIR(), new PanasonicJKEHeatpumpIR(),
-                            new PanasonicNKEHeatpumpIR(), new CarrierHeatpumpIR(), new MideaHeatpumpIR(),
-                            new FujitsuHeatpumpIR(), new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(),
-                            new SamsungHeatpumpIR(), new SharpHeatpumpIR(), new DaikinHeatpumpIR(), 
-                            new MitsubishiHeavyHeatpumpIR(), NULL};
+                            new PanasonicNKEHeatpumpIR(), new PanasonicLKEHeatpumpIR(),
+                            new CarrierNQVHeatpumpIR(), new CarrierMCAHeatpumpIR(),
+                            new MideaHeatpumpIR(), new FujitsuHeatpumpIR(),
+                            new MitsubishiFDHeatpumpIR(), new MitsubishiFEHeatpumpIR(), new MitsubishiMSYHeatpumpIR(),
+                            new SamsungAQVHeatpumpIR(), new SamsungFJMHeatpumpIR(),new SharpHeatpumpIR(), new DaikinHeatpumpIR(),
+                            new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
+                            new MitsubishiSEZKDXXHeatpumpIR(),
+                            new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(),
+                            new GreeGenericHeatpumpIR(), new GreeYANHeatpumpIR(),
+                            new FuegoHeatpumpIR(), new ToshibaHeatpumpIR(), new ToshibaDaiseikaiHeatpumpIR(),
+                            new IVTHeatpumpIR(), new HitachiHeatpumpIR(),
+                            new BalluHeatpumpIR(), new AUXHeatpumpIR(),
+                            NULL};
 
 void setup()
 {
@@ -58,9 +82,9 @@ void loop()
 
     // Send the IR command
     heatpumpIR[i]->send(irSender, POWER_ON, MODE_HEAT, FAN_2, 24, VDIR_UP, HDIR_AUTO);
-    delay(500);
+    delay(2000);
   }
   while (heatpumpIR[++i] != NULL);
 
-  delay(2000);
+  delay(5000);
 }
