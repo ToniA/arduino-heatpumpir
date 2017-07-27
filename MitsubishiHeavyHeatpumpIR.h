@@ -129,7 +129,8 @@ class MitsubishiHeavyZMHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 class MitsubishiHeavyZSHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 {
   public:
-    MitsubishiHeavyZSHeatpumpIR();
+    // ZS has the same IR protocol as the ZM, remote control has some extra options
+    MitsubishiHeavyZMHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
 
   private:
