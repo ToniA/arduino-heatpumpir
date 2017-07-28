@@ -30,6 +30,16 @@ MitsubishiHeavyZMHeatpumpIR::MitsubishiHeavyZMHeatpumpIR() : MitsubishiHeavyHeat
   _mitsubishiModel = MITSUBISHIHEAVY_ZM;
 }
 
+MitsubishiHeavyZSHeatpumpIR::MitsubishiHeavyZSHeatpumpIR() : MitsubishiHeavyZMHeatpumpIR()
+{
+  static const char PROGMEM model[] PROGMEM = "mitsubishi_heavy_zs";
+  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zs\",\"dn\":\"Mitsubishi Heavy ZS\",\"mT\":18,\"xT\":30,\"fs\":4}";
+
+  _model = model;
+  _info = info;
+
+  _mitsubishiModel = MITSUBISHIHEAVY_ZS;
+}
 
 void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {

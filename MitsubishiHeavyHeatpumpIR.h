@@ -1,5 +1,7 @@
 /*
     Mitsubishi Heavy SRKxxZJ-S heatpump control (remote control P/N RKX502A001C)
+    Mitsubishi Heavy SRKxxZM-S heatpump control (remote control P/N RLA502A700B)
+    Mitsubishi Heavy SRKxxZS-S heatpump control (remote control P/N RLA502A700L)
 */
 #ifndef MitsubishiHeavyHeatpumpIR_h
 #define MitsubishiHeavyHeatpumpIR_h
@@ -91,7 +93,7 @@
 // MitsubishiHeavy model codes
 #define MITSUBISHIHEAVY_ZJ 0
 #define MITSUBISHIHEAVY_ZM 1
-
+#define MITSUBISHIHEAVY_ZS 2
 
 class MitsubishiHeavyHeatpumpIR : public HeatpumpIR
 {
@@ -122,6 +124,13 @@ class MitsubishiHeavyZMHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 
   private:
     void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t cleanMode, uint8_t silentMode, uint8_t _3DAuto);
+};
+
+class MitsubishiHeavyZSHeatpumpIR : public MitsubishiHeavyZMHeatpumpIR
+{
+  public:
+    // ZS has the same IR protocol as the ZM, remote control has some extra options
+    MitsubishiHeavyZSHeatpumpIR();
 };
 
 
