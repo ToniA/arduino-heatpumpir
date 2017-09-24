@@ -21,6 +21,7 @@ Currently supports at least these models
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
    * Also Fujitsu remote controls RY3-AR and AR-RCE1E
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
+   * Also FH series has been confirmed to work
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 * Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
 * Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
