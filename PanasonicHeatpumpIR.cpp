@@ -75,6 +75,9 @@ void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t opera
     case POWER_ON:
       operatingMode |= PANASONIC_AIRCON2_MODE_ON;
       break;
+    case POWER_OFF:
+      operatingMode |= PANASONIC_AIRCON2_MODE_OFF;
+      break;
   }
 
   switch (operatingModeCmd)
