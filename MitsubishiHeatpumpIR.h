@@ -96,6 +96,12 @@ class MitsubishiFEHeatpumpIR : public MitsubishiHeatpumpIR
     MitsubishiFEHeatpumpIR();
 };
 
+class MitsubishiMSYHeatpumpIR : public MitsubishiHeatpumpIR
+{
+public:
+	MitsubishiMSYHeatpumpIR();
+};
+
 class MitsubishiFAHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
