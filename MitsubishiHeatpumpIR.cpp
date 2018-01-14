@@ -41,6 +41,17 @@ MitsubishiMSYHeatpumpIR::MitsubishiMSYHeatpumpIR() : MitsubishiHeatpumpIR()
   _mitsubishiModel = MITSUBISHI_MSY;
 }
 
+MitsubishiFAHeatpumpIR::MitsubishiFAHeatpumpIR() : MitsubishiHeatpumpIR()
+{
+	static const char PROGMEM model[] PROGMEM = "mitsubishi_fa";
+	static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fa\",\"dn\":\"Mitsubishi FA\",\"mT\":16,\"xT\":31,\"fs\":5}"; //TODO: What should be here?
+
+	_model = model;
+	_info = info;
+
+	_mitsubishiModel = MITSUBISHI_FA;
+}
+
 
 void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
@@ -254,3 +265,5 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8
   IR.mark(MITSUBISHI_AIRCON1_BIT_MARK);
   IR.space(0);
 }
+
+

@@ -15,26 +15,34 @@
 #define MITSUBISHI_AIRCON1_ZERO_SPACE 390
 #define MITSUBISHI_AIRCON1_MSG_SPACE  17500
 
-// Mitsubishi codes
-#define MITSUBISHI_AIRCON1_MODE_AUTO  0x20 // Operating mode
+// Mitsubishi mode codes
+#define MITSUBISHI_AIRCON1_MODE_AUTO  0x20
+#define MITSUBISHI_AIRCON3_MODE_AUTO  0x60 // FA auto mode
 #define MITSUBISHI_AIRCON1_MODE_HEAT  0x08
+#define MITSUBISHI_AIRCON3_MODE_HEAT  0x48 // FA heat mode
 #define MITSUBISHI_AIRCON1_MODE_COOL  0x18
+#define MITSUBISHI_AIRCON2_MODE_COOL  0x18 // MSY cool mode
+#define MITSUBISHI_AIRCON3_MODE_COOL  0x58 // FA cool mode
 #define MITSUBISHI_AIRCON1_MODE_DRY   0x10
-#define MITSUBISHI_AIRCON1_MODE_FAN   0x38 // EF 'FAN' mode
-#define MITSUBISHI_AIRCON1_MODE_ISEE  0x40 // Isee
 #define MITSUBISHI_AIRCON2_MODE_DRY   0x18 // MSY DRY mode
-#define MITSUBISHI_AIRCON2_MODE_FAN   0x38 // MSY
+#define MITSUBISHI_AIRCON3_MODE_DRY   0x50 // FA dry mode
+#define MITSUBISHI_AIRCON1_MODE_FAN   0x38 // EF 'FAN' mode
+#define MITSUBISHI_AIRCON2_MODE_FAN   0x38 // MSY fan mode
+#define MITSUBISHI_AIRCON1_MODE_ISEE  0x40 // Isee
 #define MITSUBISHI_AIRCON2_MODE_IFEEL 0x00 // MSY
-#define MITSUBISHI_AIRCON2_MODE_COOL  0x18 // MSY
+
 #define MITSUBISHI_AIRCON1_MODE_OFF   0x00 // Power OFF
 #define MITSUBISHI_AIRCON1_MODE_ON    0x20 // Power ON
+
+// Mitsubishi fan codes
 #define MITSUBISHI_AIRCON1_FAN_AUTO   0x00 // Fan speed - mixed with vertical swing...
 #define MITSUBISHI_AIRCON1_FAN1       0x01
 #define MITSUBISHI_AIRCON1_FAN2       0x02
 #define MITSUBISHI_AIRCON1_FAN3       0x03
 #define MITSUBISHI_AIRCON1_FAN4       0x04
 
-#define MITSUBISHI_AIRCON1_VS_SWING   0x78 // Vertical swing
+// Mitsubishi vertical swing codes
+#define MITSUBISHI_AIRCON1_VS_SWING   0x78
 #define MITSUBISHI_AIRCON1_VS_AUTO    0x40 // Automatic setting
 #define MITSUBISHI_AIRCON1_VS_UP      0x48
 #define MITSUBISHI_AIRCON1_VS_MUP     0x50
@@ -45,7 +53,8 @@
 #define MITSUBISHI_AIRCON1_VS_AUTO2   0x80 // ???
 #define MITSUBISHI_AIRCON1_VS_AUTO3   0xB8 // ???
 
-#define MITSUBISHI_AIRCON1_HS_SWING   0xC0 // Horizontal swing
+// Mitsubishi horizontal swing codes
+#define MITSUBISHI_AIRCON1_HS_SWING   0xC0
 #define MITSUBISHI_AIRCON1_HS_MIDDLE  0x30
 #define MITSUBISHI_AIRCON1_HS_LEFT    0x10
 #define MITSUBISHI_AIRCON1_HS_MLEFT   0x20
@@ -56,6 +65,7 @@
 #define MITSUBISHI_FD  0
 #define MITSUBISHI_FE  1
 #define MITSUBISHI_MSY 2
+#define MITSUBISHI_FA  3
 
 class MitsubishiHeatpumpIR : public HeatpumpIR
 {
@@ -82,10 +92,10 @@ class MitsubishiFEHeatpumpIR : public MitsubishiHeatpumpIR
     MitsubishiFEHeatpumpIR();
 };
 
-class MitsubishiMSYHeatpumpIR : public MitsubishiHeatpumpIR
+class MitsubishiFAHeatpumpIR : public MitsubishiHeatpumpIR
 {
   public:
-    MitsubishiMSYHeatpumpIR();
+    MitsubishiFAHeatpumpIR();
 };
 
 #endif
