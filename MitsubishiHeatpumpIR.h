@@ -43,12 +43,15 @@
 
 // Mitsubishi vertical swing codes
 #define MITSUBISHI_AIRCON1_VS_SWING   0x78
-#define MITSUBISHI_AIRCON1_VS_AUTO    0x40 // Automatic setting
+#define MITSUBISHI_AIRCON1_VS_AUTO    0x40
+#define MITSUBISHI_AIRCON3_VS_AUTO    0x80 // FA auto vertical swing
 #define MITSUBISHI_AIRCON1_VS_UP      0x48
 #define MITSUBISHI_AIRCON1_VS_MUP     0x50
 #define MITSUBISHI_AIRCON1_VS_MIDDLE  0x58
 #define MITSUBISHI_AIRCON1_VS_MDOWN   0x60
+#define MITSUBISHI_AIRCON3_VS_MDOWN   0x58 // FA mdown vertical swing
 #define MITSUBISHI_AIRCON1_VS_DOWN    0x68
+#define MITSUBISHI_AIRCON3_VS_DOWN    0x60 // FA down vertical swing
 
 #define MITSUBISHI_AIRCON1_VS_AUTO2   0x80 // ???
 #define MITSUBISHI_AIRCON1_VS_AUTO3   0xB8 // ???
@@ -60,6 +63,8 @@
 #define MITSUBISHI_AIRCON1_HS_MLEFT   0x20
 #define MITSUBISHI_AIRCON1_HS_MRIGHT  0x40
 #define MITSUBISHI_AIRCON1_HS_RIGHT   0x50
+
+//TODO: Add FA model wide vane
 
 // Mitsubishi model codes
 #define MITSUBISHI_FD  0
