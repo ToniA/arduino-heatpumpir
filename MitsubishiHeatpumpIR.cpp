@@ -103,7 +103,26 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
         }
         break;
     }
-  } else {
+  }
+  else if (_mitsubishiModel == MITSUBISHI_FA) // set operating model for FA
+  {
+	  switch (operatingModeCmd)
+	  {
+	  case MODE_AUTO:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_AUTO;
+		  break;
+	  case MODE_HEAT:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_HEAT;
+		  break;
+	  case MODE_COOL:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_COOL;
+		  break;
+	  case MODE_DRY:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_DRY;
+		  break;
+  }
+  else
+  {
     operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
     switch (operatingModeCmd)
     {
