@@ -167,51 +167,27 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
 
   switch (swingVCmd)
   {
-	  if (_mitsubishiModel == MITSUBISHI_FA) // set vertical swing for FA
-	  {
-			case VDIR_AUTO:
-				swingV = MITSUBISHI_AIRCON1_VS_AUTO;
-				break;
-			case VDIR_SWING:
-				swingV = MITSUBISHI_AIRCON1_VS_SWING;
-				break;
-			case VDIR_UP:
-				swingV = MITSUBISHI_AIRCON1_VS_UP;
-				break;
-			case VDIR_MUP:
-				swingV = MITSUBISHI_AIRCON1_VS_MUP;
-				break;
-			case VDIR_MDOWN:
-				swingV = MITSUBISHI_AIRCON3_VS_MDOWN;
-				break;
-			case VDIR_DOWN:
-				swingV = MITSUBISHI_AIRCON3_VS_DOWN;
-				break;
-	  }
-	  else
-	  {
-		  case VDIR_AUTO:
-			  swingV = MITSUBISHI_AIRCON1_VS_AUTO;
-			  break;
-		  case VDIR_SWING:
-			  swingV = MITSUBISHI_AIRCON1_VS_SWING;
-			  break;
-		  case VDIR_UP:
-			  swingV = MITSUBISHI_AIRCON1_VS_UP;
-			  break;
-		  case VDIR_MUP:
-			  swingV = MITSUBISHI_AIRCON1_VS_MUP;
-			  break;
-		  case VDIR_MIDDLE:
-			  swingV = MITSUBISHI_AIRCON1_VS_MIDDLE;
-			  break;
-		  case VDIR_MDOWN:
-			  swingV = MITSUBISHI_AIRCON1_VS_MDOWN;
-			  break;
-		  case VDIR_DOWN:
-			  swingV = MITSUBISHI_AIRCON1_VS_DOWN;
-			  break;
-	  }
+	  case VDIR_AUTO:
+		  swingV = MITSUBISHI_AIRCON1_VS_AUTO;
+		  break;
+	  case VDIR_SWING:
+		  swingV = MITSUBISHI_AIRCON1_VS_SWING;
+		  break;
+	  case VDIR_UP:
+		  swingV = MITSUBISHI_AIRCON1_VS_UP;
+		  break;
+	  case VDIR_MUP:
+		  swingV = MITSUBISHI_AIRCON1_VS_MUP;
+		  break;
+	  case VDIR_MIDDLE:
+		  swingV = MITSUBISHI_AIRCON1_VS_MIDDLE;
+		  break;
+	  case VDIR_MDOWN:
+		  swingV = MITSUBISHI_AIRCON1_VS_MDOWN;
+		  break;
+	  case VDIR_DOWN:
+		  swingV = MITSUBISHI_AIRCON1_VS_DOWN;
+		  break;
   }
 
   switch (swingHCmd)
