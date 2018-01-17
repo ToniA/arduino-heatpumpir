@@ -41,6 +41,17 @@ MitsubishiMSYHeatpumpIR::MitsubishiMSYHeatpumpIR() : MitsubishiHeatpumpIR()
   _mitsubishiModel = MITSUBISHI_MSY;
 }
 
+MitsubishiFAHeatpumpIR::MitsubishiFAHeatpumpIR() : MitsubishiHeatpumpIR()
+{
+	static const char PROGMEM model[] PROGMEM = "mitsubishi_fa";
+	static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fa\",\"dn\":\"Mitsubishi FA\",\"mT\":16,\"xT\":31,\"fs\":5}"; //TODO: What should be here?
+
+	_model = model;
+	_info = info;
+
+	_mitsubishiModel = MITSUBISHI_FA;
+}
+
 
 void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
@@ -92,23 +103,43 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
         }
         break;
     }
-  } else {
-    operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
-    switch (operatingModeCmd)
-    {
-      case MODE_AUTO:
-        operatingMode = MITSUBISHI_AIRCON2_MODE_IFEEL;
-        break;
-      case MODE_COOL:
-        operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
-        break;
-      case MODE_DRY:
-        operatingMode = MITSUBISHI_AIRCON2_MODE_DRY;
-        break;
-      case MODE_FAN:
-        operatingMode = MITSUBISHI_AIRCON2_MODE_FAN;
-        break;
-    }
+  }
+  else if (_mitsubishiModel == MITSUBISHI_FA) // set operating model for FA
+  {
+	  switch (operatingModeCmd)
+	  {
+	  case MODE_AUTO:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_AUTO;
+		  break;
+	  case MODE_HEAT:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_HEAT;
+		  break;
+	  case MODE_COOL:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_COOL;
+		  break;
+	  case MODE_DRY:
+		  operatingMode = MITSUBISHI_AIRCON3_MODE_DRY;
+		  break;
+	  }
+  }
+  else
+  {
+	  operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
+	  switch (operatingModeCmd)
+	  {
+	  case MODE_AUTO:
+		  operatingMode = MITSUBISHI_AIRCON2_MODE_IFEEL;
+		  break;
+	  case MODE_COOL:
+		  operatingMode = MITSUBISHI_AIRCON2_MODE_COOL;
+		  break;
+	  case MODE_DRY:
+		  operatingMode = MITSUBISHI_AIRCON2_MODE_DRY;
+		  break;
+	  case MODE_FAN:
+		  operatingMode = MITSUBISHI_AIRCON2_MODE_FAN;
+		  break;
+	  }  
   }
 
   switch (fanSpeedCmd)
@@ -137,27 +168,27 @@ void MitsubishiHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
 
   switch (swingVCmd)
   {
-    case VDIR_AUTO:
-      swingV = MITSUBISHI_AIRCON1_VS_AUTO;
-      break;
-    case VDIR_SWING:
-      swingV = MITSUBISHI_AIRCON1_VS_SWING;
-      break;
-    case VDIR_UP:
-      swingV = MITSUBISHI_AIRCON1_VS_UP;
-      break;
-    case VDIR_MUP:
-      swingV = MITSUBISHI_AIRCON1_VS_MUP;
-      break;
-    case VDIR_MIDDLE:
-      swingV = MITSUBISHI_AIRCON1_VS_MIDDLE;
-      break;
-    case VDIR_MDOWN:
-      swingV = MITSUBISHI_AIRCON1_VS_MDOWN;
-      break;
-    case VDIR_DOWN:
-      swingV = MITSUBISHI_AIRCON1_VS_DOWN;
-      break;
+	  case VDIR_AUTO:
+		  swingV = MITSUBISHI_AIRCON1_VS_AUTO;
+		  break;
+	  case VDIR_SWING:
+		  swingV = MITSUBISHI_AIRCON1_VS_SWING;
+		  break;
+	  case VDIR_UP:
+		  swingV = MITSUBISHI_AIRCON1_VS_UP;
+		  break;
+	  case VDIR_MUP:
+		  swingV = MITSUBISHI_AIRCON1_VS_MUP;
+		  break;
+	  case VDIR_MIDDLE:
+		  swingV = MITSUBISHI_AIRCON1_VS_MIDDLE;
+		  break;
+	  case VDIR_MDOWN:
+		  swingV = MITSUBISHI_AIRCON1_VS_MDOWN;
+		  break;
+	  case VDIR_DOWN:
+		  swingV = MITSUBISHI_AIRCON1_VS_DOWN;
+		  break;
   }
 
   switch (swingHCmd)
@@ -217,6 +248,13 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8
     MitsubishiTemplate[15] = 0x00;
   }
 
+  // FA also has a bit different template
+  if (_mitsubishiModel == MITSUBISHI_FA)
+  {
+	  MitsubishiTemplate[10] = 0x00;
+	  MitsubishiTemplate[15] = 0x00;
+  }
+
   // Calculate the checksum
   for (int i=0; i<17; i++) {
     checksum += MitsubishiTemplate[i];
@@ -254,3 +292,5 @@ void MitsubishiHeatpumpIR::sendMitsubishi(IRSender& IR, uint8_t powerMode, uint8
   IR.mark(MITSUBISHI_AIRCON1_BIT_MARK);
   IR.space(0);
 }
+
+
