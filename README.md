@@ -16,7 +16,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
    * This is probably a generic Gree model
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
    * Also Fujitsu remote controls RY3-AR and AR-RCE1E
-* IVT remote control CRMC-A673JBEZ
+* IVT AY-XP12FR-N (remote control CRMC-A673JBEZ)
 * Midea MSR1-12HRN1-QC2 + MOA1-12HN1-QC2, sold as Ultimate Pro Plus Basic 13FP in Finland (Midea remote control P/N RG51M1/E)
    * Also other Midea models sold as 'Ultimate', even some inverter models
    * Also Onnline (sold through Onninen) has been reported to work
