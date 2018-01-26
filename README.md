@@ -6,33 +6,36 @@ For concrete examples, see the MySensors (Arduino + nRF24 radio) and ESPEasy (ES
 * https://github.com/mysensors/MySensorsArduinoExamples/tree/master/examples/HeatpumpIRController
 * https://github.com/ToniA/ESPEasy/blob/master/ESPEasy/_P115_HeatpumpIR.ino
 
-An Arduino library to control a Panasonic, Midea, Carrier, Fujitsu or Mitsubishi heat pump/split unit air conditioner.
-Currently supports at least these models 
-* Panasonic E9/E12-CKP (Panasonic remote control P/N A75C2295)
-* Panasonic E9/E12-DKE (Panasonic remote control P/N A75C2616)
-* Panasonic E9/E12-JKE and E9/E12-NKE
+An Arduino library to control pump/split unit air conditioner. Currently supporting at least these models:
+
+* Ballu
+* Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
+* Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
+* Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
+* Hyundai (Remote Control P/N Y512F2)
+   * This is probably a generic Gree model
+* Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
+   * Also Fujitsu remote controls RY3-AR and AR-RCE1E
+* IVT AY-XP12FR-N (remote control CRMC-A673JBEZ)
 * Midea MSR1-12HRN1-QC2 + MOA1-12HN1-QC2, sold as Ultimate Pro Plus Basic 13FP in Finland (Midea remote control P/N RG51M1/E)
    * Also other Midea models sold as 'Ultimate', even some inverter models
    * Also Onnline (sold through Onninen) has been reported to work
-* Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
-* Toshiba Daiseikai (Toshiba remote control P/N WH-TA01EE).
-   * Fully compatible with CarrierNQV functions instead of Daiseikai functions.
-   * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
-* Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
-   * Also Fujitsu remote controls RY3-AR and AR-RCE1E
-* Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
-   * Also FH series has been confirmed to work
-* Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
-* Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
-* Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
 * Mitsubishi Heavy SRKxxZJ-S (Remote control P/N RKX502A001C)
 * Mitsubishi Heavy SRKxxZM-S (Remote Control P/N RLA502A700B)
-* Hyundai (Remote Control P/N Y512F2)
-   * This is probably a generic Gree model
+* Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
+   * Also FH series has been confirmed to work
+* Panasonic E9/E12-CKP (Panasonic remote control P/N A75C2295)
+* Panasonic E9/E12-DKE (Panasonic remote control P/N A75C2616)
+* Panasonic E9/E12-JKE and E9/E12-NKE
 * Samsung
    * AQV12PSBN / AQV09ASA
    * Samsung FJM (RJ040F2HXEA / 2XMH026FNEA), Remote Control P/N ARH-465
-* Ballu
+* Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
+* Toshiba Daiseikai (Toshiba remote control P/N WH-TA01EE).
+   * Fully compatible with CarrierNQV functions instead of Daiseikai functions.
+   * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
+
+
 
 ## Instructions
 
