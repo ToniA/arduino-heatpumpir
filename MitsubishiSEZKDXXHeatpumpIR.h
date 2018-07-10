@@ -3,7 +3,7 @@
 */
 
 #ifndef MitsubishiSEZKDXXHeatpumpIR_h
-#define MitsubishiSEZKDXXaHeatpumpIR_h
+#define MitsubishiSEZKDXXHeatpumpIR_h
 
 #include <HeatpumpIR.h>
 
