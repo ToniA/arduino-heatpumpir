@@ -4,8 +4,8 @@
 
 /*
 
-This is a project I did for my my friend's summer cottage. He has an alarm system
-with some extra relays which can be controlled via GSM SMS messages. With two relays
+This is a project I did for my my friend's summer cottage (he was previously using the MideaRelayControl sketch). 
+He has an alarm system with some extra relays which can be controlled via GSM SMS messages. With two relays
 we can have four heatpump states:
 * relay 1 OFF and relay 2 in any state: heatpump OFF
 * relay 1 ON and relay 2 OFF: heatpump ON, normal heating state
@@ -32,7 +32,6 @@ Button relay1 = Button(11, INPUT_PULLUP); // Heatpump ON-OFF state
 Button relay2 = Button(12, INPUT_PULLUP); // FP mode (maintenance heating at 8 degrees C) ON-OFF state
 
 IRSenderPWM irSender(9);     // IR led on Duemilanove digital pin 9, using Arduino PWM
-//IRSenderBlaster irSender(9); // IR led on Duemilanove digital pin 9, using IR Blaster (generates the 38 kHz carrier)
 
 byte heatpumpState = heatpumpOff;
 
@@ -54,13 +53,14 @@ void sendRaw(char *symbols)
         irSender.mark(IR_BIT_MARK);
         break;
       case 'W':
-        irSender.mark(IR_PAUSE_SPACE);
+        irSender.space(IR_PAUSE_SPACE);
         break;
       case 'H':
         irSender.mark(IR_HEADER_MARK);
         break;
       case 'h':
-        irSender.mark(IR_HEADER_SPACE);
+        irSender.space(IR_HEADER_SPACE);
+        irSender.mark(IR_BIT_MARK);
         break;
     }
   }
