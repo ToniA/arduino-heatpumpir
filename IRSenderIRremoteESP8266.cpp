@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#ifdef ESP8266
 #include <IRSender.h>
 
 IRSenderIRremoteESP8266::IRSenderIRremoteESP8266(uint8_t pin) : IRSender(pin), _ir(pin) 
@@ -20,3 +21,4 @@ void IRSenderIRremoteESP8266::mark(int markLength)
 {
   _ir.mark(markLength);
 }
+#endif
