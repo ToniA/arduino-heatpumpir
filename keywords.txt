@@ -9,15 +9,15 @@ CarrierHeatpumpIR	KEYWORD1
 CarrierNQVHeatpumpIR	KEYWORD1
 ToshibaDaiseikaiHeatpumpIR	KEYWORD1
 CarrierMCAHeatpumpIR	KEYWORD1
-Qlima1HeatpumpIR  KEYWORD1
-Qlima2HeatpumpIR  KEYWORD1
+Qlima1HeatpumpIR	KEYWORD1
+Qlima2HeatpumpIR	KEYWORD1
 MideaHeatpumpIR	KEYWORD1
 FujitsuHeatpumpIR	KEYWORD1
 MitsubishiHeatpumpIR	KEYWORD1
 MitsubishiFDHeatpumpIR	KEYWORD1
 MitsubishiFEHeatpumpIR	KEYWORD1
 MitsubishiMSYHeatpumpIR	KEYWORD1
-MitsubishiSEZKDXXHeatpumpIR KEYWORD1
+MitsubishiSEZKDXXHeatpumpIR	KEYWORD1
 SamsungHeatpumpIR	KEYWORD1
 SamsungAQVHeatpumpIR	KEYWORD1
 SamsungFJMHeatpumpIR	KEYWORD1
@@ -33,10 +33,10 @@ GreeGenericHeatpumpIR	KEYWORD1
 GreeYANHeatpumpIR	KEYWORD1
 FuegoHeatpumpIR	KEYWORD1
 ToshibaHeatpumpIR	KEYWORD1
-IVTHeatpumpIR KEYWORD1
-HitachiHeatpumpIR KEYWORD1
-BalluHeatpumpIR KEYWORD1
-AUXHeatpumpIR KEYWORD1
+IVTHeatpumpIR	KEYWORD1
+HitachiHeatpumpIR	KEYWORD1
+BalluHeatpumpIR	KEYWORD1
+AUXHeatpumpIR	KEYWORD1
 
 IRSender	KEYWORD1
 IRSenderPWM	KEYWORD1
