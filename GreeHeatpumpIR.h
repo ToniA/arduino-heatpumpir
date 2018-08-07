@@ -21,10 +21,10 @@
 // Operating modes
 // Gree codes
 #define GREE_AIRCON1_MODE_AUTO  0x00
-#define GREE_AIRCON1_MODE_HEAT  0x04
 #define GREE_AIRCON1_MODE_COOL  0x01
 #define GREE_AIRCON1_MODE_DRY   0x02
 #define GREE_AIRCON1_MODE_FAN   0x03
+#define GREE_AIRCON1_MODE_HEAT  0x04
 
 // Fan speeds. Note that some heatpumps have less than 5 fan speeds
 #define GREE_AIRCON1_FAN_AUTO   0x00 // Fan speed
@@ -58,6 +58,7 @@
 // Gree model codes
 #define GREE_GENERIC 0
 #define GREE_YAN     1
+#define GREE_YAA     2
 
 
 class GreeHeatpumpIR : public HeatpumpIR
@@ -84,6 +85,15 @@ class GreeYANHeatpumpIR : public GreeHeatpumpIR
 {
   public:
     GreeYANHeatpumpIR();
+
+  public:
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode);
+};
+
+class GreeYAAHeatpumpIR : public GreeHeatpumpIR
+{
+  public:
+    GreeYAAHeatpumpIR();
 
   public:
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode);
