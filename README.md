@@ -12,8 +12,9 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
 * Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
-* Hyundai (Remote Control P/N Y512F2)
+* Hyundai (remote control P/N Y512F2)
    * This is probably a generic Gree model
+   * Model H-AR21-07H (remote control P/N YKR-P/002E) confirmed as AUX
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
    * Also Fujitsu remote controls RY3-AR and AR-RCE1E
 * IVT AY-XP12FR-N (remote control CRMC-A673JBEZ)
@@ -35,6 +36,8 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Toshiba Daiseikai (Toshiba remote control P/N WH-TA01EE).
    * Fully compatible with CarrierNQV functions instead of Daiseikai functions.
    * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
+* Tosot T18H-SN/I (remote control P/N YAA1FB) as GreeYAA variant
+   * Also marketed as Tadiran brand
 
 
 

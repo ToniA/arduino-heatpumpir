@@ -1,5 +1,5 @@
 /*
-    AUX heatpump control (remote control YKR-N/002E )
+    AUX heatpump control (remote control YKR-N/002E, YKR-P/002E)
 */
 #ifndef AUXHeatpumpIR_h
 #define AUXHeatpumpIR_h
