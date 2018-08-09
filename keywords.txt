@@ -31,6 +31,7 @@ HisenseHeatpumpIR	KEYWORD1
 GreeHeatpumpIR	KEYWORD1
 GreeGenericHeatpumpIR	KEYWORD1
 GreeYANHeatpumpIR	KEYWORD1
+GreeYAAHeatpumpIR	KEYWORD1
 FuegoHeatpumpIR	KEYWORD1
 ToshibaHeatpumpIR	KEYWORD1
 IVTHeatpumpIR	KEYWORD1

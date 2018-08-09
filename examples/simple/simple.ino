@@ -41,7 +41,7 @@ HeatpumpIR *heatpumpIR[] = {new PanasonicCKPHeatpumpIR(), new PanasonicDKEHeatpu
                             new MitsubishiHeavyZJHeatpumpIR(), new MitsubishiHeavyZMHeatpumpIR(),
                             new MitsubishiSEZKDXXHeatpumpIR(),
                             new HyundaiHeatpumpIR(), new HisenseHeatpumpIR(),
-                            new GreeGenericHeatpumpIR(), new GreeYANHeatpumpIR(),
+                            new GreeGenericHeatpumpIR(), new GreeYANHeatpumpIR(), new GreeYAAHeatpumpIR(),
                             new FuegoHeatpumpIR(), new ToshibaHeatpumpIR(), new ToshibaDaiseikaiHeatpumpIR(),
                             new IVTHeatpumpIR(), new HitachiHeatpumpIR(),
                             new BalluHeatpumpIR(), new AUXHeatpumpIR(),
