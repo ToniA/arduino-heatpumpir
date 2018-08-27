@@ -55,11 +55,17 @@ PanasonicLKEHeatpumpIR::PanasonicLKEHeatpumpIR() : PanasonicHeatpumpIR()
 // Panasonic DKE/NKE/JKE numeric values to command bytes
 void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
-  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false, false);
+  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false, false, false);
 }
 
 // Panasonic DKE/NKE/JKE numeric values to command bytes
 void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool powerfulCmd, bool quietCmd)
+{
+  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, powerfulCmd, quietCmd, false);
+}
+
+// Panasonic DKE/NKE/JKE numeric values to command bytes
+void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool powerfulCmd, bool quietCmd, bool ionCmd)
 {
   // Sensible defaults for the heat pump mode
 
@@ -69,6 +75,7 @@ void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t opera
   uint8_t swingV        = PANASONIC_AIRCON2_VS_UP;
   uint8_t swingH        = PANASONIC_AIRCON2_HS_AUTO;
   uint8_t profile       = 0;
+  uint8_t ion           = 0;
 
   switch (powerModeCmd)
   {
@@ -188,6 +195,12 @@ void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t opera
     profile = PANASONIC_AIRCON2_POWERFUL;
   }
 
+  // ION
+  if ( ionCmd == true )
+  {
+    ion = PANASONIC_AIRCON2_ION;
+  }
+
   // NKE has +8 / + 10 maintenance heating, which also means MAX fanspeed
   if ( _panasonicModel == PANASONIC_NKE )
   {
@@ -198,11 +211,11 @@ void PanasonicHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t opera
     }
   }
 
-  sendPanasonic(IR, operatingMode, fanSpeed, temperature, swingV, swingH, profile);
+  sendPanasonic(IR, operatingMode, fanSpeed, temperature, swingV, swingH, profile, ion);
 }
 
 // Send the Panasonic DKE/JKE/NKE/LKE code
-void PanasonicHeatpumpIR::sendPanasonic(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t profile)
+void PanasonicHeatpumpIR::sendPanasonic(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t profile, uint8_t ion)
 {
   // Only bytes 13, 14, 16, 17 and 26 are modified
   static const uint8_t panasonicProgmemTemplate[27] PROGMEM = {
@@ -235,8 +248,9 @@ void PanasonicHeatpumpIR::sendPanasonic(IRSender& IR, uint8_t operatingMode, uin
   panasonicTemplate[13] |= operatingMode;
   panasonicTemplate[14] = temperature << 1;
   panasonicTemplate[16] = fanSpeed | swingV;
+  panasonicTemplate[21] = ion;
   panasonicTemplate[21] = profile;
-
+  
   // Checksum calculation
   uint8_t checksum = 0xF4;
 
