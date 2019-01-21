@@ -222,15 +222,15 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
   }
   else
   {
-    GreeTemplate[7] = (
+    GreeTemplate[7] = (((
      (GreeTemplate[0] & 0x0F) +
      (GreeTemplate[1] & 0x0F) +
      (GreeTemplate[2] & 0x0F) +
      (GreeTemplate[3] & 0x0F) +
-     (GreeTemplate[5] & 0xF0) >> 4 +
-     (GreeTemplate[6] & 0xF0) >> 4 +
-     (GreeTemplate[7] & 0xF0) >> 4 +
-      0x0A) & 0xF0;
+     ((GreeTemplate[5] & 0xF0) >> 4) +
+     ((GreeTemplate[6] & 0xF0) >> 4) +
+     ((GreeTemplate[7] & 0xF0) >> 4) +
+      0x0A) & 0x0F) << 4) | (GreeTemplate[7] & 0x0F);
   }
 
   // 38 kHz PWM frequency
