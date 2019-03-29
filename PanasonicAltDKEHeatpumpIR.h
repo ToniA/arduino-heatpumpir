@@ -55,14 +55,14 @@ class PanasonicAltDKEHeatpumpIR : public HeatpumpIR
 {
   public:
     PanasonicAltDKEHeatpumpIR();
-		void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
-		void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool ionizerCmd);
-		void send(IRSender& IR, bool quiet, bool powerful);
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool ionizerCmd);
+    void send(IRSender& IR, bool quiet, bool powerful);
 
   private:
-		void sendPanasonicLong(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t ionizer);
-		void sendPanasonicShort(IRSender& IR, bool quiet, bool powerful);
-		void sendPanasonic(IRSender& IR, uint8_t * panasonicTemplate, uint8_t templateLength);
+    void sendPanasonicLong(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t ionizer);
+    void sendPanasonicShort(IRSender& IR, bool quiet, bool powerful);
+    void sendPanasonic(IRSender& IR, uint8_t * panasonicTemplate, uint8_t templateLength);
 };
 
 #endif
