@@ -2,8 +2,8 @@
 
 DaikinHeatpumpARC417IR::DaikinHeatpumpARC417IR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "daikin_arc417";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"daikin_arc417\",\"dn\":\"Daikin ARC417\",\"mT\":18,\"xT\":30,\"fs\":6,\"maint\":[10,11,12,13,14,15,16,17]}}}";
+  static const char model[] PROGMEM = "daikin_arc417";
+  static const char info[]  PROGMEM = "{\"mdl\":\"daikin_arc417\",\"dn\":\"Daikin ARC417\",\"mT\":18,\"xT\":30,\"fs\":6,\"maint\":[10,11,12,13,14,15,16,17]}}}";
 
   _model = model;
   _info = info;

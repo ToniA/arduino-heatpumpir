@@ -13,8 +13,8 @@ void SamsungHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
 
 SamsungAQVHeatpumpIR::SamsungAQVHeatpumpIR() : SamsungHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "samsung_aqv";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"samsung_aqv\",\"dn\":\"Samsung AQV\",\"mT\":16,\"xT\":27,\"fs\":4}";
+  static const char model[] PROGMEM = "samsung_aqv";
+  static const char info[]  PROGMEM = "{\"mdl\":\"samsung_aqv\",\"dn\":\"Samsung AQV\",\"mT\":16,\"xT\":27,\"fs\":4}";
 
   _model = model;
   _info = info;
@@ -22,8 +22,8 @@ SamsungAQVHeatpumpIR::SamsungAQVHeatpumpIR() : SamsungHeatpumpIR()
 
 SamsungFJMHeatpumpIR::SamsungFJMHeatpumpIR() : SamsungHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "samsung_fjm";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"samsung_fjm\",\"dn\":\"Samsung FJM\",\"mT\":16,\"xT\":27,\"fs\":4}";
+  static const char model[] PROGMEM = "samsung_fjm";
+  static const char info[]  PROGMEM = "{\"mdl\":\"samsung_fjm\",\"dn\":\"Samsung FJM\",\"mT\":16,\"xT\":27,\"fs\":4}";
 
   _model = model;
   _info = info;

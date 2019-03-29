@@ -3,8 +3,8 @@
 
 ToshibaHeatpumpIR::ToshibaHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "toshiba";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"toshiba\",\"dn\":\"Toshiba\",\"mT\":17,\"xT\":30,\"fs\":5}";
+  static const char model[] PROGMEM = "toshiba";
+  static const char info[]  PROGMEM = "{\"mdl\":\"toshiba\",\"dn\":\"Toshiba\",\"mT\":17,\"xT\":30,\"fs\":5}";
 
   _model = model;
   _info = info;

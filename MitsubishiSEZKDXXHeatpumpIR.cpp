@@ -2,8 +2,8 @@
 
 MitsubishiSEZKDXXHeatpumpIR::MitsubishiSEZKDXXHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[]  PROGMEM = "mitsubishi_sez";
-  static const char PROGMEM info[]   PROGMEM = "{\"mdl\":\"mitsubishi_sez\",\"dn\":\"Mitsubishi SEZ\",\"mT\":17,\"xT\":30,\"fs\":3}";
+  static const char model[]  PROGMEM = "mitsubishi_sez";
+  static const char info[]   PROGMEM = "{\"mdl\":\"mitsubishi_sez\",\"dn\":\"Mitsubishi SEZ\",\"mT\":17,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;

@@ -2,8 +2,8 @@
 
 HitachiHeatpumpIR::HitachiHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "hitachi";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"hitachi\",\"dn\":\"Hitachi\",\"mT\":16,\"xT\":32,\"fs\":4}";
+  static const char model[] PROGMEM = "hitachi";
+  static const char info[]  PROGMEM = "{\"mdl\":\"hitachi\",\"dn\":\"Hitachi\",\"mT\":16,\"xT\":32,\"fs\":4}";
 
   _model = model;
   _info = info;

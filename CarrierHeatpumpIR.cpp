@@ -12,8 +12,8 @@ void CarrierHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operati
 // The different models just set the model accordingly
 CarrierNQVHeatpumpIR::CarrierNQVHeatpumpIR() : CarrierHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "carrier_nqv";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier_nqv\",\"dn\":\"Carrier NQV\",\"mT\":17,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "carrier_nqv";
+  static const char info[]  PROGMEM = "{\"mdl\":\"carrier_nqv\",\"dn\":\"Carrier NQV\",\"mT\":17,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
@@ -21,8 +21,8 @@ CarrierNQVHeatpumpIR::CarrierNQVHeatpumpIR() : CarrierHeatpumpIR()
 
 CarrierMCAHeatpumpIR::CarrierMCAHeatpumpIR() : CarrierHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "carrier_mca";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"carrier_mca\",\"dn\":\"Carrier MCA\",\"mT\":17,\"xT\":30,\"fs\":4}";
+  static const char model[] PROGMEM = "carrier_mca";
+  static const char info[]  PROGMEM = "{\"mdl\":\"carrier_mca\",\"dn\":\"Carrier MCA\",\"mT\":17,\"xT\":30,\"fs\":4}";
 
   _model = model;
   _info = info;
@@ -31,8 +31,8 @@ CarrierMCAHeatpumpIR::CarrierMCAHeatpumpIR() : CarrierHeatpumpIR()
 
 Qlima1HeatpumpIR::Qlima1HeatpumpIR() : CarrierMCAHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "qlima_1";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"qlima_1\",\"dn\":\"Qlima #1\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
+  static const char model[] PROGMEM = "qlima_1";
+  static const char info[]  PROGMEM = "{\"mdl\":\"qlima_1\",\"dn\":\"Qlima #1\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
 
   _model = model;
   _info = info;
@@ -42,8 +42,8 @@ Qlima1HeatpumpIR::Qlima1HeatpumpIR() : CarrierMCAHeatpumpIR()
 
 Qlima2HeatpumpIR::Qlima2HeatpumpIR() : CarrierMCAHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "qlima_2";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"qlima_2\",\"dn\":\"Qlima #2\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
+  static const char model[] PROGMEM = "qlima_2";
+  static const char info[]  PROGMEM = "{\"mdl\":\"qlima_2\",\"dn\":\"Qlima #2\",\"mT\":17,\"xT\":30,\"fs\":4, \"maint\":[10]}";
 
   _model = model;
   _info = info;

@@ -2,8 +2,8 @@
 
 DaikinHeatpumpIR::DaikinHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "daikin";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"daikin\",\"dn\":\"Daikin\",\"mT\":18,\"xT\":30,\"fs\":6,\"maint\":[10,11,12,13,14,15,16,17]}}}";
+  static const char model[] PROGMEM = "daikin";
+  static const char info[]  PROGMEM = "{\"mdl\":\"daikin\",\"dn\":\"Daikin\",\"mT\":18,\"xT\":30,\"fs\":6,\"maint\":[10,11,12,13,14,15,16,17]}}}";
 
   _model = model;
   _info = info;

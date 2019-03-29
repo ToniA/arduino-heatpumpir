@@ -3,8 +3,8 @@
 
 SharpHeatpumpIR::SharpHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "sharp";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"sharp\",\"dn\":\"Sharp AY-ZP40KR\",\"mT\":18,\"xT\":32,\"fs\":3,\"maint\":[10]}}";
+  static const char model[] PROGMEM = "sharp";
+  static const char info[]  PROGMEM = "{\"mdl\":\"sharp\",\"dn\":\"Sharp AY-ZP40KR\",\"mT\":18,\"xT\":32,\"fs\":3,\"maint\":[10]}}";
 
   _model = model;
   _info = info;

@@ -2,8 +2,8 @@
 
 HyundaiHeatpumpIR::HyundaiHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "hyundai";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"hyundai\",\"dn\":\"Hyundai\",\"mT\":16,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "hyundai";
+  static const char info[]  PROGMEM = "{\"mdl\":\"hyundai\",\"dn\":\"Hyundai\",\"mT\":16,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;

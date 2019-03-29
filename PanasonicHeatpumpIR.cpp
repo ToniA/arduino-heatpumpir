@@ -9,8 +9,8 @@ PanasonicHeatpumpIR::PanasonicHeatpumpIR() : HeatpumpIR()
 // The different models just set the model accordingly
 PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_dke";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "panasonic_dke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
@@ -20,8 +20,8 @@ PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR() : PanasonicHeatpumpIR()
 
 PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_jke";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "panasonic_jke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_jke\",\"dn\":\"Panasonic JKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
@@ -31,8 +31,8 @@ PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR() : PanasonicHeatpumpIR()
 
 PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_nke";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
+  static const char model[] PROGMEM = "panasonic_nke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_nke\",\"dn\":\"Panasonic NKE\",\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
 
   _model = model;
   _info = info;
@@ -42,8 +42,8 @@ PanasonicNKEHeatpumpIR::PanasonicNKEHeatpumpIR() : PanasonicHeatpumpIR()
 
 PanasonicLKEHeatpumpIR::PanasonicLKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_lke";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_lke\",\"dn\":\"Panasonic LKE\",\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
+  static const char model[] PROGMEM = "panasonic_lke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_lke\",\"dn\":\"Panasonic LKE\",\"mT\":16,\"xT\":30,\"fs\":6,\"maint\":[8,10]}";
 
   _model = model;
   _info = info;

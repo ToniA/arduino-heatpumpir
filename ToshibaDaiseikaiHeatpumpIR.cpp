@@ -3,8 +3,8 @@
 
 ToshibaDaiseikaiHeatpumpIR::ToshibaDaiseikaiHeatpumpIR() : CarrierHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "toshiba_daiseikai";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"toshiba_daiseikai\",\"dn\":\"Toshiba Daiseikai\",\"mT\":17,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "toshiba_daiseikai";
+  static const char info[]  PROGMEM = "{\"mdl\":\"toshiba_daiseikai\",\"dn\":\"Toshiba Daiseikai\",\"mT\":17,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;

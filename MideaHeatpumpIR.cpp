@@ -2,8 +2,8 @@
 
 MideaHeatpumpIR::MideaHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[]  PROGMEM = "midea"; // The basic and inverter Midea's are the same, i.e. at least Pro Plus 10FP, Pro Plus 13Fp, Pro Plus 9 Inverter and Pro Plus 12 Inverter should work
-  static const char PROGMEM info[]   PROGMEM = "{\"mdl\":\"midea\",\"dn\":\"Ultimate Pro Plus\",\"mT\":16,\"xT\":30,\"fs\":4,\"maint\":[10]}";
+  static const char model[]  PROGMEM = "midea"; // The basic and inverter Midea's are the same, i.e. at least Pro Plus 10FP, Pro Plus 13Fp, Pro Plus 9 Inverter and Pro Plus 12 Inverter should work
+  static const char info[]   PROGMEM = "{\"mdl\":\"midea\",\"dn\":\"Ultimate Pro Plus\",\"mT\":16,\"xT\":30,\"fs\":4,\"maint\":[10]}";
 
   _model = model;
   _info = info;

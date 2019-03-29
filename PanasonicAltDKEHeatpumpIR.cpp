@@ -3,8 +3,8 @@
 // This is a protected method, i.e. generic Panasonic instances cannot be created
 PanasonicAltDKEHeatpumpIR::PanasonicAltDKEHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_dke";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "panasonic_dke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
