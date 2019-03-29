@@ -1,25 +1,22 @@
 #include <PanasonicAltDKEHeatpumpIR.h>
 
-// This is a protected method, i.e. generic Panasonic instances cannot be created
 PanasonicAltDKEHeatpumpIR::PanasonicAltDKEHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_dke";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_dke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "panasonic_altdke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_altdke\",\"dn\":\"Panasonic DKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;
-
-  _panasonicModel = PANASONIC_DKE;
 }
 
 
-// Panasonic DKE/NKE/JKE numeric values to command bytes
+// Panasonic DKE numeric values to command bytes
 void PanasonicAltDKEHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
   send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false);
 }
 
-// Panasonic DKE/NKE/JKE numeric values to command bytes
+// Panasonic DKE numeric values to command bytes
 void PanasonicAltDKEHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool ionizerCmd)
 {
   // Sensible defaults for the heat pump mode
@@ -148,7 +145,7 @@ void PanasonicAltDKEHeatpumpIR::send(IRSender& IR, bool quiet, bool powerful)
 	sendPanasonicShort(IR, quiet, powerful);
 }
 
-// Send the Panasonic DKE/JKE/NKE/LKE code
+// Send the Panasonic DKE code
 void PanasonicAltDKEHeatpumpIR::sendPanasonicLong(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t ionizer)
 {
   // Only bytes 13, 14, 16, 17 and 26 are modified
@@ -161,24 +158,9 @@ void PanasonicAltDKEHeatpumpIR::sendPanasonicLong(IRSender& IR, uint8_t operatin
   uint8_t panasonicTemplate[27];
   memcpy_P(panasonicTemplate, panasonicProgmemTemplate, sizeof(panasonicTemplate));
 
-  switch(_panasonicModel)
-  {
-    case PANASONIC_DKE:
-      panasonicTemplate[17] = swingH; // Only the DKE model has a setting for the horizontal air flow
-      panasonicTemplate[23] = 0x01;
-      panasonicTemplate[25] = 0x06;
-      break;
-    case PANASONIC_JKE:
-      break;
-    case PANASONIC_NKE:
-      panasonicTemplate[17] = 0x06;
-      break;
-    case PANASONIC_LKE:
-      panasonicTemplate[17] = 0x06;
-      panasonicTemplate[13] = 0x02;
-      break;
-  }
-
+  panasonicTemplate[17] = swingH; // Only the DKE model has a setting for the horizontal air flow
+  panasonicTemplate[23] = 0x01;
+  panasonicTemplate[25] = 0x06;
   panasonicTemplate[13] |= operatingMode;
   panasonicTemplate[14] = temperature << 1;
   panasonicTemplate[16] = fanSpeed | swingV;
