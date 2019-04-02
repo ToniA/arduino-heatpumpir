@@ -83,6 +83,18 @@ class IRSenderESP8266 : public IRSender
   protected:
     uint32_t _halfPeriodicTime;
 };
+
+class IRSenderESP8266Alt : public IRSender
+{
+  public:
+    IRSenderESP8266Alt(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  protected:
+    uint32_t _halfPeriodicTime;
+};
 #endif
 
 #endif
