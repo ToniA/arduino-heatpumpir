@@ -7,8 +7,8 @@ GreeHeatpumpIR::GreeHeatpumpIR() : HeatpumpIR()
 
 GreeGenericHeatpumpIR::GreeGenericHeatpumpIR() : GreeHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "gree";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"gree\",\"dn\":\"Gree\",\"mT\":16,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "gree";
+  static const char info[]  PROGMEM = "{\"mdl\":\"gree\",\"dn\":\"Gree\",\"mT\":16,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;
@@ -17,8 +17,8 @@ GreeGenericHeatpumpIR::GreeGenericHeatpumpIR() : GreeHeatpumpIR()
 
 GreeYANHeatpumpIR::GreeYANHeatpumpIR() : GreeHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "greeyan";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"greeyan\",\"dn\":\"Gree YAN\",\"mT\":16,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "greeyan";
+  static const char info[]  PROGMEM = "{\"mdl\":\"greeyan\",\"dn\":\"Gree YAN\",\"mT\":16,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;
@@ -28,8 +28,8 @@ GreeYANHeatpumpIR::GreeYANHeatpumpIR() : GreeHeatpumpIR()
 // Support for YAA1FB, FAA1FB1, YB1F2 remotes
 GreeYAAHeatpumpIR::GreeYAAHeatpumpIR() : GreeHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "greeyaa";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"greeyaa\",\"dn\":\"Gree YAA\",\"mT\":16,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "greeyaa";
+  static const char info[]  PROGMEM = "{\"mdl\":\"greeyaa\",\"dn\":\"Gree YAA\",\"mT\":16,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;

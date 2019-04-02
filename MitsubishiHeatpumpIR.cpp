@@ -10,8 +10,8 @@ MitsubishiHeatpumpIR::MitsubishiHeatpumpIR() : HeatpumpIR()
 
 MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_fd";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mT\":16,\"xT\":31,\"fs\":5}";
+  static const char model[] PROGMEM = "mitsubishi_fd";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fd\",\"dn\":\"Mitsubishi FD\",\"mT\":16,\"xT\":31,\"fs\":5}";
 
   _model = model;
   _info = info;
@@ -21,8 +21,8 @@ MitsubishiFDHeatpumpIR::MitsubishiFDHeatpumpIR() : MitsubishiHeatpumpIR()
 
 MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_fe";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
+  static const char model[] PROGMEM = "mitsubishi_fe";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fe\",\"dn\":\"Mitsubishi FE\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
 
   _model = model;
   _info = info;
@@ -32,8 +32,8 @@ MitsubishiFEHeatpumpIR::MitsubishiFEHeatpumpIR() : MitsubishiHeatpumpIR()
 
 MitsubishiMSYHeatpumpIR::MitsubishiMSYHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_msy";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_msy\",\"dn\":\"Mitsubishi MSY\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
+  static const char model[] PROGMEM = "mitsubishi_msy";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_msy\",\"dn\":\"Mitsubishi MSY\",\"mT\":16,\"xT\":31,\"fs\":5,\"maint\":[10]}";
 
   _model = model;
   _info = info;
@@ -43,8 +43,8 @@ MitsubishiMSYHeatpumpIR::MitsubishiMSYHeatpumpIR() : MitsubishiHeatpumpIR()
 
 MitsubishiFAHeatpumpIR::MitsubishiFAHeatpumpIR() : MitsubishiHeatpumpIR()
 {
-	static const char PROGMEM model[] PROGMEM = "mitsubishi_fa";
-	static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fa\",\"dn\":\"Mitsubishi FA\",\"mT\":16,\"xT\":31,\"fs\":5}"; //TODO: What should be here?
+	static const char model[] PROGMEM = "mitsubishi_fa";
+	static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_fa\",\"dn\":\"Mitsubishi FA\",\"mT\":16,\"xT\":31,\"fs\":5}"; //TODO: What should be here?
 
 	_model = model;
 	_info = info;

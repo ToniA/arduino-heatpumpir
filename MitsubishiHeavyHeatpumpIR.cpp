@@ -10,8 +10,8 @@ MitsubishiHeavyHeatpumpIR::MitsubishiHeavyHeatpumpIR() : HeatpumpIR()
 
 MitsubishiHeavyZJHeatpumpIR::MitsubishiHeavyZJHeatpumpIR() : MitsubishiHeavyHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_heavy_zj";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zj\",\"dn\":\"Mitsubishi Heavy ZJ\",\"mT\":18,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "mitsubishi_heavy_zj";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zj\",\"dn\":\"Mitsubishi Heavy ZJ\",\"mT\":18,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;
@@ -21,8 +21,8 @@ MitsubishiHeavyZJHeatpumpIR::MitsubishiHeavyZJHeatpumpIR() : MitsubishiHeavyHeat
 
 MitsubishiHeavyZMHeatpumpIR::MitsubishiHeavyZMHeatpumpIR() : MitsubishiHeavyHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_heavy_zm";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zm\",\"dn\":\"Mitsubishi Heavy ZM\",\"mT\":18,\"xT\":30,\"fs\":4}";
+  static const char model[] PROGMEM = "mitsubishi_heavy_zm";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zm\",\"dn\":\"Mitsubishi Heavy ZM\",\"mT\":18,\"xT\":30,\"fs\":4}";
 
   _model = model;
   _info = info;
@@ -32,8 +32,8 @@ MitsubishiHeavyZMHeatpumpIR::MitsubishiHeavyZMHeatpumpIR() : MitsubishiHeavyHeat
 
 MitsubishiHeavyZMPHeatpumpIR::MitsubishiHeavyZMPHeatpumpIR() : MitsubishiHeavyHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_heavy_zmp";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zmp\",\"dn\":\"Mitsubishi Heavy ZMP\",\"mT\":18,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "mitsubishi_heavy_zmp";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zmp\",\"dn\":\"Mitsubishi Heavy ZMP\",\"mT\":18,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;

@@ -2,8 +2,8 @@
 
 BGHHeatpumpIR::BGHHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "BGH_aud";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"BGH_aud\",\"dn\":\"BGH AUD\",\"mT\":18,\"xT\":32,\"fs\":3}";
+  static const char model[] PROGMEM = "BGH_aud";
+  static const char info[]  PROGMEM = "{\"mdl\":\"BGH_aud\",\"dn\":\"BGH AUD\",\"mT\":18,\"xT\":32,\"fs\":3}";
 
   _model = model;
   _info = info;

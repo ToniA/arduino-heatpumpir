@@ -8,6 +8,7 @@
 
 #ifdef ESP8266
 #include <IRsend.h>  // From IRremoteESP8266 library
+#include <stdint.h>
 #endif
 
 class IRSender
@@ -69,6 +70,30 @@ class IRSenderIRremoteESP8266 : public IRSender
 
   private:
     IRsend _ir;
+};
+
+class IRSenderESP8266 : public IRSender
+{
+  public:
+    IRSenderESP8266(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  protected:
+    uint32_t _halfPeriodicTime;
+};
+
+class IRSenderESP8266Alt : public IRSender
+{
+  public:
+    IRSenderESP8266Alt(uint8_t pin);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  protected:
+    uint32_t _halfPeriodicTime;
 };
 #endif
 

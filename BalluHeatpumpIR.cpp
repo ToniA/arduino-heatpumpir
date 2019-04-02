@@ -2,8 +2,8 @@
 
 BalluHeatpumpIR::BalluHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "ballu";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"ballu\",\"dn\":\"Ballu\",\"mT\":16,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "ballu";
+  static const char info[]  PROGMEM = "{\"mdl\":\"ballu\",\"dn\":\"Ballu\",\"mT\":16,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;

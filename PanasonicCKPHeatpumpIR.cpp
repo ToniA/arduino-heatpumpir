@@ -3,8 +3,8 @@
 
 PanasonicCKPHeatpumpIR::PanasonicCKPHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "panasonic_ckp";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"panasonic_ckp\",\"dn\":\"Panasonic CKP\",\"mT\":16,\"xT\":30,\"fs\":6}";
+  static const char model[] PROGMEM = "panasonic_ckp";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_ckp\",\"dn\":\"Panasonic CKP\",\"mT\":16,\"xT\":30,\"fs\":6}";
 
   _model = model;
   _info = info;

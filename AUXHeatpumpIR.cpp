@@ -2,8 +2,8 @@
 
 AUXHeatpumpIR::AUXHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "AUX";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"aux\",\"dn\":\"AUX\",\"mT\":16,\"xT\":30,\"fs\":5}";
+  static const char model[] PROGMEM = "AUX";
+  static const char info[]  PROGMEM = "{\"mdl\":\"aux\",\"dn\":\"AUX\",\"mT\":16,\"xT\":30,\"fs\":5}";
 
   _model = model;
   _info = info;

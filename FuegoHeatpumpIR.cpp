@@ -3,8 +3,8 @@
 
 FuegoHeatpumpIR::FuegoHeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "fuego";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"fuego\",\"dn\":\"Fuego\",\"mT\":18,\"xT\":31,\"fs\":3}";
+  static const char model[] PROGMEM = "fuego";
+  static const char info[]  PROGMEM = "{\"mdl\":\"fuego\",\"dn\":\"Fuego\",\"mT\":18,\"xT\":31,\"fs\":3}";
 
   _model = model;
   _info = info;
