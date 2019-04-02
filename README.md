@@ -48,11 +48,19 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 
 ### ESP8266 support
 
-This library also supports ESP8266. Just change the IR send method from 'IRSenderPWM' to 'IRSenderBitBang':
+This library also supports ESP8266. Just change the IR send method from 'IRSenderPWM' to 'IRSenderESP8266':
 
-    IRSenderBitBang irSender(1);     // IR led on ESP8266 digital pin 1
+    IRSenderESP8266 irSender(1);     // IR led on ESP8266 digital pin 1
 
-* Note that depending on your board, certain GPIO's might not be available. For example on NodeMCU, the usable GPIO's are D1 (GPIO5), D2 (GPIO4), D6 (GPIO12), D7 (GPIO13) and D3 (GPIO0).
+This method are updated to use ESP8266 SDK built-int startWaveform() function which utilizes Timer1 for more accurate waveform generation.
+
+As an alternative methods these are available:
+
+* IRSenderESP8266Alt - This method uses ESP.getCycleCount() function. This might be affected by inaccuracy during WiFi comms.
+* IRSenderBitBang - Generic method using delayMicroseconds. Worst accuracy, but available on any platform.
+* IRSenderIRremoteESP8266 - This method requires [IRremoteESP8266 library](https://github.com/markszabo/IRremoteESP8266/). Good accuracy, but worse than IRSenderESP8266.
+
+Note that depending on your board, certain GPIO's might not be available. For example on NodeMCU, the usable GPIO's are D1 (GPIO5), D2 (GPIO4), D6 (GPIO12), D7 (GPIO13) and D3 (GPIO0).
 
 ### Arduino example
 
