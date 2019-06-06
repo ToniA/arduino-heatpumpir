@@ -119,6 +119,7 @@ void IRSenderPWM::setFrequency(int frequency)
       OCR5A = pwmval16 / 3;
 #else
 // Arduino Duemilanove etc
+#if !defined(__AVR_ATmega8__)
     case 3:
       // Fall-through to 11, timer2 controls both 3 and 11
     case 11:
@@ -127,6 +128,7 @@ void IRSenderPWM::setFrequency(int frequency)
       OCR2A = pwmval8;
       OCR2B = pwmval8 / 3;
       break;
+#endif
     case 9:
       // Fall-through to 10, timer1 controls both 9 and 10
     case 10:
@@ -176,18 +178,22 @@ void IRSenderPWM::mark(int markLength)
       break;
 #else
 // Arduino Duemilanove etc
+#if !defined(__AVR_ATmega8__)
     case 3:
       (TCCR2A |= _BV(COM2B1)); // Enable pin 3 PWM output
       break;
+#endif
     case 9:
       (TCCR1A |= _BV(COM1A1)); // Enable pin 9 PWM output
       break;
     case 10:
       (TCCR1A |= _BV(COM1B1)); // Enable pin 10 PWM output
       break;
+#if !defined(__AVR_ATmega8__)
     case 11:
       (TCCR2A |= _BV(COM2A1)); // Enable pin 11 PWM output
       break;
+#endif
 #endif
   }
 #endif
@@ -227,18 +233,22 @@ void IRSenderPWM::space(int spaceLength)
       (TCCR5A &= ~(_BV(COM5A1))); // Disable pin 46 PWM output on Arduino Mega
 #else
 // Arduino Duemilanove etc
+#if !defined(__AVR_ATmega8__)
     case 3:
       (TCCR2A &= ~(_BV(COM2B1))); // Disable pin 3 PWM output
       break;
+#endif
     case 9:
       (TCCR1A &= ~(_BV(COM1A1))); // Disable pin 9 PWM output
       break;
     case 10:
       (TCCR1A &= ~(_BV(COM1B1))); // Disable pin 10 PWM output
       break;
+#if !defined(__AVR_ATmega8__)
     case 11:
       (TCCR2A &= ~(_BV(COM2A1))); // Disable pin 11 PWM output
       break;
+#endif
 #endif
 }
 #endif
