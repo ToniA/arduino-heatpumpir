@@ -15,7 +15,7 @@ void AUXHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingMo
   // Sensible defaults for the heat pump mode
 
   uint8_t powerMode = AUX_AIRCON1_MODE_ON;
-  uint8_t operatingMode = AUX_AIRCON1_MODE_HEAT;
+  uint8_t operatingMode = AUX_AIRCON1_MODE_AUTO;
   uint8_t fanSpeed = AUX_AIRCON1_FAN_AUTO;
   uint8_t temperature = 23;
   uint8_t swingV = AUX_AIRCON1_VDIR_MANUAL;
