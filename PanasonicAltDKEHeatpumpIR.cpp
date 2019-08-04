@@ -135,7 +135,7 @@ void PanasonicAltDKEHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t
       break;
   }
 	
-	uint ionizer = ionizerCmd ? PANASONIC_AIRCON2_ION_ON : PANASONIC_AIRCON2_ION_OFF;
+	uint8_t ionizer = ionizerCmd ? PANASONIC_AIRCON2_ION_ON : PANASONIC_AIRCON2_ION_OFF;
 	
   sendPanasonicLong(IR, operatingMode, fanSpeed, temperature, swingV, swingH, ionizer);
 }
