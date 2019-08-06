@@ -59,6 +59,21 @@ class IRSenderBitBang : public IRSender
     int _halfPeriodicTime;
 };
 
+#ifdef ESP32
+class IRSenderESP32 : public IRSender
+{
+  public:
+    IRSenderESP32(uint8_t pin, uint8_t pwmChannel);
+    void setFrequency(int frequency);
+    void space(int spaceLength);
+    void mark(int markLength);
+
+  protected:
+    uint32_t _frequency;
+    uint8_t _pwmChannel;
+};
+#endif
+
 #ifdef ESP8266
 class IRSenderIRremoteESP8266 : public IRSender
 {

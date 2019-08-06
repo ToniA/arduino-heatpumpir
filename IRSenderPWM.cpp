@@ -2,7 +2,8 @@
 #include <IRSender.h>
 
 // ESP8266 does not have the Arduino PWM control registers
-#ifndef ESP8266 
+
+#if not defined ESP8266 && not defined ESP32
 
 // Heavily based on Ken Shirriff's IRRemote library:
 // https://github.com/shirriff/Arduino-IRremote
