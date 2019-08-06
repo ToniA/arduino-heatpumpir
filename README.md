@@ -62,6 +62,11 @@ As an alternative methods these are available:
 
 Note that depending on your board, certain GPIO's might not be available. For example on NodeMCU, the usable GPIO's are D1 (GPIO5), D2 (GPIO4), D6 (GPIO12), D7 (GPIO13) and D3 (GPIO0).
 
+### ESP32 support
+This library also supports ESP32. Just change the IR send method from 'IRSenderPWM' to 'IRSenderESP32':
+
+    IRSenderESP32 irSender(2, 0);     // IR led on ESP22 digital pin 2, 0 - ESP32 LEDC channel. 
+
 ### Arduino example
 
 ![Schema](https://raw.github.com/ToniA/arduino-heatpumpir/master/arduino_irsender.png)
