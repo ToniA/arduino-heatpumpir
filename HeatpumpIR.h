@@ -30,14 +30,8 @@
 #define FAN_3       3
 #define FAN_4       4
 #define FAN_5       5
+#define FAN_SILENT  6  //SILENT/NIGHTMODE
 
-// Fan speeds and Vertical air directions. Note only for daikin heatpumps
-#define FAN_AUTO_SWING 6
-#define FAN_1_SWING 7
-#define FAN_2_SWING 8
-#define FAN_3_SWING 9
-#define FAN_4_SWING 10
-#define FAN_5_SWING 11
 
 // Vertical air directions. Note that these cannot be set on all heat pumps
 #define VDIR_AUTO   0
