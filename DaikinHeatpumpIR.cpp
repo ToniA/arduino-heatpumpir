@@ -67,6 +67,24 @@ void DaikinHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatin
     case FAN_5:
       fanSpeed = DAIKIN_AIRCON_FAN5;
       break;
+    case FAN_AUTO_SWING:
+      fanSpeed = DAIKIN_AIRCON_FAN_AUTO_SWING;
+      break;
+    case FAN_1_SWING:
+      fanSpeed = DAIKIN_AIRCON_FAN1_SWING;
+      break;
+    case FAN_2_SWING:
+      fanSpeed = DAIKIN_AIRCON_FAN2_SWING;
+      break;
+    case FAN_3_SWING:
+      fanSpeed = DAIKIN_AIRCON_FAN3_SWING;
+      break;
+    case FAN_4_SWING:
+      fanSpeed = DAIKIN_AIRCON_FAN4_SWING;
+      break;
+    case FAN_5_SWING:
+      fanSpeed = DAIKIN_AIRCON_FAN5_SWING;
+      break;
   }
 
   if ((operatingModeCmd == MODE_HEAT && temperatureCmd >= 10 && temperatureCmd <= 30) ||
