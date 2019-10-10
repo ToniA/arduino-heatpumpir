@@ -15,15 +15,18 @@ void DaikinHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatin
 {
   // Sensible defaults for the heat pump mode
 
-  uint8_t operatingMode = DAIKIN_AIRCON_MODE_OFF | DAIKIN_AIRCON_MODE_AUTO;
+  uint8_t operatingMode = DAIKIN_AIRCON_MODE_OFF | DAIKIN_AIRCON_MODE_FAN;
   uint8_t fanSpeed      = DAIKIN_AIRCON_FAN_AUTO;
   uint8_t temperature   = 23;
+  uint8_t swingV        = DAIKIN_AIRCON_SWING_OFF;
 
   switch (powerModeCmd)
   {
     case POWER_ON:
       operatingMode |= DAIKIN_AIRCON_MODE_ON;
       break;
+    case POWER_OFF:
+      operatingMode |= DAIKIN_AIRCON_MODE_OFF;
   }
 
   switch (operatingModeCmd)
@@ -67,24 +70,18 @@ void DaikinHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatin
     case FAN_5:
       fanSpeed = DAIKIN_AIRCON_FAN5;
       break;
-    case FAN_AUTO_SWING:
-      fanSpeed = DAIKIN_AIRCON_FAN_AUTO_SWING;
+    case FAN_SILENT:
+      fanSpeed = DAIKIN_AIRCON_FAN_SILENT;
+  }
+
+  switch (swingVCmd)
+  {
+    case VDIR_SWING:
+      swingV = DAIKIN_AIRCON_SWING_ON;
       break;
-    case FAN_1_SWING:
-      fanSpeed = DAIKIN_AIRCON_FAN1_SWING;
-      break;
-    case FAN_2_SWING:
-      fanSpeed = DAIKIN_AIRCON_FAN2_SWING;
-      break;
-    case FAN_3_SWING:
-      fanSpeed = DAIKIN_AIRCON_FAN3_SWING;
-      break;
-    case FAN_4_SWING:
-      fanSpeed = DAIKIN_AIRCON_FAN4_SWING;
-      break;
-    case FAN_5_SWING:
-      fanSpeed = DAIKIN_AIRCON_FAN5_SWING;
-      break;
+    case VDIR_UP:
+      swingV = DAIKIN_AIRCON_SWING_OFF;
+      break;    
   }
 
   if ((operatingModeCmd == MODE_HEAT && temperatureCmd >= 10 && temperatureCmd <= 30) ||
@@ -93,14 +90,13 @@ void DaikinHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatin
     temperature = temperatureCmd << 1;
   }
 
-  sendDaikin(IR, operatingMode, fanSpeed, temperature, swingVCmd, swingHCmd);
+  sendDaikin(IR, operatingMode, fanSpeed, temperature, swingV, swingHCmd);
 }
 
 
 // Send the Daikin code
 void DaikinHeatpumpIR::sendDaikin(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH)
 {
-  (void)swingV;
   (void)swingH;
 
   uint8_t daikinTemplate[35] = {
@@ -113,17 +109,25 @@ void DaikinHeatpumpIR::sendDaikin(IRSender& IR, uint8_t operatingMode, uint8_t f
 
   daikinTemplate[21] = operatingMode;
   daikinTemplate[22] = temperature;
-  daikinTemplate[24] = fanSpeed;
+  daikinTemplate[24] = fanSpeed + swingV;
 
   // Checksum calculation
   // * Checksums at bytes 7 and 15 are calculated the same way
-  uint8_t checksum = 0x00;
+  uint8_t checksum1 = 0x00;
 
-  for (int i=16; i<34; i++) {
-    checksum += daikinTemplate[i];
+  for (int i=0; i<7; i++) {
+    checksum1 += daikinTemplate[i];
   }
 
-  daikinTemplate[34] = checksum;
+  daikinTemplate[7] = checksum1;
+  
+  uint8_t checksum3 = 0x00;
+
+  for (int i=16; i<34; i++) {
+    checksum3 += daikinTemplate[i];
+  }
+
+  daikinTemplate[34] = checksum3;
 
   // 38 kHz PWM frequency
   IR.setFrequency(38);
