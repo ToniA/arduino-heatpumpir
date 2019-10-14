@@ -1,8 +1,8 @@
 /*
     Daikin heatpump control (Daikin remote control P/N ARC433B50)
 */
-#ifndef DaikinHeatpumpIR_h
-#define DaikinHeatpumpIR_h
+#ifndef DaikinHeatpumpARC_TBC_IR_h
+#define DaikinHeatpumpARC_TBC_IR_h
 
 #include <HeatpumpIR.h>
 
@@ -44,10 +44,10 @@
 #define DAIKIN_AIRCON_POWERFUL_OFF   0x00
 
 
-class DaikinHeatpumpIR : public HeatpumpIR
+class DaikinHeatpumpARC_TBC_IR : public HeatpumpIR
 {
   public:
-    DaikinHeatpumpIR();
+    DaikinHeatpumpARC_TBC_IR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t comfortMode, uint8_t econo, uint8_t sensor, uint8_t quiet, uint8_t powerful);
   private:
     void sendDaikin(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t comfortMode, uint8_t econo, uint8_t sensor, uint8_t quiet, uint8_t powerful);
