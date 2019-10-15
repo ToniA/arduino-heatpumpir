@@ -1,10 +1,7 @@
 /*    im a novis to coding but do try. i have bit banged this together and works for me.
  *    hope this helps any one else that may need it.
- *
- *
- *
  */
-#include <DaikinHeatpumpARC_TBC_IR.h>
+#include <DaikinHeatpumpARC480A14IR.h>
 #include <HeatpumpIR.h>
 #include <IRSender.h>
 
@@ -12,7 +9,7 @@
 #include <PubSubClient.h>
 
 IRSenderESP8266 irSender(14);     // IR led on Duemilanove digital pin 3, using Arduino PWM
-DaikinHeatpumpARC_TBC_IR *heatpumpIR;
+DaikinHeatpumpARC480A14IR *heatpumpIR;
 
 const char* ssid = "SSID";// your wifi name
 const char* password = "PASS";  // your wifi password
@@ -48,7 +45,6 @@ int low = false;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-char msg[50];
 
 void setup() {
   Serial.begin(74880);
@@ -56,11 +52,11 @@ void setup() {
   Serial.print("RSSI : ");
   Serial.println(WiFi.RSSI());      // wifi signal strength
   Serial.println();
-  heatpumpIR = new DaikinHeatpumpARC_TBC_IR();
+  heatpumpIR = new DaikinHeatpumpARC480A14IR();
   client.setServer(mqtt_server, 1883);      
   client.setCallback(callback);
 
-  power = POWER_OFF;        //after power outage reset remote to these settings.(should not transmit)
+  power = POWER_OFF;        //after power outage reset remote to these settings.  does not transmit
   acmode = MODE_FAN;
   fan = FAN_1;
   temp = 26;
@@ -77,7 +73,6 @@ void setup_wifi() {
   WiFi.mode(WIFI_STA);      //set wifi to connect to your wifi and not start a AP
   WiFi.config(ip, gateway, subnet);
   WiFi.begin(ssid, password);
-
   while (WiFi.status() != WL_CONNECTED) {       // waits for WIFI to connect
     delay(500);
   }
@@ -88,7 +83,6 @@ void reconnect() {        //waits for MQTT to connect then connects to topics
   // Loop until we're reconnected
   while (!client.connected()) {
     // Attempt to connect
-
     client.loop();
     if (client.connect(client_id)) {
       client.subscribe(inTopic1);
@@ -117,7 +111,6 @@ void callback(char* topic, byte* payload, unsigned int length) {    // lissons f
       power = POWER_OFF;
     }
   }
-
   if (strcmp(topic, inTopic2) == 0) {   //MODE
     if (payload[0] == 'a') {
       acmode = MODE_AUTO;
@@ -135,7 +128,6 @@ void callback(char* topic, byte* payload, unsigned int length) {    // lissons f
       acmode = MODE_FAN;
     }
   }
-
   if (strcmp(topic, inTopic3) == 0) {   //FAN
     if (payload[0] == 'a') {
       fan = FAN_AUTO;
@@ -159,7 +151,6 @@ void callback(char* topic, byte* payload, unsigned int length) {    // lissons f
       fan = FAN_SILENT;
     }
   }
-
   if (strcmp(topic, inTopic4) == 0) {   //TEMP
     if (payload[0] == '1') {
       if (payload[1] == '8') {
@@ -220,50 +211,45 @@ void callback(char* topic, byte* payload, unsigned int length) {    // lissons f
       Serial.println("swing off sent");
     }
   }
-    if (strcmp(topic, inTopic6) == 0) {    //comfort
-      if (payload[0] == '1') {
-        comfort = high;
-      }
-      else if (payload[0] == '0') {
-        comfort = low;
-     }
+  if (strcmp(topic, inTopic6) == 0) {    //comfort
+    if (payload[0] == '1') {
+      comfort = high;
     }
-    if (strcmp(topic, inTopic7) == 0) {    //econo
-      if (payload[0] == '1') {
-        econo = high;
-      }
-      else if (payload[0] == '0') {
-        econo = low;
-      }
+    else if (payload[0] == '0') {
+      comfort = low;
     }
-    if (strcmp(topic, inTopic8) == 0) {    //sensor
-      if (payload[0] == '1') {
-        sensor = high;
-      }
-      else if (payload[0] == '0') {
-        sensor = low;
-      }
+  }
+  if (strcmp(topic, inTopic7) == 0) {    //econo
+    if (payload[0] == '1') {
+      econo = high;
     }
-    if (strcmp(topic, inTopic9) == 0) {    //quiet
-      if (payload[0] == '1') {
-        quiet = high;
-      }
-      else if (payload[0] == '0') {
-        quiet = low;
-      }
+    else if (payload[0] == '0') {
+      econo = low;
     }
-    if (strcmp(topic, inTopic10) == 0) {    //powerful
-      if (payload[0] == '1') {
-        powerful = high;
-      }
-      else if (payload[0] == '0') {
-        powerful = low;
-      }
+  }
+  if (strcmp(topic, inTopic8) == 0) {    //sensor
+    if (payload[0] == '1') {
+      sensor = high;
     }
-  
-  heatpumpIR->send(irSender, power, acmode, fan, temp, swing, HDIR_AUTO, comfort, econo, sensor, quiet, powerful);
-  if (power == POWER_OFF) {
-    delay(1500);
+    else if (payload[0] == '0') {
+      sensor = low;
+    }
+  }
+  if (strcmp(topic, inTopic9) == 0) {    //quiet
+    if (payload[0] == '1') {
+      quiet = high;
+    }
+    else if (payload[0] == '0') {
+      quiet = low;
+    }
+  }
+  if (strcmp(topic, inTopic10) == 0) {    //powerful
+    if (payload[0] == '1') {
+      powerful = high;
+    }
+    else if (payload[0] == '0') {
+      powerful = low;
+    }
   }
 }
 
@@ -271,7 +257,6 @@ void loop() {
   if (!client.connected()) {
     reconnect();
   }
-
   client.loop();
   delay(50);
 }
