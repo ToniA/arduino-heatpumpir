@@ -1,6 +1,6 @@
-#include <DaikinHeatpumpARC_TBC_IR.h>
+#include <DaikinHeatpumpARC480A14IR.h>
 
-DaikinHeatpumpARC_TBC_IR::DaikinHeatpumpARC_TBC_IR() : HeatpumpIR()
+DaikinHeatpumpARC480A14IR::DaikinHeatpumpARC480A14IR() : HeatpumpIR()
 {
   static const char model[] PROGMEM = "daikin";
   static const char info[]  PROGMEM = "{\"mdl\":\"daikin\",\"dn\":\"Daikin\",\"mT\":18,\"xT\":30,\"fs\":7,\"maint\":[10,11,12,13,14,15,16,17]}}}";
@@ -11,7 +11,7 @@ DaikinHeatpumpARC_TBC_IR::DaikinHeatpumpARC_TBC_IR() : HeatpumpIR()
 
 
 // Daikin numeric values to command bytes
-void DaikinHeatpumpARC_TBC_IR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t comfortModeCmd, uint8_t econoCmd, uint8_t sensorCmd, uint8_t quietCmd, uint8_t powerfulCmd)
+void DaikinHeatpumpARC480A14IR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, uint8_t comfortModeCmd, uint8_t econoCmd, uint8_t sensorCmd, uint8_t quietCmd, uint8_t powerfulCmd)
 {
   // Sensible defaults for the heat pump mode
 
@@ -141,7 +141,7 @@ void DaikinHeatpumpARC_TBC_IR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t 
 }
 
 // Send the Daikin code
-void DaikinHeatpumpARC_TBC_IR::sendDaikin(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t comfortMode, uint8_t econo, uint8_t sensor, uint8_t quiet, uint8_t powerful)
+void DaikinHeatpumpARC480A14IR::sendDaikin(IRSender& IR, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t comfortMode, uint8_t econo, uint8_t sensor, uint8_t quiet, uint8_t powerful)
 {
   (void)swingH;
 
