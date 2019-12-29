@@ -24,6 +24,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Mitsubishi Heavy SRKxxZJ-S (Remote control P/N RKX502A001C)
 * Mitsubishi Heavy SRKxxZM-S (Remote Control P/N RLA502A700B)
 * Mitsubishi Heavy SRKxxZMP-S (Remote Control P/N RKX502A001P)
+* Mitsubishi Heavy FDTCxxVF (Remote Control P/N PJA502A704AA)
 * Mitsubishi MSZ FD-25, probably also FD-35 (remote control P/N KM09D 0052376)
    * Also FH series has been confirmed to work
 * Panasonic E9/E12-CKP (Panasonic remote control P/N A75C2295)
