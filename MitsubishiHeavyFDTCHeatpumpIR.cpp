@@ -2,8 +2,8 @@
 
 MitsubishiHeavyFDTCHeatpumpIR::MitsubishiHeavyFDTCHeatpumpIR() : HeatpumpIR()
 {
-  static const char PROGMEM model[] PROGMEM = "mitsubishi_heavy_fdtc";
-  static const char PROGMEM info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_fdtc\",\"dn\":\"Mitsubishi Heavy FDTC\",\"mT\":18,\"xT\":30,\"fs\":3}";
+  static const char model[] PROGMEM = "mitsubishi_heavy_fdtc";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_fdtc\",\"dn\":\"Mitsubishi Heavy FDTC\",\"mT\":18,\"xT\":30,\"fs\":3}";
 
   _model = model;
   _info = info;
