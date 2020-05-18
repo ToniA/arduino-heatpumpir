@@ -33,6 +33,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Panasonic E9/E12-JKE and E9/E12-NKE
 * Samsung
    * AQV12PSBN / AQV09ASA
+   * AQV12MSAN, Remote Control ARH-1362
    * Samsung FJM (RJ040F2HXEA / 2XMH026FNEA), Remote Control P/N ARH-465
 * Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
 * Toshiba Daiseikai (Toshiba remote control P/N WH-TA01EE).
