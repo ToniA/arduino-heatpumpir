@@ -4,7 +4,7 @@ Original location: https://github.com/ToniA/arduino-heatpumpir
 
 For concrete examples, see the MySensors (Arduino + nRF24 radio) and ESPEasy (ESP8266 modules) integrations:
 * https://github.com/mysensors/MySensorsArduinoExamples/tree/master/examples/HeatpumpIRController
-* https://github.com/ToniA/ESPEasy/blob/master/ESPEasy/_P115_HeatpumpIR.ino
+* https://github.com/ToniA/ESPEasy/blob/HeatpumpIR/src/_P088_HeatpumpIR.ino
 
 An Arduino library to control pump/split unit air conditioner. Currently supporting at least these models:
 
