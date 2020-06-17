@@ -14,7 +14,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 * Hyundai (remote control P/N Y512F2)
    * This is probably a generic Gree model
-   * Model H-AR21-07H (remote control P/N YKR-P/002E) confirmed as AUX
+   * Models H-AR21-07H / H-AR16-09H (remote control P/N YKR-P/002E) confirmed as AUX
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
    * Also Fujitsu remote controls RY3-AR and AR-RCE1E
 * IVT AY-XP12FR-N (remote control CRMC-A673JBEZ)
