@@ -26,7 +26,7 @@
 #include <SharpHeatpumpIR.h>
 #include <ToshibaDaiseikaiHeatpumpIR.h>
 #include <ToshibaHeatpumpIR.h>
-
+#include <ZHLT01HeatpumpIR.h>
 
 class HeatpumpIRFactory
 {
