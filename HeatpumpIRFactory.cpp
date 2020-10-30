@@ -77,6 +77,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new ToshibaDaiseikaiHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("toshiba")) == 0) {
     return new ToshibaHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("ZHLT01")) == 0) {
+    return new ZHLT01HeatpumpIR();
   }
 
    return NULL;
