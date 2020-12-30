@@ -4,7 +4,7 @@ Original location: https://github.com/ToniA/arduino-heatpumpir
 
 For concrete examples, see the MySensors (Arduino + nRF24 radio) and ESPEasy (ESP8266 modules) integrations:
 * https://github.com/mysensors/MySensorsArduinoExamples/tree/master/examples/HeatpumpIRController
-* https://github.com/ToniA/ESPEasy/blob/master/ESPEasy/_P115_HeatpumpIR.ino
+* https://github.com/ToniA/ESPEasy/blob/HeatpumpIR/src/_P088_HeatpumpIR.ino
 
 An Arduino library to control pump/split unit air conditioner. Currently supporting at least these models:
 
@@ -14,7 +14,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 * Hyundai (remote control P/N Y512F2)
    * This is probably a generic Gree model
-   * Model H-AR21-07H (remote control P/N YKR-P/002E) confirmed as AUX
+   * Models H-AR21-07H / H-AR16-09H (remote control P/N YKR-P/002E) confirmed as AUX
 * Fujitsu Nocria AWYZ14 (remote control P/N AR-PZ2)
    * Also Fujitsu remote controls RY3-AR and AR-RCE1E
 * IVT AY-XP12FR-N (remote control CRMC-A673JBEZ)
@@ -41,7 +41,10 @@ An Arduino library to control pump/split unit air conditioner. Currently support
    * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
 * Tosot T18H-SN/I (remote control P/N YAA1FB) as GreeYAA variant
    * Also marketed as Tadiran brand
-
+* ZH/LT-01 remote control
+   * Brands: Eurom, Chigo, Tristar, Tecnomaster, Elgin, Geant, Tekno, Topair, 
+             Proma, Sumikura, JBS, Turbo Air, Nakatomy, Celestial Air, Ager,
+             Blueway, Airlux, etc.
 
 
 ## Instructions
