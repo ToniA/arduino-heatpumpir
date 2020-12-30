@@ -112,10 +112,6 @@ void SamsungAQVHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
     powerMode = SAMSUNG_AIRCON1_MODE_OFF;
 	if (_samsungAQVModel == MODEL_AQV12_MSAN)
 	{
-		if (operatingModeCmd != MODE_AUTO)
-		{
-			swingV = 0xFF;
-		}
 		if (operatingModeCmd == MODE_AUTO)
 		{
 			fanSpeed = 0x0D;  // reverse enginering remote
@@ -172,17 +168,7 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
   SamsungChecksum <<= 4;
   SamsungChecksum += 0x02;
 
-  // for some unknown reason the checksum is different when powering off for the model Samsung AQV12MSAN
-  if (_samsungAQVModel == MODEL_AQV12_MSAN 
-		&& powerMode == SAMSUNG_AIRCON1_MODE_OFF 
-		&& (operatingMode == SAMSUNG_AIRCON1_MODE_HEAT || operatingMode == SAMSUNG_AIRCON1_MODE_COOL))
-  {
-	SamsungTemplate[15] = 0x02;  // reverse enginering remote
-  }
-  else
-  {
-	SamsungTemplate[15] = SamsungChecksum;
-  }
+  SamsungTemplate[15] = SamsungChecksum;
 
   // 38 kHz PWM frequency
   IR.setFrequency(38);
