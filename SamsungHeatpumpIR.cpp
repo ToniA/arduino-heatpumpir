@@ -126,8 +126,8 @@ void SamsungAQVHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
 
 void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
 {
-  uint8_t SamsungTemplate[] = { 0x02, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Header part
-                                0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages
+  uint8_t SamsungTemplate[] = { 0x02, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Header part (0-6)
+                                0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages (7-13)
                                 0x01, 0x00, 0xFE, 0x71, 0x00, 0x00, 0x00 }; // The actual data is in this part, on uint8_ts 14-20
 
   uint8_t SamsungChecksum = 0;
@@ -153,7 +153,7 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
 
   // Calculate the byte 15 checksum
   // Count the number of ONE bits on message uint8_ts 15-20
-  for (uint8_t j=15; j<21; j++) {
+  for (uint8_t j=16; j<20; j++) {
     uint8_t Samsungbyte = SamsungTemplate[j];
     for (uint8_t i=0; i<8; i++) {
       if ( (Samsungbyte & 0x01) == 0x01 ) {
@@ -164,11 +164,18 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
   }
 
   // Transform the number of ONE bits to the actual checksum
-  SamsungChecksum = 32 - SamsungChecksum;
+  SamsungChecksum = 28 - SamsungChecksum;
   SamsungChecksum <<= 4;
-  SamsungChecksum += 0x02;
+  SamsungChecksum |= (powerMode == SAMSUNG_AIRCON1_MODE_OFF && _samsungAQVModel == MODEL_AQV12_MSAN) ? 0x22 : 0x02;
 
   SamsungTemplate[15] = SamsungChecksum;
+  
+  // incredible hack if power off and temp = 20 
+  if (powerMode == SAMSUNG_AIRCON1_MODE_OFF && _samsungAQVModel == MODEL_AQV12_MSAN && SamsungTemplate[18] == 0x40)
+  {
+	  SamsungTemplate[15] = 0x02;
+	  SamsungTemplate[16] = 0xFF;  //normally this is swingV
+  }
 
   // 38 kHz PWM frequency
   IR.setFrequency(38);
