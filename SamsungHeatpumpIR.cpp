@@ -170,8 +170,9 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
 
   SamsungTemplate[15] = SamsungChecksum;
   
-  // incredible hack if power off and temp = 20 
-  if (powerMode == SAMSUNG_AIRCON1_MODE_OFF && _samsungAQVModel == MODEL_AQV12_MSAN && SamsungTemplate[18] == 0x40)
+  // incredible hack if power off and temp = 20 and mode heat, dry or cool
+  if (powerMode == SAMSUNG_AIRCON1_MODE_OFF && _samsungAQVModel == MODEL_AQV12_MSAN 
+	&& (SamsungTemplate[18] == SAMSUNG_AIRCON1_MODE_HEAT || SamsungTemplate[18] == SAMSUNG_AIRCON1_MODE_DRY || SamsungTemplate[18] == SAMSUNG_AIRCON1_MODE_COOL))
   {
 	  SamsungTemplate[15] = 0x02;
 	  SamsungTemplate[16] = 0xFF;  //normally this is swingV
