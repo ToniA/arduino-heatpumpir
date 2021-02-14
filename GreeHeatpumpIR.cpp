@@ -44,7 +44,7 @@ GreeYACHeatpumpIR::GreeYACHeatpumpIR() : GreeHeatpumpIR()
 
   _model = model;
   _info = info;
-  greeModel = GREE_YAA;
+  greeModel = GREE_YAC;
 }
 
 void GreeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
@@ -117,7 +117,7 @@ void GreeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingM
   }
 
 
-  if (greeModel == GREE_YAN || greeModel == GREE_YAC)
+  if (greeModel == GREE_YAN)
   {
     switch (swingVCmd)
     {
@@ -143,7 +143,7 @@ void GreeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingM
     }
   }
 
-  if (greeModel == GREE_YAA)
+  if (greeModel == GREE_YAA || greeModel == GREE_YAC)
   {
     switch (swingVCmd)
     {
@@ -222,7 +222,7 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
   GreeTemplate[1] = temperature;
 
   // Gree YAN-specific
-  if (greeModel == GREE_YAN || greeModel == GREE_YAC)
+  if (greeModel == GREE_YAN)
   {
     GreeTemplate[2] = 0x60;
     GreeTemplate[2] = 0x50;
@@ -242,7 +242,7 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
       GreeTemplate[5] |= (1 << 3);
     }
   }
-  if (greeModel == GREE_YAA)
+  if (greeModel == GREE_YAA || greeModel == GREE_YAC)
   {
 //    GreeTemplate[2] = 0xE0; // bits 0..3 always 0000, bits 4..7 TURBO,LIGHT,HEALTH,X-FAN
     GreeTemplate[2] = 0x20; // bits 0..3 always 0000, bits 4..7 TURBO,LIGHT,HEALTH,X-FAN
@@ -264,7 +264,7 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
   }
 
   // Calculate the checksum
-  if (greeModel == GREE_YAN || greeModel == GREE_YAC)
+  if (greeModel == GREE_YAN)
   {
     GreeTemplate[7] = (
       (GreeTemplate[0] << 4) +
