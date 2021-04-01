@@ -11,6 +11,12 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new CarrierMCAHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("carrier_nqv")) == 0) {
     return new CarrierNQVHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("daikin_arc417")) == 0) {
+    return new DaikinHeatpumpARC417IR();
+  } else if (strcmp_P(modelName, PSTR("daikin_arc480")) == 0) {
+    return new DaikinHeatpumpARC480A14IR();
+  } else if (strcmp_P(modelName, PSTR("daikin")) == 0) {
+    return new DaikinHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("fuego")) == 0) {
     return new FuegoHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("fujitsu_awyz")) == 0) {
@@ -71,6 +77,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new ToshibaDaiseikaiHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("toshiba")) == 0) {
     return new ToshibaHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("ZHLT01")) == 0) {
+    return new ZHLT01HeatpumpIR();
   }
 
    return NULL;
