@@ -422,21 +422,21 @@ void MitsubishiHeavyZMPHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint
   /* ZMP model has no horizontal swing
   */
 
-  Serial.println("Calling sendHeavy from ZMP with");
-  Serial.print(F("PowerMode: "));
-  Serial.println(powerMode);
-  Serial.print(F("OperatingMode: "));
-  Serial.println(operatingMode);
-  Serial.print(F("FanSpeed: "));
-  Serial.println(fanSpeed);
-  Serial.print(F("Temperature: "));
-  Serial.println(temperature);
-  Serial.print(F("swingV: "));
-  Serial.println(swingV);
-  Serial.print(F("swingH: "));
-  Serial.println(swingH);
-  Serial.print(F("cleanMode: "));
-  Serial.println(cleanMode);
+  LOGLN("Calling sendHeavy from ZMP with");
+  LOG(F("PowerMode: "));
+  LOGLN(powerMode);
+  LOG(F("OperatingMode: "));
+  LOGLN(operatingMode);
+  LOG(F("FanSpeed: "));
+  LOGLN(fanSpeed);
+  LOG(F("Temperature: "));
+  LOGLN(temperature);
+  LOG(F("swingV: "));
+  LOGLN(swingV);
+  LOG(F("swingH: "));
+  LOGLN(swingH);
+  LOG(F("cleanMode: "));
+  LOGLN(cleanMode);
   sendMitsubishiHeavy(IR, powerMode, operatingMode, fanSpeed, temperature, swingV, swingH, cleanMode);
 }
 
@@ -553,10 +553,10 @@ void MitsubishiHeavyZMPHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t pow
 
   // Data
   for (uint8_t i=0; i<sizeof(MitsubishiHeavyZMPTemplate); i++) {
-    Serial.print(F("Byte "));
-    Serial.print(i);
-    Serial.print(F(": "));
-    Serial.println(MitsubishiHeavyZMPTemplate[i]);
+    LOG(F("Byte "));
+    LOG(i);
+    LOG(F(": "));
+    LOGLN(MitsubishiHeavyZMPTemplate[i]);
     IR.sendIRbyte(MitsubishiHeavyZMPTemplate[i], MITSUBISHI_HEAVY_BIT_MARK, MITSUBISHI_HEAVY_ZERO_SPACE, MITSUBISHI_HEAVY_ONE_SPACE);
   }
 
