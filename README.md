@@ -41,6 +41,9 @@ An Arduino library to control pump/split unit air conditioner. Currently support
    * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
 * Tosot T18H-SN/I (remote control P/N YAA1FB) as GreeYAA variant
    * Also marketed as Tadiran brand
+* Vaillant VAI8 (remote control P/N YAN1F1), a Gree YAA variant
+   * Tested and fully working with VAI8-025WNI
+   * Does not support iFeel, all other (essential) features are implemented, note the custom send() for commanding turbo and panel light
 * ZH/LT-01 remote control
    * Brands: Eurom, Chigo, Tristar, Tecnomaster, Elgin, Geant, Tekno, Topair, 
              Proma, Sumikura, JBS, Turbo Air, Nakatomy, Celestial Air, Ager,
