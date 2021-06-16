@@ -73,7 +73,7 @@ Note that depending on your board, certain GPIO's might not be available. For ex
 
 ### ESPEasy on ESP8266 board
 
-This library (together with the HeatpumpIR plugin) is integrated into the ESP Easy firmware. The a look here: https://github.com/letscontrolit/ESPEasy
+This library (together with the HeatpumpIR plugin) is integrated into the ESP Easy firmware. Take a look here: https://github.com/letscontrolit/ESPEasy
 * Download the pre-built firmware under the 'Releases' tab
 * HeatpumpIR is included in the 'minimalIRext' images
 * Documentation: https://espeasy.readthedocs.io/en/latest/Plugin/P088.html#p088-page
