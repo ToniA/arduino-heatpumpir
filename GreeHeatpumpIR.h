@@ -14,6 +14,11 @@
 #define GREE_AIRCON1_ZERO_SPACE 540
 #define GREE_AIRCON1_MSG_SPACE  19000
 
+// Timing specific for YAC features (I-Feel mode)
+#define GREE_YAC_HDR_MARK   6000
+#define GREE_YAC_HDR_SPACE  3000
+#define GREE_YAC_BIT_MARK   650
+
 // Power state
 #define GREE_AIRCON1_POWER_OFF  0x00
 #define GREE_AIRCON1_POWER_ON   0x08
