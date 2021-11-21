@@ -225,7 +225,7 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
   if (greeModel == GREE_YAN)
   {
     GreeTemplate[2] = 0x60;
-    GreeTemplate[2] = 0x50;
+    GreeTemplate[3] = 0x50;
 
     if (turboMode)
     {
