@@ -224,14 +224,8 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
   // Gree YAN-specific
   if (greeModel == GREE_YAN)
   {
-    GreeTemplate[2] = 0x60;
-    GreeTemplate[2] = 0x50;
-
-    if (turboMode)
-    {
-      GreeTemplate[2]=0x70;
-    }
-
+    GreeTemplate[2] = turboMode ? 0x70 : 0x60;
+    GreeTemplate[3] = 0x50;
     GreeTemplate[4] = swingV;
   }
   if (greeModel == GREE_YAC)
