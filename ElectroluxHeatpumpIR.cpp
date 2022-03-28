@@ -5,7 +5,7 @@ ElectroluxHeatpumpIR::ElectroluxHeatpumpIR() : HeatpumpIR()
 {
 }
 
-// Support for YAC1FBF remote
+// Support for YAL1F remote
 ElectroluxYALHeatpumpIR::ElectroluxYALHeatpumpIR() : ElectroluxHeatpumpIR()
 {
   static const char model[] PROGMEM = "electroluxyal";
