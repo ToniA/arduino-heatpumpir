@@ -7,6 +7,7 @@
 #include <DaikinHeatpumpIR.h>
 #include <DaikinHeatpumpARC417IR.h>
 #include <DaikinHeatpumpARC480A14IR.h>
+#include <ElectroluxHeatpumpIR.h>
 #include <FuegoHeatpumpIR.h>
 #include <FujitsuHeatpumpIR.h>
 #include <GreeHeatpumpIR.h>
