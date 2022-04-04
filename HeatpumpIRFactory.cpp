@@ -17,6 +17,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new DaikinHeatpumpARC480A14IR();
   } else if (strcmp_P(modelName, PSTR("daikin")) == 0) {
     return new DaikinHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("electroluxyal")) == 0) {
+    return new ElectroluxYALHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("fuego")) == 0) {
     return new FuegoHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("fujitsu_awyz")) == 0) {
