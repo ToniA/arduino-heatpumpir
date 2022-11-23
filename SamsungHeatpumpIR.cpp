@@ -292,7 +292,7 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
       break;
   }
 
-  if ( temperatureCmd > 15 && temperatureCmd < 28)
+  if ( temperatureCmd > 15 && temperatureCmd < 31)
   {
     temperature = temperatureCmd;
   }
