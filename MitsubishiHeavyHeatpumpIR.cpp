@@ -250,6 +250,9 @@ void MitsubishiHeavyZMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
     case FAN_4:
       fanSpeed = MITSUBISHI_HEAVY_ZM_FAN4;
       break;
+    case FAN_5: //Eco mode
+      fanSpeed = MITSUBISHI_HEAVY_ZM_ECONO;
+      break;
   }
 
   if ( temperatureCmd > 17 && temperatureCmd < 31)
