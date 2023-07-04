@@ -38,7 +38,7 @@
 #define GREE_AIRCON1_FAN3       0x30 // * high
 #define GREE_AIRCON1_TURBO      0x80 // * turbo mode on YAN
 
-// Only available on YAN
+// Only available on YAN and YT
 // Vertical air directions. Note that these cannot be set on all heat pumps
 #define GREE_VDIR_AUTO   0x00
 #define GREE_VDIR_MANUAL 0x00
@@ -62,7 +62,7 @@
 
 #define GREE_IFEEL_BIT 0x08
 
-// Only available on YAA and YAC
+// Only available on YAA, YAC, and YT
 // byte 0
 #define GREE_VSWING     (1 << 6)
 // byte 2
@@ -78,6 +78,7 @@
 #define GREE_YAN     1
 #define GREE_YAA     2
 #define GREE_YAC     3
+#define GREE_YT      4
 
 
 class GreeHeatpumpIR : public HeatpumpIR
@@ -125,17 +126,26 @@ class GreeYAAHeatpumpIR : public GreeHeatpumpIR
     }
 };
 
-class GreeYACHeatpumpIR : public GreeHeatpumpIR
+class GreeiFeelHeatpumpIR : public GreeHeatpumpIR
 {
-  public:
-    GreeYACHeatpumpIR();
-
   public:
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode, bool iFeelMode)
     {
       GreeHeatpumpIR::send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, turboMode, iFeelMode);
     }
     void send(IRSender& IR, uint8_t currentTemperature);
+};
+
+class GreeYACHeatpumpIR : public GreeiFeelHeatpumpIR
+{
+  public:
+    GreeYACHeatpumpIR();
+};
+
+class GreeYTHeatpumpIR : public GreeiFeelHeatpumpIR
+{
+  public:
+    GreeYTHeatpumpIR();
 };
 
 #endif
