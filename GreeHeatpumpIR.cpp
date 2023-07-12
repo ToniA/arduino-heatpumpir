@@ -233,23 +233,22 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
     GreeTemplate[4] |= (swingH << 4);
     if (iFeelMode)
     {
-      GreeTemplate[5] |= (1 << 3);
+      GreeTemplate[5] |= GREE_IFEEL_BIT;
     }
   }
   if (greeModel == GREE_YAA || greeModel == GREE_YAC)
   {
-//    GreeTemplate[2] = 0xE0; // bits 0..3 always 0000, bits 4..7 TURBO,LIGHT,HEALTH,X-FAN
-    GreeTemplate[2] = 0x20; // bits 0..3 always 0000, bits 4..7 TURBO,LIGHT,HEALTH,X-FAN
+    GreeTemplate[2] = GREE_LIGHT_BIT; // bits 0..3 always 0000, bits 4..7 TURBO,LIGHT,HEALTH,X-FAN
     GreeTemplate[3] = 0x50; // bits 4..7 always 0101
     GreeTemplate[6] = 0x20; // YAA1FB, FAA1FB1, YB1F2 bits 4..7 always 0010
 
     if (turboMode)
     {
-      GreeTemplate[2] |= (1 << 4); // Set bit 4 (TURBO)
+      GreeTemplate[2] |= GREE_TURBO_BIT;
     }
     if (swingV == GREE_VDIR_SWING)
     {
-      GreeTemplate[0] |= (1 << 6); // Enable swing by setting bit 6
+      GreeTemplate[0] |= GREE_VSWING; // Enable swing by setting bit 6
     }
     else if (swingV != GREE_VDIR_AUTO)
     {

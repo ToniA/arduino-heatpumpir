@@ -60,6 +60,19 @@
 #define GREE_HDIR_MRIGHT 0x05
 #define GREE_HDIR_RIGHT  0x06
 
+#define GREE_IFEEL_BIT 0x08
+
+// Only available on YAA and YAC
+// byte 0
+#define GREE_VSWING     (1 << 6)
+// byte 2
+#define GREE_TURBO_BIT  (1 << 4)
+#define GREE_LIGHT_BIT  (1 << 5)
+#define GREE_HEALTH_BIT (1 << 6)
+#define GREE_XFAN_BIT   (1 << 7) // aka BLOW on some remotes
+
+
+
 // Gree model codes
 #define GREE_GENERIC 0
 #define GREE_YAN     1
