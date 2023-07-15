@@ -36,6 +36,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
    * AQV12MSAN, Remote Control ARH-1362
    * Samsung FJM (RJ040F2HXEA / 2XMH026FNEA), Remote Control P/N ARH-465
 * Sharp AY-ZP40KR (remote control P/N CRMC-A788JBEZ), possibly also IVT
+* Sharp AY-X09LCJ (Remote control P/N YT1F)
 * Toshiba Daiseikai (Toshiba remote control P/N WH-TA01EE).
    * Fully compatible with CarrierNQV functions instead of Daiseikai functions.
    * Tested with: RAS-10G2KVP-E RAS-10G2AVP-E and RAS-13G2KVP-E RAS-13G2AVP-E
