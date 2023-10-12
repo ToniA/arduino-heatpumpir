@@ -13,6 +13,10 @@ IRSenderESP32::IRSenderESP32(uint8_t pin, uint8_t pwmChannel) : IRSender(pin)
 {
   _pwmChannel = pwmChannel;
   pinMode(_pin, OUTPUT);
+  // If we have an inverted signal, we need to set the pin from default LOW
+  // to HIGH to make it off
+  if (_inverted)
+    digitalWrite(_pin, HIGH);
 }
 
 void IRSenderESP32::setFrequency(int frequency)
@@ -37,13 +41,19 @@ void IRSenderESP32::mark(int markLength)
 #endif  // ESP_ARDUINO_VERSION_MAJOR >= 3
   while((int)(micros() - beginning) < markLength);
   gpio_reset_pin(static_cast<gpio_num_t>(_pin));
-  digitalWrite(_pin, LOW);
+  if (_inverted)
+    digitalWrite(_pin, HIGH);
+  else
+    digitalWrite(_pin, LOW);
 }
 
 // Send an IR 'space' symbol, i.e. transmitter OFF
 void IRSenderESP32::space(int spaceLength)
 {
-  digitalWrite(_pin, LOW);
+  if (_inverted)
+    digitalWrite(_pin, HIGH);
+  else
+    digitalWrite(_pin, LOW);
 
   if (spaceLength < 16383) {
     delayMicroseconds(spaceLength);

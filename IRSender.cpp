@@ -44,6 +44,14 @@ uint8_t IRSender::bitReverse(uint8_t x)
 }
 
 
+// Some boards have inverted signals, so we need to set the pin to HIGH to turn the IR transmitter off
+// For example M5Stick-C where LED positive on VCC and negative on pin 9
+void IRSender::invert(bool inverted)
+{
+  _inverted = inverted;
+}
+
+
 // Definitions of virtual functions
 void IRSender::setFrequency(int) {};
 void IRSender::space(int) {};
