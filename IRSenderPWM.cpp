@@ -3,7 +3,7 @@
 
 // ESP8266 does not have the Arduino PWM control registers
 
-#if not defined ESP8266 && not defined ESP32
+#if not defined ESP8266 && not defined ESP32 && not defined LIBRETINY
 
 // Heavily based on Ken Shirriff's IRRemote library:
 // https://github.com/shirriff/Arduino-IRremote
@@ -24,7 +24,7 @@ IRSenderPWM::IRSenderPWM(uint8_t pin) : IRSender(pin)
 
 #if defined(__SAM3X8E__) || defined(__SAM3X8H__)
 // Arduino Due
-	pmc_set_writeprotect(false); 
+	pmc_set_writeprotect(false);
 
   switch (_pin)
   {
@@ -32,7 +32,7 @@ IRSenderPWM::IRSenderPWM(uint8_t pin) : IRSender(pin)
 			IR_USE_PWM_PINMASK = PIO_PC24;
 			IR_USE_PWM_CH = 7;
 		break;
-	
+
 		case 7:
 			IR_USE_PWM_PINMASK = PIO_PC23;
 			IR_USE_PWM_CH = 6;
