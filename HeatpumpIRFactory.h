@@ -15,6 +15,7 @@
 #include <HitachiHeatpumpIR.h>
 #include <HyundaiHeatpumpIR.h>
 #include <IVTHeatpumpIR.h>
+#include <NibeHeatpumpIR.h>
 #include <MideaHeatpumpIR.h>
 #include <MitsubishiHeatpumpIR.h>
 #include <MitsubishiHeavyFDTCHeatpumpIR.h>

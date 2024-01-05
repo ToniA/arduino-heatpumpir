@@ -10,9 +10,9 @@ IRSender::IRSender(uint8_t pin)
 
 
 // Send a uint8_t (8 bits) over IR
-void IRSender::sendIRbyte(uint8_t sendByte, int bitMarkLength, int zeroSpaceLength, int oneSpaceLength)
+void IRSender::sendIRbyte(uint8_t sendByte, int bitMarkLength, int zeroSpaceLength, int oneSpaceLength, uint8_t bitCount)
 {
-  for (int i=0; i<8 ; i++)
+  for (int i=0; i<bitCount ; i++)
   {
     if (sendByte & 0x01)
     {

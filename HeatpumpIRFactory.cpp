@@ -41,6 +41,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new HyundaiHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("ivt")) == 0) {
     return new IVTHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("nibe")) == 0) {
+	return new NibeHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("midea")) == 0) {
     return new MideaHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("mitsubishi_fa")) == 0) {
