@@ -58,8 +58,6 @@
 #define GREE_HEALTH_BIT (1 << 6)
 #define GREE_XFAN_BIT   (1 << 7) // aka BLOW on some remotes
 
-
-
 // Gree model codes
 #define GREE_GENERIC 0
 #define GREE_YAN     1
@@ -100,15 +98,41 @@ class GreeHeatpumpIR : public HeatpumpIR
         return timings;
     };
 
-    uint8_t greeModel;
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode);
+
+    virtual void calculateChecksum(uint8_t * buffer);
 
   public:
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd , uint8_t fanSpeedCmd , uint8_t temperatureCmd , uint8_t swingVCmd , uint8_t swingHCmd, bool turboMode);
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd , uint8_t fanSpeedCmd , uint8_t temperatureCmd , uint8_t swingVCmd , uint8_t swingHCmd, bool turboMode, bool iFeelMode);
+    void send(
+            IRSender& IR,
+            uint8_t powerModeCmd, uint8_t operatingModeCmd,
+            uint8_t fanSpeedCmd, uint8_t temperatureCmd,
+            uint8_t swingVCmd, uint8_t swingHCmd) override {
+        send(
+            IR,
+            powerModeCmd, operatingModeCmd,
+            fanSpeedCmd, temperatureCmd,
+            swingVCmd, swingHCmd, false);
+    }
+
+    void send(
+            IRSender& IR,
+            uint8_t powerModeCmd, uint8_t operatingModeCmd,
+            uint8_t fanSpeedCmd, uint8_t temperatureCmd,
+            uint8_t swingVCmd, uint8_t swingHCmd,
+            bool turboMode, bool iFeelMode = false);
 
   private:
-    void sendGree(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, bool turboMode, bool iFeelMode);
+    void sendGree(
+            IRSender& IR,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode);
 };
 
 class GreeGenericHeatpumpIR : public GreeHeatpumpIR
@@ -122,11 +146,14 @@ class GreeYANHeatpumpIR : public GreeHeatpumpIR
   public:
     GreeYANHeatpumpIR();
 
-  public:
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode)
-    {
-      GreeHeatpumpIR::send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, turboMode);
-    }
+  protected:
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
+
+    virtual void calculateChecksum(uint8_t * buffer) override;
 };
 
 class GreeYAAHeatpumpIR : public GreeHeatpumpIR
@@ -134,33 +161,52 @@ class GreeYAAHeatpumpIR : public GreeHeatpumpIR
   public:
     GreeYAAHeatpumpIR();
 
-  public:
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode)
-    {
-      GreeHeatpumpIR::send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, turboMode);
-    }
+  protected:
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
 };
 
 class GreeiFeelHeatpumpIR : public GreeHeatpumpIR
 {
   public:
-    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboMode, bool iFeelMode)
-    {
-      GreeHeatpumpIR::send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, turboMode, iFeelMode);
-    }
-    void send(IRSender& IR, uint8_t currentTemperature);
+    using GreeHeatpumpIR::send;
+    void send(IRSender& IR, uint8_t currentTemperature) override;
+
+  protected:
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
 };
 
 class GreeYACHeatpumpIR : public GreeiFeelHeatpumpIR
 {
   public:
     GreeYACHeatpumpIR();
+
+  protected:
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
 };
 
 class GreeYTHeatpumpIR : public GreeiFeelHeatpumpIR
 {
   public:
     GreeYTHeatpumpIR();
+
+  protected:
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
 };
 
 #endif
