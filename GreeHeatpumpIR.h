@@ -83,20 +83,7 @@ class GreeHeatpumpIR : public HeatpumpIR
 
     GreeHeatpumpIR();
 
-    virtual const Timings & getTimings() const {
-        static Timings timings = {
-            9000,
-            4000,
-            620,
-            1600,
-            540,
-            19000,
-            8200,
-            3800,
-            650,
-        };
-        return timings;
-    };
+    virtual const Timings & getTimings() const;
 
     virtual void generateCommand(uint8_t * buffer,
             uint8_t powerMode, uint8_t operatingMode,
@@ -105,6 +92,18 @@ class GreeHeatpumpIR : public HeatpumpIR
             bool turboMode, bool iFeelMode);
 
     virtual void calculateChecksum(uint8_t * buffer);
+
+    virtual void sendGree(
+            IRSender& IR,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode);
+
+    virtual void sendBuffer(
+            IRSender& IR,
+            const uint8_t * buffer,
+            size_t len = 8);
 
   public:
     void send(
@@ -119,20 +118,12 @@ class GreeHeatpumpIR : public HeatpumpIR
             swingVCmd, swingHCmd, false);
     }
 
-    void send(
+    virtual void send(
             IRSender& IR,
             uint8_t powerModeCmd, uint8_t operatingModeCmd,
             uint8_t fanSpeedCmd, uint8_t temperatureCmd,
             uint8_t swingVCmd, uint8_t swingHCmd,
             bool turboMode, bool iFeelMode = false);
-
-  private:
-    void sendGree(
-            IRSender& IR,
-            uint8_t powerMode, uint8_t operatingMode,
-            uint8_t fanSpeed, uint8_t temperature,
-            uint8_t swingV, uint8_t swingH,
-            bool turboMode, bool iFeelMode);
 };
 
 class GreeGenericHeatpumpIR : public GreeHeatpumpIR
@@ -207,6 +198,77 @@ class GreeYTHeatpumpIR : public GreeiFeelHeatpumpIR
             uint8_t fanSpeed, uint8_t temperature,
             uint8_t swingV, uint8_t swingH,
             bool turboMode, bool iFeelMode) override;
+};
+
+class GreeYAPHeatpumpIR : public GreeiFeelHeatpumpIR
+{
+  public:
+    GreeYAPHeatpumpIR();
+
+    using GreeiFeelHeatpumpIR::send;
+
+    virtual void send(
+            IRSender& IR,
+            uint8_t powerModeCmd, uint8_t operatingModeCmd,
+            uint8_t fanSpeedCmd, uint8_t temperatureCmd,
+            uint8_t swingVCmd, uint8_t swingHCmd,
+            bool turboMode, bool iFeelMode = false) override {
+        send(
+            IR,
+            powerModeCmd, operatingModeCmd,
+            fanSpeedCmd, temperatureCmd,
+            swingVCmd, swingHCmd,
+            turboMode, iFeelMode,
+            true);
+    }
+
+    virtual void send(
+            IRSender& IR,
+            uint8_t powerModeCmd, uint8_t operatingModeCmd,
+            uint8_t fanSpeedCmd, uint8_t temperatureCmd,
+            uint8_t swingVCmd, uint8_t swingHCmd,
+            bool turboMode, bool iFeelMode,
+            bool light, bool xfan = false,
+            bool health = false, bool valve = false,
+            bool sthtMode = false, bool enableWiFi = true);
+
+  protected:
+    virtual const Timings & getTimings() const override;
+
+    virtual void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
+
+    void generateCommand(uint8_t * buffer,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode,
+
+            bool light, bool xfan = false,
+            bool health = false, bool valve = false,
+            bool sthtMode = false, bool enableWiFi = true
+        );
+
+    virtual void sendGree(
+            IRSender& IR,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode) override;
+
+    void sendGree(
+            IRSender& IR,
+            uint8_t powerMode, uint8_t operatingMode,
+            uint8_t fanSpeed, uint8_t temperature,
+            uint8_t swingV, uint8_t swingH,
+            bool turboMode, bool iFeelMode,
+
+            bool light, bool xfan = false,
+            bool health = false, bool valve = false,
+            bool sthtMode = false, bool enableWiFi = true);
 };
 
 #endif
