@@ -309,36 +309,38 @@ void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operating
       0x0A) & 0x0F) << 4) | (GreeTemplate[7] & 0x0F);
   }
 
+  const auto & timings = getTimings();
+
   // 38 kHz PWM frequency
   IR.setFrequency(38);
 
   // Send Header mark
-  IR.mark(GREE_AIRCON1_HDR_MARK);
-  IR.space(GREE_AIRCON1_HDR_SPACE);
+  IR.mark(timings.hdr_mark);
+  IR.space(timings.hdr_space);
 
   // Payload part #1
   for (i=0; i<4; i++) {
-    IR.sendIRbyte(GreeTemplate[i], GREE_AIRCON1_BIT_MARK, GREE_AIRCON1_ZERO_SPACE, GREE_AIRCON1_ONE_SPACE);
+    IR.sendIRbyte(GreeTemplate[i], timings.bit_mark, timings.zero_space, timings.one_space);
   }
   // Only three first bits of byte 4 are sent, this is always '010'
-  IR.mark(GREE_AIRCON1_BIT_MARK);
-  IR.space(GREE_AIRCON1_ZERO_SPACE);
-  IR.mark(GREE_AIRCON1_BIT_MARK);
-  IR.space(GREE_AIRCON1_ONE_SPACE);
-  IR.mark(GREE_AIRCON1_BIT_MARK);
-  IR.space(GREE_AIRCON1_ZERO_SPACE);
+  IR.mark(timings.bit_mark);
+  IR.space(timings.zero_space);
+  IR.mark(timings.bit_mark);
+  IR.space(timings.one_space);
+  IR.mark(timings.bit_mark);
+  IR.space(timings.zero_space);
 
   // Message space
-  IR.mark(GREE_AIRCON1_BIT_MARK);
-  IR.space(GREE_AIRCON1_MSG_SPACE);
+  IR.mark(timings.bit_mark);
+  IR.space(timings.msg_space);
 
   // Payload part #2
   for (i=4; i<8; i++) {
-    IR.sendIRbyte(GreeTemplate[i], GREE_AIRCON1_BIT_MARK, GREE_AIRCON1_ZERO_SPACE, GREE_AIRCON1_ONE_SPACE);
-	}
+    IR.sendIRbyte(GreeTemplate[i], timings.bit_mark, timings.zero_space, timings.one_space);
+  }
 
   // End mark
-  IR.mark(GREE_AIRCON1_BIT_MARK);
+  IR.mark(timings.bit_mark);
   IR.space(0);
 }
 
@@ -350,18 +352,20 @@ void GreeiFeelHeatpumpIR::send(IRSender& IR, uint8_t currentTemperature)
   GreeTemplate[0] = currentTemperature;
   GreeTemplate[1] = 0xA5;
 
+  const auto & timings = getTimings();
+
   // 38 kHz PWM frequency
   IR.setFrequency(38);
 
   // Send Header mark
-  IR.mark(GREE_YAC_HDR_MARK);
-  IR.space(GREE_YAC_HDR_SPACE);
+  IR.mark(timings.ifeel_hdr_mark);
+  IR.space(timings.ifeel_hdr_space);
 
   // send payload
-  IR.sendIRbyte(GreeTemplate[0], GREE_YAC_BIT_MARK, GREE_AIRCON1_ZERO_SPACE, GREE_AIRCON1_ONE_SPACE);
-  IR.sendIRbyte(GreeTemplate[1], GREE_YAC_BIT_MARK, GREE_AIRCON1_ZERO_SPACE, GREE_AIRCON1_ONE_SPACE);
+  IR.sendIRbyte(GreeTemplate[0], timings.ifeel_bit_mark, timings.zero_space, timings.one_space);
+  IR.sendIRbyte(GreeTemplate[1], timings.ifeel_bit_mark, timings.zero_space, timings.one_space);
 
   // End mark
-  IR.mark(GREE_YAC_BIT_MARK);
+  IR.mark(timings.ifeel_bit_mark);
   IR.space(0);
 }

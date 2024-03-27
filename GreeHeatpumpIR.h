@@ -6,19 +6,6 @@
 
 #include <HeatpumpIR.h>
 
-// Gree timing constants
-#define GREE_AIRCON1_HDR_MARK   9000
-#define GREE_AIRCON1_HDR_SPACE  4000
-#define GREE_AIRCON1_BIT_MARK   620
-#define GREE_AIRCON1_ONE_SPACE  1600
-#define GREE_AIRCON1_ZERO_SPACE 540
-#define GREE_AIRCON1_MSG_SPACE  19000
-
-// Timing specific for YAC features (I-Feel mode)
-#define GREE_YAC_HDR_MARK   6000
-#define GREE_YAC_HDR_SPACE  3000
-#define GREE_YAC_BIT_MARK   650
-
 // Power state
 #define GREE_AIRCON1_POWER_OFF  0x00
 #define GREE_AIRCON1_POWER_ON   0x08
@@ -84,7 +71,35 @@
 class GreeHeatpumpIR : public HeatpumpIR
 {
   protected:
+    struct Timings {
+        int hdr_mark;
+        int hdr_space;
+        int bit_mark;
+        int one_space;
+        int zero_space;
+        int msg_space;
+        int ifeel_hdr_mark;
+        int ifeel_hdr_space;
+        int ifeel_bit_mark;
+    };
+
     GreeHeatpumpIR();
+
+    virtual const Timings & getTimings() const {
+        static Timings timings = {
+            9000,
+            4000,
+            620,
+            1600,
+            540,
+            19000,
+            8200,
+            3800,
+            650,
+        };
+        return timings;
+    };
+
     uint8_t greeModel;
 
   public:
