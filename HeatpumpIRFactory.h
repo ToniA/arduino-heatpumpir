@@ -27,6 +27,7 @@
 #include <PanasonicAltDKEHeatpumpIR.h>
 #include <PanasonicCKPHeatpumpIR.h>
 #include <PanasonicHeatpumpIR.h>
+#include <R51MHeatpumpIR.h>
 #include <SamsungHeatpumpIR.h>
 #include <SharpHeatpumpIR.h>
 #include <ToshibaDaiseikaiHeatpumpIR.h>
