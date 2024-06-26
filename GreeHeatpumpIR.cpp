@@ -212,7 +212,7 @@ void GreeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingM
 // Send the Gree code
 void GreeHeatpumpIR::sendGree(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, bool turboMode, bool iFeelMode)
 {
-  uint8_t buffer[8];
+  uint8_t buffer[9];
 
   generateCommand(
       buffer,
@@ -420,7 +420,7 @@ void GreeYAPHeatpumpIR::generateCommand(uint8_t * buffer,
 }
 
 void GreeHeatpumpIR::calculateChecksum(uint8_t * buffer) {
-  buffer[7] = (((
+  buffer[8] = (((
    (buffer[0] & 0x0F) +
    (buffer[1] & 0x0F) +
    (buffer[2] & 0x0F) +
@@ -432,7 +432,7 @@ void GreeHeatpumpIR::calculateChecksum(uint8_t * buffer) {
 }
 
 void GreeYANHeatpumpIR::calculateChecksum(uint8_t * buffer) {
-  buffer[7] = (
+  buffer[8] = (
     (buffer[0] << 4) +
     (buffer[1] << 4) +
     0xC0);
@@ -472,7 +472,7 @@ void GreeHeatpumpIR::sendBuffer(IRSender& IR, const uint8_t * buffer, size_t len
     IR.space(timings.msg_space);
 
     // Payload part #2
-    for (size_t i = 4; i < 8; i++) {
+    for (size_t i = 5; i < 9; i++) {
       IR.sendIRbyte(buffer[pos + i], timings.bit_mark, timings.zero_space, timings.one_space);
     }
 
