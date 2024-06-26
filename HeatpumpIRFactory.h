@@ -2,7 +2,9 @@
 #define HeatpumpIRFactory_h
 
 #include <AUXHeatpumpIR.h>
+#include <AIRWAYHeatpumpIR.h>
 #include <BalluHeatpumpIR.h>
+#include <BGHHeatpumpIR.h>
 #include <CarrierHeatpumpIR.h>
 #include <DaikinHeatpumpIR.h>
 #include <DaikinHeatpumpARC417IR.h>
@@ -22,12 +24,15 @@
 #include <MitsubishiHeavyHeatpumpIR.h>
 #include <MitsubishiMSCHeatpumpIR.h>
 #include <MitsubishiSEZKDXXHeatpumpIR.h>
+#include <PanasonicAltDKEHeatpumpIR.h>
 #include <PanasonicCKPHeatpumpIR.h>
 #include <PanasonicHeatpumpIR.h>
+#include <R51MHeatpumpIR.h>
 #include <SamsungHeatpumpIR.h>
 #include <SharpHeatpumpIR.h>
 #include <ToshibaDaiseikaiHeatpumpIR.h>
 #include <ToshibaHeatpumpIR.h>
+#include <VaillantHeatpumpIR.h>
 #include <ZHJG01HeatpumpIR.h>
 #include <ZHLT01HeatpumpIR.h>
 
