@@ -71,7 +71,7 @@ NibeHeatpumpIR::NibeHeatpumpIR() : HeatpumpIR()
 
 void NibeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
-  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false, false);
+  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false, true);
 }
 
 void NibeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool turboModeCmd, bool iFeelModeCmd)
@@ -120,24 +120,23 @@ void NibeHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingM
     }
   }
 
-  // NOTE Fan speed Auto can not be used in MODE_FAN
-  // TODO not sure this fan mapping is correct? FAN_1 = low speed and FAN_3 = high speed?
+  // NOTE Fan speed Auto can not be used in NIBE_MODE_FAN
   switch (fanSpeedCmd)
   {
     case FAN_AUTO:
       if (operatingMode == NIBE_MODE_FAN)
-        fanSpeed = NIBE_MODE_FAN1;
+        fanSpeed = NIBE_MODE_FAN_HIGH;
       else
         fanSpeed = NIBE_MODE_FAN_AUTO;
       break;
-    case FAN_1:
-      fanSpeed = NIBE_MODE_FAN3;
+    case FAN_4:				// FAN_4 = CLIMATE_FAN_HIGH - ESPHOME
+      fanSpeed = NIBE_MODE_FAN_HIGH;
       break;
-    case FAN_2:
-      fanSpeed = NIBE_MODE_FAN2;
+    case FAN_3:				// FAN_3 = CLIMATE_FAN_MEDIUM - ESPHOME
+      fanSpeed = NIBE_MODE_FAN_MED;
       break;
-    case FAN_3:
-      fanSpeed = NIBE_MODE_FAN1;
+    case FAN_2:				// FAN_2 = CLIMATE_FAN_LOW - ESPHOME
+      fanSpeed = NIBE_MODE_FAN_LOW;
       break;
     case FAN_SILENT:
       nightMode = 0x01;
