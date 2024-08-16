@@ -92,14 +92,6 @@ void KY26HeatpumpIR::sendKY26(IRSender &IR, uint8_t powerModeCmd,
   IR.space(KY26_HDR_SPACE);
 
   for (unsigned int i = 0; i < sizeof(KY26Template); i++) {
-    Serial.print("Byte ");
-    Serial.print(i);
-    Serial.print(": ");
-    for (int j = 7; j >= 0; j--) {
-      Serial.print((KY26Template[i] >> j) & 0x01);
-    }
-    Serial.println();
-
     IR.sendIRbyte(KY26Template[i], KY26_BIT_MARK, KY26_ZERO_SPACE,
                   KY26_ONE_SPACE);
   }
