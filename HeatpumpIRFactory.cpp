@@ -75,6 +75,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new PanasonicLKEHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("panasonic_nke")) == 0) {
     return new PanasonicNKEHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("philco_phs32")) == 0) {
+    return new PhilcoPHS32HeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("samsung_aqv")) == 0) {
     return new SamsungAQVHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("samsung_fjm")) == 0) {
