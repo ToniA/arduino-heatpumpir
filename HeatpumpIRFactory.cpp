@@ -91,6 +91,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new ZHJG01HeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("ZHLT01")) == 0) {
     return new ZHLT01HeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("KY-26")) == 0) {
+    return new KY26HeatpumpIR();
   }
 
    return NULL;
