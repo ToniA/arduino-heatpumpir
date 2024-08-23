@@ -32,6 +32,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Panasonic E9/E12-CKP (Panasonic remote control P/N A75C2295)
 * Panasonic E9/E12-DKE (Panasonic remote control P/N A75C2616)
 * Panasonic E9/E12-JKE and E9/E12-NKE
+* Philco PHS32
 * Samsung
    * AQV12PSBN / AQV09ASA
    * AQV12MSAN, Remote Control ARH-1362
