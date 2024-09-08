@@ -34,6 +34,14 @@
 #define MITSUBISHI_HEAVY_ZJ_HIPOWER        0x40 
 #define MITSUBISHI_HEAVY_ZJ_ECONO          0x00
 
+#define MITSUBISHI_HEAVY_ZEA_FAN_AUTO      0xE0 // Fan speed
+#define MITSUBISHI_HEAVY_ZEA_FAN1          0xC2
+#define MITSUBISHI_HEAVY_ZEA_FAN2          0xA4
+#define MITSUBISHI_HEAVY_ZEA_FAN3          0x86
+#define MITSUBISHI_HEAVY_ZEA_FAN4          0x68
+#define MITSUBISHI_HEAVY_ZEA_HIPOWER       0x2C 
+#define MITSUBISHI_HEAVY_ZEA_ECONO         0x0E
+
 #define MITSUBISHI_HEAVY_ZM_FAN_AUTO       0x0F // Fan speed
 #define MITSUBISHI_HEAVY_ZM_FAN1           0x0E
 #define MITSUBISHI_HEAVY_ZM_FAN2           0x0D
@@ -54,6 +62,7 @@
 #define MITSUBISHI_HEAVY_ZJ_CLEAN_OFF      0x20
 #define MITSUBISHI_HEAVY_ZM_CLEAN_OFF      0x60
 #define MITSUBISHI_HEAVY_ZMP_CLEAN_OFF     0x20
+#define MITSUBISHI_HEAVY_ZEA_CLEAN_OFF     0x08
 
 #define MITSUBISHI_HEAVY_ZM_3DAUTO_ON      0x00 // Only available in Auto, Cool and Heat mode
 #define MITSUBISHI_HEAVY_ZM_3DAUTO_OFF     0x12
@@ -62,6 +71,7 @@
 #define MITSUBISHI_HEAVY_ZM_SILENT_ON      0x00 // NOT available in Fan or Dry mode
 #define MITSUBISHI_HEAVY_ZM_SILENT_OFF     0x80
 #define MITSUBISHI_HEAVY_ZMP_SILENT_ON     0x00
+#define MITSUBISHI_HEAVY_ZEA_SILENT_ON     0x0E
 
 #define MITSUBISHI_HEAVY_ZJ_VS_SWING       0x0A // Vertical swing
 #define MITSUBISHI_HEAVY_ZJ_VS_UP          0x02
@@ -70,6 +80,14 @@
 #define MITSUBISHI_HEAVY_ZJ_VS_MDOWN       0x08
 #define MITSUBISHI_HEAVY_ZJ_VS_DOWN        0x00
 #define MITSUBISHI_HEAVY_ZJ_VS_STOP        0x1A
+
+#define MITSUBISHI_HEAVY_ZEA_VS_SWING      0x1A // Vertical swing
+#define MITSUBISHI_HEAVY_ZEA_VS_UP         0x0E
+#define MITSUBISHI_HEAVY_ZEA_VS_MUP        0x31
+#define MITSUBISHI_HEAVY_ZEA_VS_MIDDLE     0x25
+#define MITSUBISHI_HEAVY_ZEA_VS_MDOWN      0x19
+#define MITSUBISHI_HEAVY_ZEA_VS_DOWN       0x0D
+#define MITSUBISHI_HEAVY_ZEA_VS_STOP       0x32
 
 #define MITSUBISHI_HEAVY_ZM_VS_SWING       0xE0 // Vertical swing
 #define MITSUBISHI_HEAVY_ZM_VS_UP          0xC0
@@ -98,6 +116,17 @@
 #define MITSUBISHI_HEAVY_ZJ_HS_RIGHTLEFT   0x44
 #define MITSUBISHI_HEAVY_ZJ_HS_3DAUTO      0x04
 
+#define MITSUBISHI_HEAVY_ZEA_HS_SWING      0xD2 // Horizontal swing - 3D AUTO
+#define MITSUBISHI_HEAVY_ZEA_HS_MIDDLE     0xA5
+#define MITSUBISHI_HEAVY_ZEA_HS_LEFT       0xC3
+#define MITSUBISHI_HEAVY_ZEA_HS_MLEFT      0xB4
+#define MITSUBISHI_HEAVY_ZEA_HS_MRIGHT     0x96
+#define MITSUBISHI_HEAVY_ZEA_HS_RIGHT      0x87
+#define MITSUBISHI_HEAVY_ZEA_HS_STOP       0xF0
+#define MITSUBISHI_HEAVY_ZEA_HS_LEFTRIGHT  0x78
+#define MITSUBISHI_HEAVY_ZEA_HS_RIGHTLEFT  0x69
+#define MITSUBISHI_HEAVY_ZEA_HS_3DAUTO     0xE1
+
 #define MITSUBISHI_HEAVY_ZM_HS_SWING       0x0F // Horizontal swing
 #define MITSUBISHI_HEAVY_ZM_HS_MIDDLE      0x0C
 #define MITSUBISHI_HEAVY_ZM_HS_LEFT        0x0E
@@ -115,6 +144,7 @@
 #define MITSUBISHIHEAVY_ZJ 0
 #define MITSUBISHIHEAVY_ZM 1
 #define MITSUBISHIHEAVY_ZMP 2
+#define MITSUBISHIHEAVY_ZEA 3
 
 
 class MitsubishiHeavyHeatpumpIR : public HeatpumpIR
@@ -157,5 +187,16 @@ class MitsubishiHeavyZMPHeatpumpIR : public MitsubishiHeavyHeatpumpIR
   private:
     void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t cleanMode);
 };
+
+class MitsubishiHeavyZEAHeatpumpIR : public MitsubishiHeavyHeatpumpIR
+{
+  public:
+    MitsubishiHeavyZEAHeatpumpIR();
+    void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
+
+  private:
+    void sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t cleanMode);
+};
+
 
 #endif
