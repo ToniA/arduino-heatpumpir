@@ -32,11 +32,11 @@
 #define NIBE_MODE_AUTO_COOL      0x02
 
 // Fan speeds (2 bits)
-//NOTE Fan speed Auto can not be used in MODE_FAN
-#define NIBE_MODE_FAN_AUTO   0x00 // Fan speed
-#define NIBE_MODE_FAN1       0x03 // * Max
-#define NIBE_MODE_FAN2       0x01 // * Medium
-#define NIBE_MODE_FAN3       0x02 // * Low
+//NOTE Fan speed Auto can not be used in NIBE_MODE_FAN
+#define NIBE_MODE_FAN_AUTO  0x00
+#define NIBE_MODE_FAN_HIGH  0x03
+#define NIBE_MODE_FAN_MED   0x01
+#define NIBE_MODE_FAN_LOW   0x02
 
 // Vertical air directions (3 bits)
 // Note according to the remote control manual there are limitations:
