@@ -538,10 +538,6 @@ void GreeYAPHeatpumpIR::sendGree(
   calculateChecksum(buffer + 8);
 
   sendBuffer(IR, buffer, 24);
-
-  for (size_t offset = 0; offset < 24; ++offset) {
-      Serial.printf("%2i: %02x\n", offset, buffer[offset]);
-  }
 }
 
 void GreeYAPHeatpumpIR::send(
