@@ -1,5 +1,5 @@
 {
-  "name": "HeatpumpIR-MB",
+  "name": "HeatpumpIR",
   "description": "Heatpump / Air Conditioner infrared control",
   "keywords": "ac, ir, remote",
   "authors": {
