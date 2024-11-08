@@ -43,40 +43,43 @@ SamsungFJMHeatpumpIR::SamsungFJMHeatpumpIR() : SamsungHeatpumpIR()
 
 void SamsungAQVHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
-  (void)swingVCmd;
-  (void)swingHCmd;
 
   // Sensible defaults for the heat pump mode
 
-  uint8_t powerMode = SAMSUNG_AIRCON1_MODE_ON;
+  uint8_t powerMode=SAMSUNG_AIRCON1_MODE_OFF;
   uint8_t operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
   uint8_t fanSpeed = SAMSUNG_AIRCON1_FAN_AUTO;
   uint8_t temperature = 23;
-  uint8_t swingV = SAMSUNG_AIRCON1_VS_AUTO;
+  uint8_t swing = SAMSUNG_AIRCON2_VHS_OFF;
 
-	switch (operatingModeCmd)
-	{
-	  case MODE_AUTO:
-		operatingMode = SAMSUNG_AIRCON1_MODE_AUTO;
-		fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in AUTO mode
-		break;
-	  case MODE_HEAT:
-		operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
-		break;
-	  case MODE_COOL:
-		operatingMode = SAMSUNG_AIRCON1_MODE_COOL;
-		break;
-	  case MODE_DRY:
-		operatingMode = SAMSUNG_AIRCON1_MODE_DRY;
-		fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in DRY mode
-		break;
-	  case MODE_FAN:
-		operatingMode = SAMSUNG_AIRCON1_MODE_FAN;
-		if ( fanSpeedCmd == FAN_AUTO ) {
-		  fanSpeedCmd = FAN_1; // Fan speed cannot be 'AUTO' in FAN mode
-		}
-		break;
-	}
+  if (powerModeCmd == POWER_ON)
+  {
+    powerMode = SAMSUNG_AIRCON1_MODE_ON;
+    switch (operatingModeCmd)
+	  {
+	    case MODE_AUTO:
+		  operatingMode = SAMSUNG_AIRCON1_MODE_AUTO;
+		  fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in AUTO mode
+		  break;
+	    case MODE_HEAT:
+		  operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
+		  break;
+	    case MODE_COOL:
+		  operatingMode = SAMSUNG_AIRCON1_MODE_COOL;
+		  break;
+	    case MODE_DRY:
+		  operatingMode = SAMSUNG_AIRCON1_MODE_DRY;
+		  fanSpeedCmd = FAN_AUTO; // Fan speed is always 'AUTO' in DRY mode
+		  break;
+	    case MODE_FAN:
+		  operatingMode = SAMSUNG_AIRCON1_MODE_FAN;
+		  if ( fanSpeedCmd == FAN_AUTO ) {
+		    fanSpeedCmd = FAN_1; // Fan speed cannot be 'AUTO' in FAN mode
+		  }
+		  break;
+	  } 
+  }
+	
 
   switch (fanSpeedCmd)
   {
@@ -94,52 +97,73 @@ void SamsungAQVHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
       break;
   }
 
-  if ( temperatureCmd > 15 && temperatureCmd < 28)
-  {
-    temperature = temperatureCmd;
-  }
+  temperature = temperatureCmd < 16 
+    ? 16
+    : temperatureCmd > 30 ? 30 : temperatureCmd;
 
-  switch (swingVCmd)
-  {
-    case VDIR_SWING:
-      swingV = SAMSUNG_AIRCON1_VS_SWING;
-      break;
+
+  if(swingVCmd == VDIR_SWING && swingHCmd == HDIR_SWING ){
+    swing = SAMSUNG_AIRCON2_VHS_SWING;
+  }
+  else if(swingVCmd == VDIR_SWING){
+    swing = SAMSUNG_AIRCON2_VS_SWING;
+  }
+  else if(swingHCmd == HDIR_SWING){
+    swing = SAMSUNG_AIRCON2_HS_SWING;
+  }
+  else{
+    swing = SAMSUNG_AIRCON2_VHS_OFF;
   }
 
   // power offmode is something special, so set it latest to treat
   if (powerModeCmd == POWER_OFF)
   {
-    powerMode = SAMSUNG_AIRCON1_MODE_OFF;
-	if (_samsungAQVModel == MODEL_AQV12_MSAN)
-	{
-		if (operatingModeCmd == MODE_AUTO)
-		{
-			fanSpeed = 0x0D;  // reverse enginering remote
+	  if (_samsungAQVModel == MODEL_AQV12_MSAN)
+	  {
+		  if (operatingModeCmd == MODE_AUTO)
+			  fanSpeed = 0x0D;  // reverse enginering remote
 		}
-	}
   }
   
-  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature, swingV);
+  sendSamsung(IR, powerMode, operatingMode, fanSpeed, temperature, swing);
+}
+
+// Checksum calcultation https://github.com/crankyoldgit/IRremoteESP8266/issues/1538
+void SamsungAQVHeatpumpIR::fillChecksum(uint8_t* chunk){
+  // clearing checksum bits
+  chunk[1] &= 0x0F;
+  chunk[2] &= 0xF0;
+
+  // computing checksum
+  uint8_t SamsungChecksum = 0;
+  for (uint8_t j=0; j<7; j++) {
+    uint8_t Samsungbyte = chunk[j];
+    for (uint8_t i=0; i<8; i++) {
+      if ( (Samsungbyte & 0x01) == 0x01 ) {
+        SamsungChecksum++;
+      }
+      Samsungbyte >>= 1;
+    }
+  }
+  SamsungChecksum = ~SamsungChecksum;
+
+  // writing checksum
+  chunk[1] |= (SamsungChecksum & 0x0F) << 4 ;
+  chunk[2] |= (SamsungChecksum & 0xF0) >> 4;
+
 }
 
 // Send the Samsung code
 
 void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV)
 {
-  uint8_t SamsungTemplate[] = { 0x02, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Header part (0-6)
-                                0x01, 0xD2, 0x0F, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages (7-13)
-                                0x01, 0x00, 0xFE, 0x71, 0x00, 0x00, 0x00 }; // The actual data is in this part, on uint8_ts 14-20
+  uint8_t SamsungTemplate[] = { 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,   // Header part (0-6)
+                                0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,   // Always the same data on POWER messages (7-13)
+                                0x01, 0x02, 0x00, 0x01, 0x00, 0x00, 0x00 }; // The actual data is in this part, on uint8_ts 14-20
 
-  uint8_t SamsungChecksum = 0;
 
-  // Set the power mode on the template message, also add the first part checksum
+  // Set the power mode on the template message
   SamsungTemplate[6] = powerMode;
-  if ( powerMode == SAMSUNG_AIRCON1_MODE_ON ) {
-    SamsungTemplate[1] = 0x92;
-  } else {
-    SamsungTemplate[1] = 0xB2;
-  }
-
   SamsungTemplate[20] = powerMode;
 
   // Set the fan speed and the operating mode on the template message
@@ -151,32 +175,9 @@ void SamsungAQVHeatpumpIR::sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t 
   // Set the vertical swing mode on the template message
   SamsungTemplate[16] = swingV;
 
-  // Calculate the byte 15 checksum
-  // Count the number of ONE bits on message uint8_ts 15-20
-  for (uint8_t j=16; j<20; j++) {
-    uint8_t Samsungbyte = SamsungTemplate[j];
-    for (uint8_t i=0; i<8; i++) {
-      if ( (Samsungbyte & 0x01) == 0x01 ) {
-        SamsungChecksum++;
-      }
-      Samsungbyte >>= 1;
-    }
-  }
-
-  // Transform the number of ONE bits to the actual checksum
-  SamsungChecksum = 28 - SamsungChecksum;
-  SamsungChecksum <<= 4;
-  SamsungChecksum |= (powerMode == SAMSUNG_AIRCON1_MODE_OFF && _samsungAQVModel == MODEL_AQV12_MSAN) ? 0x22 : 0x02;
-
-  SamsungTemplate[15] = SamsungChecksum;
-  
-  // incredible hack if power off and temp = 20 and mode heat, dry or cool
-  if (powerMode == SAMSUNG_AIRCON1_MODE_OFF && _samsungAQVModel == MODEL_AQV12_MSAN 
-	&& (SamsungTemplate[18] == SAMSUNG_AIRCON1_MODE_HEAT || SamsungTemplate[18] == SAMSUNG_AIRCON1_MODE_DRY || SamsungTemplate[18] == SAMSUNG_AIRCON1_MODE_COOL))
-  {
-	  SamsungTemplate[15] = 0x02;
-	  SamsungTemplate[16] = 0xFF;  //normally this is swingV
-  }
+  fillChecksum(SamsungTemplate);
+  fillChecksum(SamsungTemplate + 7);
+  fillChecksum(SamsungTemplate + 14);
 
   // 38 kHz PWM frequency
   IR.setFrequency(38);
@@ -237,7 +238,7 @@ void SamsungFJMHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t oper
   uint8_t operatingMode = SAMSUNG_AIRCON1_MODE_HEAT;
   uint8_t fanSpeed = SAMSUNG_AIRCON1_FAN_AUTO;
   uint8_t temperature = 23;
-  uint8_t swingV = SAMSUNG_AIRCON2_VS_AUTO;
+  uint8_t swingV = SAMSUNG_AIRCON2_VS_SWING;
 
   // See also https://github.com/wisskar/souliss/blob/master/extras/SamsungMH026FB.cpp
 

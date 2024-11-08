@@ -27,6 +27,7 @@
 #include <PanasonicAltDKEHeatpumpIR.h>
 #include <PanasonicCKPHeatpumpIR.h>
 #include <PanasonicHeatpumpIR.h>
+#include <PhilcoPHS32HeatpumpIR.h>
 #include <R51MHeatpumpIR.h>
 #include <SamsungHeatpumpIR.h>
 #include <SharpHeatpumpIR.h>
@@ -35,6 +36,7 @@
 #include <VaillantHeatpumpIR.h>
 #include <ZHJG01HeatpumpIR.h>
 #include <ZHLT01HeatpumpIR.h>
+#include <KY26HeatpumpIR.h>
 
 class HeatpumpIRFactory
 {
