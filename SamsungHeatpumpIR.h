@@ -40,12 +40,14 @@
 #define SAMSUNG_AIRCON1_FAN1       0x05 // * low
 #define SAMSUNG_AIRCON1_FAN2       0x09 // * med
 #define SAMSUNG_AIRCON1_FAN3       0x0B // * high
-#define SAMSUNG_AIRCON2_FAN4       0x0B // * very high
+#define SAMSUNG_AIRCON2_FAN4       0x0F // * very high
 #define SAMSUNG_AIRCON1_VS_SWING   0xAE // Vertical swing
 #define SAMSUNG_AIRCON1_VS_AUTO    0xFE
 
-#define SAMSUNG_AIRCON2_VS_SWING   0xA0 // Vertical swing
-#define SAMSUNG_AIRCON2_VS_AUTO    0xF0
+#define SAMSUNG_AIRCON2_VS_SWING   0xA0 //  swing
+#define SAMSUNG_AIRCON2_HS_SWING   0xB0
+#define SAMSUNG_AIRCON2_VHS_SWING  0xC0
+#define SAMSUNG_AIRCON2_VHS_OFF    0xF0
 #define SAMSUNG_AIRCON2_TURBO      0x06 // 30 minutes of full power
 
 #define MODEL_AQV12_MSAN            1
@@ -71,7 +73,10 @@ class SamsungAQVHeatpumpIR : public SamsungHeatpumpIR
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
     
   private:
-    void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV);    
+    void sendSamsung(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV); 
+
+    
+    void fillChecksum(uint8_t* chunk);   
 };
 
 class SamsungFJMHeatpumpIR : public SamsungHeatpumpIR
