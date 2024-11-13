@@ -19,6 +19,17 @@ MitsubishiHeavyZJHeatpumpIR::MitsubishiHeavyZJHeatpumpIR() : MitsubishiHeavyHeat
   _mitsubishiModel = MITSUBISHIHEAVY_ZJ;
 }
 
+MitsubishiHeavyZEAHeatpumpIR::MitsubishiHeavyZEAHeatpumpIR() : MitsubishiHeavyHeatpumpIR()
+{
+  static const char model[] PROGMEM = "mitsubishi_heavy_zea";
+  static const char info[]  PROGMEM = "{\"mdl\":\"mitsubishi_heavy_zea\",\"dn\":\"Mitsubishi Heavy ZEA\",\"mT\":18,\"xT\":30,\"fs\":3}";
+
+  _model = model;
+  _info = info;
+
+  _mitsubishiModel = MITSUBISHIHEAVY_ZEA;
+}
+
 MitsubishiHeavyZMHeatpumpIR::MitsubishiHeavyZMHeatpumpIR() : MitsubishiHeavyHeatpumpIR()
 {
   static const char model[] PROGMEM = "mitsubishi_heavy_zm";
@@ -43,7 +54,7 @@ MitsubishiHeavyZMPHeatpumpIR::MitsubishiHeavyZMPHeatpumpIR() : MitsubishiHeavyHe
 
 void MitsubishiHeavyHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd)
 {
-  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, true, false, false);
+  send(IR, powerModeCmd, operatingModeCmd, fanSpeedCmd, temperatureCmd, swingVCmd, swingHCmd, false, false, false);
 }
 
 // This is a virtual dummy method, i.e. MitsubishiHeavyZJHeatpumpIR::send or MitsubishiHeavyZMHeatpumpIR::send is called instead
@@ -174,6 +185,135 @@ void MitsubishiHeavyZJHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
   if (_3DAutoCmd == true && (operatingModeCmd == MODE_AUTO || operatingModeCmd == MODE_COOL || operatingModeCmd == MODE_HEAT))
   {
       swingH = MITSUBISHI_HEAVY_ZJ_HS_3DAUTO;
+  }
+  sendMitsubishiHeavy(IR, powerMode, operatingMode, fanSpeed, temperature, swingV, swingH, cleanMode);
+}
+
+void MitsubishiHeavyZEAHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd)
+{
+  // Sensible defaults for the heat pump mode
+
+  uint8_t powerMode     = MITSUBISHI_HEAVY_MODE_ON;
+  uint8_t operatingMode = MITSUBISHI_HEAVY_MODE_HEAT;
+  uint8_t fanSpeed      = MITSUBISHI_HEAVY_ZEA_FAN_AUTO;
+  uint8_t temperature   = 23;
+  uint8_t swingV        = MITSUBISHI_HEAVY_ZEA_VS_STOP;
+  uint8_t swingH        = MITSUBISHI_HEAVY_ZEA_HS_STOP;
+  uint8_t cleanMode     = MITSUBISHI_HEAVY_ZEA_CLEAN_OFF;
+
+  if (powerModeCmd == POWER_OFF)
+  {
+    powerMode = MITSUBISHI_HEAVY_MODE_OFF;
+  }
+
+  if (cleanModeCmd && powerModeCmd == POWER_OFF && (operatingModeCmd == MODE_AUTO || operatingModeCmd == MODE_COOL || operatingModeCmd == MODE_DRY))
+  {
+    powerMode = MITSUBISHI_HEAVY_MODE_ON;
+    cleanMode = MITSUBISHI_HEAVY_CLEAN_ON;
+  }
+
+  switch (operatingModeCmd)
+  {
+    case MODE_AUTO:
+      operatingMode = MITSUBISHI_HEAVY_MODE_AUTO;
+      break;
+    case MODE_HEAT:
+      operatingMode = MITSUBISHI_HEAVY_MODE_HEAT;
+      break;
+    case MODE_COOL:
+      operatingMode = MITSUBISHI_HEAVY_MODE_COOL;
+      break;
+    case MODE_DRY:
+      operatingMode = MITSUBISHI_HEAVY_MODE_DRY;
+      break;
+    case MODE_FAN:
+      operatingMode = MITSUBISHI_HEAVY_MODE_FAN;
+      break;
+  }
+
+  switch (fanSpeedCmd)
+  {
+    case FAN_AUTO:
+      fanSpeed = MITSUBISHI_HEAVY_ZEA_FAN_AUTO;
+      break;
+    case FAN_1:
+      fanSpeed = MITSUBISHI_HEAVY_ZEA_FAN1;
+      break;
+    case FAN_2:
+      fanSpeed = MITSUBISHI_HEAVY_ZEA_FAN2;
+      break;
+    case FAN_3:
+      fanSpeed = MITSUBISHI_HEAVY_ZEA_FAN3;
+      break;
+    case FAN_4:
+      fanSpeed = MITSUBISHI_HEAVY_ZEA_FAN4;
+      break;
+  }
+
+  if (silentModeCmd)
+  {
+  	// Silent mode doesn't exist on ZEA model, use ECONO mode instead
+    fanSpeed = MITSUBISHI_HEAVY_ZEA_SILENT_ON;
+  }
+
+  if ( temperatureCmd > 17 && temperatureCmd < 31)
+  {
+    temperature = (~((temperatureCmd - 17) << 4)) & 0xF0;
+  }
+
+  switch (swingVCmd)
+  {
+    case VDIR_MANUAL:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_STOP;
+      break;
+    case VDIR_SWING:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_SWING;
+      break;
+    case VDIR_UP:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_UP;
+      break;
+    case VDIR_MUP:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_MUP;
+      break;
+    case VDIR_MIDDLE:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_MIDDLE;
+      break;
+    case VDIR_MDOWN:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_MDOWN;
+      break;
+    case VDIR_DOWN:
+      swingV = MITSUBISHI_HEAVY_ZEA_VS_DOWN;
+      break;
+  }
+
+  switch (swingHCmd)
+  {
+    case HDIR_MANUAL:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_STOP;
+      break;
+    case HDIR_SWING:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_SWING;
+      break;
+    case HDIR_MIDDLE:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_MIDDLE;
+      break;
+    case HDIR_LEFT:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_LEFT;
+      break;
+    case HDIR_MLEFT:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_MLEFT;
+      break;
+    case HDIR_RIGHT:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_RIGHT;
+      break;
+    case HDIR_MRIGHT:
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_MRIGHT;
+      break;
+  }
+
+  if (_3DAutoCmd == true && (operatingModeCmd == MODE_AUTO || operatingModeCmd == MODE_COOL || operatingModeCmd == MODE_HEAT))
+  {
+      swingH = MITSUBISHI_HEAVY_ZEA_HS_3DAUTO;
   }
   sendMitsubishiHeavy(IR, powerMode, operatingMode, fanSpeed, temperature, swingV, swingH, cleanMode);
 }
@@ -472,6 +612,48 @@ void MitsubishiHeavyZJHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powe
   // Data
   for (uint8_t i=0; i<sizeof(MitsubishiHeavyZJTemplate); i++) {
     IR.sendIRbyte(MitsubishiHeavyZJTemplate[i], MITSUBISHI_HEAVY_BIT_MARK, MITSUBISHI_HEAVY_ZERO_SPACE, MITSUBISHI_HEAVY_ONE_SPACE);
+  }
+
+  // End mark
+  IR.mark(MITSUBISHI_HEAVY_BIT_MARK);
+  IR.space(0);
+}
+
+void MitsubishiHeavyZEAHeatpumpIR::sendMitsubishiHeavy(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH, uint8_t cleanMode)
+{
+  uint8_t MitsubishiHeavyZEATemplate[] = { 0x52, 0xAE, 0xC3, 0x26, 0xD9, 0xDF, 0x20, 0x07, 0x00, 0x00, 0x00 };
+  //                                         0     1     2     3     4     5     6     7     8     9    10
+
+  // Horizontal & vertical air flow + allergen + clean + 3D
+  MitsubishiHeavyZEATemplate[5] |= (swingH & 0b11110000) | ((swingV >> 1) & 0b00000001) | cleanMode;
+
+  // Horizontal & vertical air flow + 3D
+  MitsubishiHeavyZEATemplate[6] |= ((swingH << 4) & 0b11110000) | (swingV & 0b00000001);
+
+  // Vertical air flow + fan speed
+  MitsubishiHeavyZEATemplate[7] |= (fanSpeed & 0b11100000) | ((swingV >>1) & 0b00011000);
+
+  // Vertical air flow + fan speed
+  MitsubishiHeavyZEATemplate[8] |= ((fanSpeed << 4) & 0b11100000) | ((swingV >> 1) & 0b00011000);
+
+  // Power state + operating mode + temperature
+  MitsubishiHeavyZEATemplate[9] |= operatingMode | powerMode | temperature;
+
+  // There is no checksum, but some bytes are inverted
+  MitsubishiHeavyZEATemplate[6] = ~MitsubishiHeavyZEATemplate[5];
+  MitsubishiHeavyZEATemplate[8] = ~MitsubishiHeavyZEATemplate[7];
+  MitsubishiHeavyZEATemplate[10] = ~MitsubishiHeavyZEATemplate[9];
+
+  // 38 kHz PWM frequency
+  IR.setFrequency(38);
+
+  // Header
+  IR.mark(MITSUBISHI_HEAVY_HDR_MARK);
+  IR.space(MITSUBISHI_HEAVY_HDR_SPACE);
+
+  // Data
+  for (uint8_t i=0; i<sizeof(MitsubishiHeavyZEATemplate); i++) {
+    IR.sendIRbyte(MitsubishiHeavyZEATemplate[i], MITSUBISHI_HEAVY_BIT_MARK, MITSUBISHI_HEAVY_ZERO_SPACE, MITSUBISHI_HEAVY_ONE_SPACE);
   }
 
   // End mark
