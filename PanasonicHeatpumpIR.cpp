@@ -18,6 +18,17 @@ PanasonicDKEHeatpumpIR::PanasonicDKEHeatpumpIR() : PanasonicHeatpumpIR()
   _panasonicModel = PANASONIC_DKE;
 }
 
+PanasonicEKEHeatpumpIR::PanasonicEKEHeatpumpIR() : PanasonicHeatpumpIR()
+{
+  static const char model[] PROGMEM = "panasonic_eke";
+  static const char info[]  PROGMEM = "{\"mdl\":\"panasonic_eke\",\"dn\":\"Panasonic EKE\",\"mT\":16,\"xT\":30,\"fs\":6}";
+
+  _model = model;
+  _info = info;
+
+  _panasonicModel = PANASONIC_EKE;
+}
+
 PanasonicJKEHeatpumpIR::PanasonicJKEHeatpumpIR() : PanasonicHeatpumpIR()
 {
   static const char model[] PROGMEM = "panasonic_jke";
@@ -217,23 +228,29 @@ void PanasonicHeatpumpIR::sendPanasonic(IRSender& IR, uint8_t operatingMode, uin
   switch(_panasonicModel)
   {
     case PANASONIC_DKE:
+      panasonicTemplate[14] = temperature << 1;
       panasonicTemplate[17] = swingH; // Only the DKE model has a setting for the horizontal air flow
       panasonicTemplate[23] = 0x01;
       panasonicTemplate[25] = 0x06;
       break;
+    case PANASONIC_EKE:
+      panasonicTemplate[14] = IR.bitReverse(temperature << 1);
+      break;
     case PANASONIC_JKE:
+      panasonicTemplate[14] = temperature << 1;
       break;
     case PANASONIC_NKE:
+      panasonicTemplate[14] = temperature << 1;
       panasonicTemplate[17] = 0x06;
       break;
     case PANASONIC_LKE:
+      panasonicTemplate[14] = temperature << 1;
       panasonicTemplate[17] = 0x06;
       panasonicTemplate[13] = 0x02;
       break;
   }
 
   panasonicTemplate[13] |= operatingMode;
-  panasonicTemplate[14] = temperature << 1;
   panasonicTemplate[16] = fanSpeed | swingV;
   panasonicTemplate[21] = profile;
 
