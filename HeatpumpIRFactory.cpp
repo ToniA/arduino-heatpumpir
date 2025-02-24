@@ -69,6 +69,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new PanasonicCKPHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("panasonic_dke")) == 0) {
     return new PanasonicDKEHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("panasonic_eke")) == 0) {
+    return new PanasonicEKEHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("panasonic_jke")) == 0) {
     return new PanasonicJKEHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("panasonic_lke")) == 0) {
