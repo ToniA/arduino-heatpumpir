@@ -1,5 +1,5 @@
 /*
-    Panasonic DKE/JKE/NKE heatpump control (DKE remote control P/N A75C2616 etc)
+    Panasonic DKE/EKE/JKE/NKE heatpump control (DKE remote control P/N A75C2616 etc)
 */
 #ifndef PanasonicHeatpumpIR_h
 #define PanasonicHeatpumpIR_h
@@ -7,7 +7,7 @@
 #include <HeatpumpIR.h>
 
 
-// Panasonic DKE, JKE & NKE timing constants (DKE remote control P/N A75C2616)
+// Panasonic DKE, EKE, JKE & NKE timing constants (DKE remote control P/N A75C2616)
 #define PANASONIC_AIRCON2_HDR_MARK   3500
 #define PANASONIC_AIRCON2_HDR_SPACE  1800
 #define PANASONIC_AIRCON2_BIT_MARK   420
@@ -15,7 +15,7 @@
 #define PANASONIC_AIRCON2_ZERO_SPACE 470
 #define PANASONIC_AIRCON2_MSG_SPACE  10000
 
-// Panasonic DKE, JNE & NKE codes
+// Panasonic DKE, EKE, JNE & NKE codes
 #define PANASONIC_AIRCON2_MODE_AUTO  0x00 // Operating mode
 #define PANASONIC_AIRCON2_MODE_HEAT  0x40
 #define PANASONIC_AIRCON2_MODE_COOL  0x30
@@ -50,13 +50,14 @@
 #define PANASONIC_JKE 1
 #define PANASONIC_NKE 2
 #define PANASONIC_LKE 3
+#define PANASONIC_EKE 4
 
 
 class PanasonicHeatpumpIR : public HeatpumpIR
 {
   protected: // Cannot create generic Panasonic heatpump instances
     PanasonicHeatpumpIR();
-    uint8_t _panasonicModel;  // Tells whether this is DKE, NKE or JKE (or other supported model...)
+    uint8_t _panasonicModel;  // Tells whether this is DKE, EKE, NKE or JKE (or other supported model...)
 
   public:
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
@@ -70,6 +71,12 @@ class PanasonicDKEHeatpumpIR : public PanasonicHeatpumpIR
 {
   public:
     PanasonicDKEHeatpumpIR();
+};
+
+class PanasonicEKEHeatpumpIR : public PanasonicHeatpumpIR
+{
+  public:
+    PanasonicEKEHeatpumpIR();
 };
 
 class PanasonicJKEHeatpumpIR : public PanasonicHeatpumpIR
