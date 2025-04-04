@@ -65,6 +65,8 @@ HeatpumpIR* HeatpumpIRFactory::create(const char *modelName) {
     return new MitsubishiMSYHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("mitsubishi_sez")) == 0) {
     return new MitsubishiSEZKDXXHeatpumpIR();
+  } else if (strcmp_P(modelName, PSTR("olimpia")) == 0) {
+    return new OlimpiaStandardMaestroHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("panasonic_ckp")) == 0) {
     return new PanasonicCKPHeatpumpIR();
   } else if (strcmp_P(modelName, PSTR("panasonic_dke")) == 0) {
