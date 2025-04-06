@@ -24,6 +24,7 @@
 #include <MitsubishiHeavyHeatpumpIR.h>
 #include <MitsubishiMSCHeatpumpIR.h>
 #include <MitsubishiSEZKDXXHeatpumpIR.h>
+#include <OlimpiaStandardMaestroHeatpumpIR.h>
 #include <PanasonicAltDKEHeatpumpIR.h>
 #include <PanasonicCKPHeatpumpIR.h>
 #include <PanasonicHeatpumpIR.h>
