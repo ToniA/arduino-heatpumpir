@@ -11,6 +11,7 @@ An Arduino library to control pump/split unit air conditioner. Currently support
 * Ballu
 * Carrier 42NQV035G / 38NYV035H2 (Carrier remote control P/N WH-L05SE)
 * Daikin RXS25G2V1B / FVXS25FV1B (Remote control P/N ARC452A1)
+* Hitachi (Remote Control SPX-RCKA 1,2 and 3)
 * Hisense AUD (remote control Y-H1-01,  Y-H1-02(E), Y-J1, Y-E4-07) probably AUC model
 * Hyundai (remote control P/N Y512F2)
    * This is probably a generic Gree model
