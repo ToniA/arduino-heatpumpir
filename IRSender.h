@@ -14,7 +14,7 @@
 #define LOGLN(...)
 #endif
 
-#if defined(ESP8266) || defined(ESP32)
+#if defined(ESP8266)
 #include <IRsend.h>  // From IRremoteESP8266 library
 #include <stdint.h>
 #endif
