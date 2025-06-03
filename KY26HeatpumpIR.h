@@ -66,6 +66,9 @@ public:
   KY26HeatpumpIR();
   void send(IRSender &IR, uint8_t powerModeCmd, uint8_t operatingModeCmd,
             uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd,
+            uint8_t swingHCmd);
+  void send(IRSender &IR, uint8_t powerModeCmd, uint8_t operatingModeCmd,
+            uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd,
             uint8_t swingHCmd, uint8_t timerHourCmd = 0x00,
             bool timerHalfHourCmd = false);
 
