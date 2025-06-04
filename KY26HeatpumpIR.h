@@ -8,8 +8,8 @@
 // time.
 //
 // Byte 0 contains the a power signal, operating mode, and fan speed.
-// Byte 1 contains the temperature setting.
-// Byte 2 contains the timer setting.
+// Byte 1 contains the timer setting.
+// Byte 2 contains the temperature setting.
 // Byte 3 contains the checksum.
 //
 // MSB                                    LSB
