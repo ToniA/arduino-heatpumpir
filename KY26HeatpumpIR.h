@@ -8,8 +8,8 @@
 // time.
 //
 // Byte 0 contains the a power signal, operating mode, and fan speed.
-// Byte 1 contains the temperature setting.
-// Byte 2 contains the timer setting.
+// Byte 1 contains the timer setting.
+// Byte 2 contains the temperature setting.
 // Byte 3 contains the checksum.
 //
 // MSB                                    LSB
@@ -64,6 +64,9 @@
 class KY26HeatpumpIR : public HeatpumpIR {
 public:
   KY26HeatpumpIR();
+  void send(IRSender &IR, uint8_t powerModeCmd, uint8_t operatingModeCmd,
+            uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd,
+            uint8_t swingHCmd);
   void send(IRSender &IR, uint8_t powerModeCmd, uint8_t operatingModeCmd,
             uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd,
             uint8_t swingHCmd, uint8_t timerHourCmd = 0x00,
