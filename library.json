@@ -12,8 +12,8 @@
     "url": "https://github.com/ToniA/arduino-heatpumpir.git"
   },
   "frameworks": "arduino",
-  "platforms": ["atmelavr", "espressif32", "espressif8266"],
-  "version": "1.0.36",
+  "platforms": ["atmelavr", "espressif32", "espressif8266", "libretiny"],
+  "version": "1.0.37",
   "dependencies": [
     {
       "owner": "crankyoldgit",
