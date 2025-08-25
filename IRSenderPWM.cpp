@@ -1,4 +1,3 @@
-IRSenderPWM.cpp
 #include <Arduino.h>
 #include <IRSender.h>
 
