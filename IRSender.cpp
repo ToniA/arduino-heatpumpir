@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
 #include <IRSender.h>
 
 // The generic functions of the abstract IRSender class

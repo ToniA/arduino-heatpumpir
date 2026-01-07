@@ -1,10 +1,10 @@
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
 
 // IRSender implementation for ESP32
-// Tested on R51M/E control with SENSEI air conditioner 
+// Tested on R51M/E control with SENSEI air conditioner
 // Maksym Krasovskyi
 
-#if defined ESP32
+#if defined(ESP32) && defined(ARDUINO)
 #include <IRSender.h>
 #if ( defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 3) )
 #include <driver/gpio.h>

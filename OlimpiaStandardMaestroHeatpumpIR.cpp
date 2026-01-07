@@ -166,7 +166,7 @@ void OlimpiaStandardMaestroHeatpumpIR::sendMaestro(IRSender &IR, const HeatpumpS
   encodeMaestroState(state, command);
   
 
-  Serial.println(F("Starting to send IR"));
+  LOGLN(F("Starting to send IR"));
   // Set the frequency for the IR signal
   IR.setFrequency(38); // 38kHz frequency
 

@@ -1,4 +1,5 @@
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
+
 #ifdef ESP8266
 #include <IRSender.h>
 

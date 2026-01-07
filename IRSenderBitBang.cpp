@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
 #include <IRSender.h>
 
 // Send IR using the 'bit banging' on ESP8266 etc.

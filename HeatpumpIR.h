@@ -7,7 +7,7 @@
 #ifndef HeatpumpIR_h
 #define HeatpumpIR_h
 
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
 #include <IRSender.h>
 
 

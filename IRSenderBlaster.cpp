@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
 #include <IRSender.h>
 
 // Send IR using the IR Blaster. The IR Blaster generates the 38 kHz carrier frequency
