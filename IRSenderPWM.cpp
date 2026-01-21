@@ -1,10 +1,9 @@
-IRSenderPWM.cpp
-#include <Arduino.h>
+#include "HeatpumpIRCompat.h"
 #include <IRSender.h>
 
 // ESP8266 does not have the Arduino PWM control registers
 
-#if not defined ESP8266 && not defined ESP32 && not defined LIBRETINY
+#if not defined ESP8266 && not defined ESP32 && not defined ESP_PLATFORM && not defined LIBRETINY
 
 // Heavily based on Ken Shirriff's IRRemote library:
 // https://github.com/shirriff/Arduino-IRremote
