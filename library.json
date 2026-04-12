@@ -21,5 +21,8 @@
       "version": "~2.8.4",
       "platforms": ["espressif8266"]
     }
-  ]
+  ],
+  "build": {
+    "flags": ["-Wno-error=overloaded-virtual"]
+  }
 }
