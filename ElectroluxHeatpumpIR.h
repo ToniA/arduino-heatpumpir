@@ -51,6 +51,7 @@ class ElectroluxHeatpumpIR : public HeatpumpIR
     uint8_t electroluxModel;
 
   public:
+    using HeatpumpIR::send;
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
 
   private:
@@ -61,6 +62,7 @@ class ElectroluxHeatpumpIR : public HeatpumpIR
 class ElectroluxYALHeatpumpIR : public ElectroluxHeatpumpIR
 {
   public:
+    using ElectroluxHeatpumpIR::send;
     ElectroluxYALHeatpumpIR();
 
   public:

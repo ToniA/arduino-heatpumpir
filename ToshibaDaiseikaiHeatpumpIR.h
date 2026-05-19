@@ -38,6 +38,7 @@
 class ToshibaDaiseikaiHeatpumpIR : public CarrierHeatpumpIR
 {
   public:
+    using CarrierHeatpumpIR::send;
     ToshibaDaiseikaiHeatpumpIR();
 
   public:
