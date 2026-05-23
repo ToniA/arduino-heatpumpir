@@ -10,7 +10,7 @@
 //
 // For PWM on Arduino, see http://playground.arduino.cc/Main/TimerPWMCheatsheet
 
-#if defined(SAM3X8E) || defined(SAM3X8H)
+#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
   // Arduino Due
   uint32_t IR_USE_PWM_PINMASK;
 byte IR_USE_PWM_CH;
@@ -31,7 +31,7 @@ IRSenderPWM::IRSenderPWM(uint8_t pin)
   pinMode(_pin, OUTPUT);
   digitalWrite(_pin, LOW);  // When not sending PWM, we want it low
 
-#if defined(SAM3X8E) || defined(SAM3X8H)
+#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
   // Arduino Due
   pmc_set_writeprotect(false);
 
@@ -82,7 +82,7 @@ IRSenderPWM::IRSenderPWM(uint8_t pin)
 
 // Set the PWM frequency. The selected pin determines which timer to use
 void IRSenderPWM::setFrequency(int frequency) {
-#if defined(SAM3X8E) || defined(SAM3X8H)
+#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
   // Arduino Due
   pmc_enable_periph_clk(PWM_INTERFACE_ID);
   const uint32_t pwmval = (frequency)*2000;
@@ -182,7 +182,7 @@ void IRSenderPWM::mark(int markLength) {
   // Arduino Uno R4
   senderPWM->begin(38000.0f, 50.0f);  // Enable PWM at 38 kHz, 50% duty
 #else
-#if defined(SAM3X8E) || defined(SAM3X8H)
+#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
   // Arduino Due
   PWMC_EnableChannel(PWM_INTERFACE, IR_USE_PWM_CH);  // Enable pin PWM output
 #else
@@ -257,7 +257,7 @@ void IRSenderPWM::space(int spaceLength) {
   // Arduino Uno R4
   senderPWM->end();  // Disable PWM on Pin
 #else
-#if defined(SAM3X8E) || defined(SAM3X8H)
+#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
   // Arduino Due
   PWMC_DisableChannel(PWM_INTERFACE, IR_USE_PWM_CH);  // Disable pin PWM output
 #else
