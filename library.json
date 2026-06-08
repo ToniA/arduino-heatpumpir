@@ -13,7 +13,7 @@
   },
   "frameworks": ["arduino", "espidf"],
   "platforms": ["atmelavr", "espressif32", "espressif8266", "libretiny"],
-  "version": "1.0.41",
+  "version": "1.0.42",
   "dependencies": [
     {
       "owner": "crankyoldgit",
