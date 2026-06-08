@@ -45,6 +45,7 @@
 class VaillantHeatpumpIR : public HeatpumpIR
 {
   public:
+    using HeatpumpIR::send;
     VaillantHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, bool turboModeCmd, bool lightCmd);
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);

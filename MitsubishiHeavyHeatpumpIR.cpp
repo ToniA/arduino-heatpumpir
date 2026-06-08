@@ -119,6 +119,12 @@ void MitsubishiHeavyZJHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
     case FAN_3:
       fanSpeed = MITSUBISHI_HEAVY_ZJ_FAN3;
       break;
+    case FAN_4: //Map FAN_4 to HiPower
+      fanSpeed = MITSUBISHI_HEAVY_ZJ_HIPOWER;
+      break;
+    case FAN_5: //Map FAN_5 to Econo
+      fanSpeed = MITSUBISHI_HEAVY_ZJ_ECONO;
+      break;
   }
 
   if (silentModeCmd)
@@ -179,6 +185,15 @@ void MitsubishiHeavyZJHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8
       break;
     case HDIR_MRIGHT:
       swingH = MITSUBISHI_HEAVY_ZJ_HS_MRIGHT;
+      break;
+    case HDIR_3DAUTO:
+      swingH = MITSUBISHI_HEAVY_ZJ_HS_3DAUTO;
+      break;
+    case HDIR_LEFTRIGHT:
+      swingH = MITSUBISHI_HEAVY_ZJ_HS_LEFTRIGHT;
+      break;
+    case HDIR_RIGHTLEFT:
+      swingH = MITSUBISHI_HEAVY_ZJ_HS_RIGHTLEFT;
       break;
   }
 

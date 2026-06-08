@@ -94,6 +94,7 @@
 class ZHJG01HeatpumpIR : public HeatpumpIR
 {
   public:
+    using HeatpumpIR::send;
     ZHJG01HeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd,
                             uint8_t operatingModeCmd,

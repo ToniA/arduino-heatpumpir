@@ -141,6 +141,7 @@
 class ZHLT01HeatpumpIR : public HeatpumpIR
 {
   public:
+    using HeatpumpIR::send;
     ZHLT01HeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, 
 	                        uint8_t operatingModeCmd, 
