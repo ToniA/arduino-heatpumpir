@@ -52,6 +52,9 @@
 #define HDIR_MLEFT  4
 #define HDIR_MRIGHT 5
 #define HDIR_RIGHT  6
+#define HDIR_3DAUTO      7
+#define HDIR_LEFTRIGHT   8
+#define HDIR_RIGHTLEFT   9
 
 
 class HeatpumpIR
