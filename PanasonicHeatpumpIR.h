@@ -60,6 +60,7 @@ class PanasonicHeatpumpIR : public HeatpumpIR
     uint8_t _panasonicModel;  // Tells whether this is DKE, EKE, NKE or JKE (or other supported model...)
 
   public:
+    using HeatpumpIR::send;
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool powerfulCmd, bool quietCmd);
 

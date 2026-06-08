@@ -106,6 +106,7 @@ class GreeHeatpumpIR : public HeatpumpIR
             size_t len = 8);
 
   public:
+    using HeatpumpIR::send;
     void send(
             IRSender& IR,
             uint8_t powerModeCmd, uint8_t operatingModeCmd,

@@ -64,12 +64,14 @@ class CarrierHeatpumpIR : public HeatpumpIR
     uint8_t _carrierModel;
 
   public:
+    using HeatpumpIR::send;
     virtual void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
 };
 
 class CarrierNQVHeatpumpIR : public CarrierHeatpumpIR
 {
   public:
+    using CarrierHeatpumpIR::send;
     CarrierNQVHeatpumpIR();
 
   public:
@@ -82,6 +84,7 @@ class CarrierNQVHeatpumpIR : public CarrierHeatpumpIR
 class CarrierMCAHeatpumpIR : public CarrierHeatpumpIR
 {
   public:
+    using CarrierHeatpumpIR::send;
     CarrierMCAHeatpumpIR();
 
   public:

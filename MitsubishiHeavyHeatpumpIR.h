@@ -154,6 +154,7 @@ class MitsubishiHeavyHeatpumpIR : public HeatpumpIR
     uint8_t _mitsubishiModel;  // Tells whether this is ZJ or ZM (or other supported model...)
 
   public:
+    using HeatpumpIR::send;
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd);
     virtual void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
 };
@@ -161,6 +162,7 @@ class MitsubishiHeavyHeatpumpIR : public HeatpumpIR
 class MitsubishiHeavyZJHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 {
   public:
+    using MitsubishiHeavyHeatpumpIR::send;
     MitsubishiHeavyZJHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
 
@@ -171,6 +173,7 @@ class MitsubishiHeavyZJHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 class MitsubishiHeavyZMHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 {
   public:
+    using MitsubishiHeavyHeatpumpIR::send;
     MitsubishiHeavyZMHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
 
@@ -181,6 +184,7 @@ class MitsubishiHeavyZMHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 class MitsubishiHeavyZMPHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 {
   public:
+    using MitsubishiHeavyHeatpumpIR::send;
     MitsubishiHeavyZMPHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
 
@@ -191,6 +195,7 @@ class MitsubishiHeavyZMPHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 class MitsubishiHeavyZEAHeatpumpIR : public MitsubishiHeavyHeatpumpIR
 {
   public:
+    using MitsubishiHeavyHeatpumpIR::send;
     MitsubishiHeavyZEAHeatpumpIR();
     void send(IRSender& IR, uint8_t powerModeCmd, uint8_t operatingModeCmd, uint8_t fanSpeedCmd, uint8_t temperatureCmd, uint8_t swingVCmd, uint8_t swingHCmd, bool cleanModeCmd, bool silentModeCmd, bool _3DAutoCmd);
 
